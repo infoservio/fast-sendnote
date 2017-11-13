@@ -1,0 +1,122 @@
+{#
+/**
+ * donations-free plugin for Craft CMS 3.x
+ *
+ * donations-free Settings.twig
+ *
+ * @author    endurant
+ * @copyright Copyright (c) 2017 endurant
+ * @link      https://endurant.org
+ * @package   Donationsfree
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("endurant\\donationsfree\\DonationsFreeSettingsAssetBundle") %}
+<h2 class="instructions-header">Instructions</h2>
+
+<script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
+<div>
+    API credentials are unique account identifiers that must be added to your code before you can process payments via the API. Think of them as your username and password to payment processing.
+    This is your user-specific public identifier. Each user associated with your Braintree gateway will have their own public key.
+
+    To find your keys:
+
+    <ol>
+        <li>Log into either the production Control Panel or the sandbox Control Panel, depending on which environment you are working in</li>
+        <li>Navigate to Account > My User</li>
+        <li>Under API Keys, Tokenization Keys, Encryption Keys, click View Authorizations</li>
+    </ol>
+
+    You'll find your keys under the API Keys section at the top. If no API keys appear, click Generate New API Key.
+</div>
+
+{{ forms.textField({
+    label: 'Braintree Environment',
+    instructions: 'Get this parameter from your braintree account.',
+    id: 'btEnvironment',
+    name: 'btEnvironment',
+    value: settings['btEnvironment'],
+    required: true,
+    element: true
+})
+}}
+
+{{ forms.textField({
+    label: 'Braintree Merchant Id',
+    instructions: 'Get this parameter from your braintree account.',
+    id: 'btMerchantId',
+    name: 'btMerchantId',
+    value: settings['btMerchantId'],
+    required: true
+})
+}}
+
+{{ forms.textField({
+    label: 'Braintree Public Key',
+    instructions: 'Get this parameter from your braintree account.',
+    id: 'btPublicKey',
+    name: 'btPublicKey',
+    value: settings['btPublicKey'],
+    required: true
+})
+}}
+
+{{ forms.textField({
+    label: 'Braintree Private Key',
+    instructions: 'Get this parameter from your braintree account.',
+    id: 'btPrivateKey',
+    name: 'btPrivateKey',
+    value: settings['btPrivateKey'],
+    required: true
+})
+}}
+
+{{ forms.textField({
+    label: 'Braintree Authorization Key',
+    instructions: 'Get this parameter from your braintree account.',
+    id: 'btAuthorization',
+    name: 'btAuthorization',
+    value: settings['btAuthorization'],
+    required: true
+})
+}}
+
+{{ forms.textareaField({
+    label: 'Success Page',
+    instructions: 'Success message for user after successfull donation.',
+    id: 'successText',
+    name: 'successText',
+    value: settings['successText'],
+    required: true
+})
+}}
+
+{{ forms.textareaField({
+    label: 'Error Page',
+    instructions: 'Error message for user after failed donation.',
+    id: 'errorText',
+    name: 'errorText',
+    value: settings['errorText'],
+    required: true
+})
+}}
+
+{{ forms.textField({
+    label: 'Main Color',
+    instructions: 'This color will be used for buttons, spinner and slider steps.',
+    id: 'color',
+    name: 'color',
+    value: settings['color'],
+    required: true
+})
+}}
+
+<script>
+    let input = document.getElementById('settings-color');
+    input.className += ' jscolor';
+    CKEDITOR.replace('settings-successText');
+    CKEDITOR.replace('settings-errorText');
+</script>
