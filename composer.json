@@ -1,0 +1,54 @@
+{
+    "name": "endurant/smtp-mailer",
+    "description": "Free Smtp Mailer",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "smtp-mailer"
+    ],
+    "support": {
+        "docs": "http://test",
+        "issues": "http://test"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "endurant",
+            "homepage": "https://endurant.org"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "~3.0.0-beta.23",
+        "yiisoft/yii2": "^2.0"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+          "endurant\\smtpmailer\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Smtp Mailer",
+        "handle": "smtp-mailer",
+        "schemaVersion": "1.0.0",
+        "hasCpSettings": true,
+        "hasCpSection": false,
+        "changelogUrl": "???",
+        "components": {
+            "donationService": "endurant\\donationsfree\\services\\DonationService"
+        },
+        "class": "endurant\\smtpmailer\\SmtpMailer"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.2"
+    }
+}
