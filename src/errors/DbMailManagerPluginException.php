@@ -5,7 +5,7 @@ namespace endurant\smtpmailer\errors;
 use endurant\smtpmailer\models\Log;
 
 
-class DbSmtpMailerPluginException extends SmtpMailerPluginException
+class DbMailManagerPluginException extends MailManagerPluginException
 {
     protected $culprit = Log::DB_CULPRIT;
     

@@ -10,9 +10,6 @@
 
 namespace endurant\mailmanager\models;
 
-use endurant\donationsfree\SmptMailer;
-
-use Craft;
 use craft\base\Model;
 
 /**
@@ -27,28 +24,18 @@ use craft\base\Model;
  * @package   Donationsfree
  * @since     1.0.0
  */
-class Log extends Model
+class Template extends Model
 {
-    // Public Properties
-    // =========================================================================
-    const MAIL_LOGS = 'mailmanager-mail-logs';
-    const CHANGES_LOGS = 'mailmanager-changes-logs';
-    const TEMPLATE_LOGS = 'mailmanager-template-logs';
-
-    const MAIL_MANAGER_CULPRIT = ['id' => 1, 'name' => 'mail-manager'];
-    const DB_CULPRIT = ['id' => 2, 'name' => 'db'];
     /**
      * Some model attribute
      *
      * @var string
      */
     public $id;
-    public $pid;
-    public $culprit;
-    public $category;
-    public $method;
-    public $errors;
-    public $message;
+    public $userId;
+    public $key;
+    public $name;
+    public $template;
 
     // Public Methods
     // =========================================================================
@@ -60,9 +47,9 @@ class Log extends Model
     public function rules()
     {
         return [
-            [['id', 'pid', 'culprit'], 'integer'],
-            [['method', 'errors', 'message', 'category'], 'string'],
-            [['pid', 'method', 'errors', 'message'], 'required']
+            [['id', 'userId'], 'integer'],
+            [['key', 'name', 'template'], 'string'],
+            [['userId', 'key', 'name', 'template'], 'required']
         ];
     }
 }

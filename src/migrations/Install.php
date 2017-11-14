@@ -1,5 +1,5 @@
 <?php
-namespace endurant\donationsfree\migrations;
+namespace endurant\mailmanager\migrations;
 
 use Yii;
 use Craft;
@@ -32,6 +32,8 @@ class Install extends Migration
         // Refresh the db schema caches
         Craft::$app->db->schema->refresh();
 
+        $this->insertDefaultValues();
+
         return true;
     }
 
@@ -58,112 +60,61 @@ class Install extends Migration
 
     private function createTables()
     {
-        if (!$this->tableExists('donations_transaction')) {
-            $this->createTable('donations_transaction', [
+        if (!$this->tableExists('mailmanager_mail_type')) {
+            $this->createTable('mailmanager_mail_type', [
                 'id' => $this->primaryKey(),
-                'transactionId' => $this->text(),
-                'type' => $this->text()->null(),
-                'cardId' => $this->integer(),
-                'amount' => $this->float(),
-                'status' => $this->string(50),
-                'projectId' => $this->integer()->null(),
-                'projectName' => $this->string(50)->null(),
-                'transactionDetails' => $this->text()->null(),
-                'transactionErrors' => $this->text()->null(),
-                'transactionErrorMessage' => $this->text()->null(),
-                'dateCreated' => $this->date(),
-                'dateUpdated' => $this->date(),
-                'uid' => $this->text()
-            ]);
-        }
-
-        if (!$this->tableExists('donations_card')) {
-            $this->createTable('donations_card', [
-                'id' => $this->primaryKey(),
-                'tokenId' => $this->string(36),
-                'customerId' => $this->integer(),
-                'bin' => $this->string(20),
-                'last4' => $this->string(4),
-                'cardType' => $this->string(32),
-                'expirationDate' => $this->string(20),
-                'cardholderName' => $this->string()->null(),
-                'customerLocation' => $this->string(2)->null(),
-                'dateCreated' => $this->date(),
-                'dateUpdated' => $this->date(),
-                'uid' => $this->text()
-            ]);
-        }
-
-        if (!$this->tableExists('donations_customer')) {
-            $this->createTable('donations_customer', [
-                'id' => $this->primaryKey(),
-                'customerId' => $this->string(36),
-                'addressId' => $this->integer(),
-                'firstName' => $this->string(50),
-                'lastName' => $this->string(50),
-                'email' => $this->string(50),
-                'phone' => $this->string(50),
-                'dateCreated' => $this->date(),
-                'dateUpdated' => $this->date(),
-                'uid' => $this->text()
-            ]);
-        }
-
-        if (!$this->tableExists('donations_address')) {
-            $this->createTable('donations_address', [
-                'id' => $this->primaryKey(),
-                'company' => $this->string(50),
-                'countryId' => $this->integer(),
-                'stateId' => $this->string(50)->null(),
-                'city' => $this->string(50),
-                'postalCode' => $this->integer(),
-                'streetAddress' => $this->string(100),
-                'extendedAddress' => $this->string(100)->null(),
-                'dateCreated' => $this->date(),
-                'dateUpdated' => $this->date(),
-                'uid' => $this->text()
-            ]);
-        }
-
-        if (!$this->tableExists('donations_recurring_payment')) {
-            $this->createTable('donations_recurring_payment', [
-                'id' => $this->primaryKey(),
-                'cardId' => $this->integer(),
-                'frequency' => $this->integer(),
-                'amount' => $this->integer(),
-                'status' => $this->integer(),
-                'lastDateDonation' => $this->date(),
-                'nextDateDonation' => $this->date(),
-                'dateCreated' => $this->date(),
-                'dateUpdated' => $this->date(),
-                'uid' => $this->text()
-            ]);
-        }
-
-        if (!$this->tableExists('donations_country')) {
-            $this->createTable('donations_country', [
-                'id' => $this->primaryKey(),
-                'name' => $this->string(100),
-                'alpha2' => $this->string(2),
-                'alpha3' => $this->string(3),
-                'countryCode' => $this->integer(),
-                'region' => $this->string(50),
-                'subRegion' => $this->string(50),
-                'regionCode' => $this->integer(50),
-                'subRegionCode' => $this->integer()
-            ]);
-        }
-
-        if (!$this->tableExists('donations_state')) {
-            $this->createTable('donations_state', [
-                'id' => $this->primaryKey(),
+                'key' => $this->string(10),
                 'name' => $this->string(50),
-                'code' => $this->string(2)
+                'dateCreated' => $this->date(),
+                'dateUpdated' => $this->date(),
+                'uid' => $this->text()
             ]);
         }
 
-        if (!$this->tableExists('donations_logs')) {
-            $this->createTable('donations_logs', [
+        if (!$this->tableExists('mailmanager_mail')) {
+            $this->createTable('mailmanager_mail', [
+                'id' => $this->primaryKey(),
+                'userId' => $this->integer(),
+                'templateId' => $this->integer(),
+                'mailTypeId' => $this->integer(),
+                'email' => $this->string(255),
+                'isDelivered' => $this->smallInteger()->defaultValue(0),
+                'isOpened' => $this->smallInteger()->defaultValue(0),
+                'isDropped' => $this->smallInteger()->defaultValue(0),
+                'dateCreated' => $this->date(),
+                'dateUpdated' => $this->date(),
+                'uid' => $this->text()
+            ]);
+        }
+
+        if (!$this->tableExists('mailmanager_template')) {
+            $this->createTable('mailmanager_template', [
+                'id' => $this->primaryKey(),
+                'userId' => $this->integer(),
+                'key' => $this->string(20),
+                'name' => $this->string(255),
+                'template' => $this->text(),
+                'dateCreated' => $this->date(),
+                'dateUpdated' => $this->date(),
+                'uid' => $this->text()
+            ]);
+        }
+
+        if (!$this->tableExists('mailmanager_changes')) {
+            $this->createTable('mailmanager_changes', [
+                'id' => $this->primaryKey(),
+                'templateId' => $this->integer(),
+                'userId' => $this->integer(),
+                'oldVersion' => $this->text(),
+                'newVersion' => $this->text(),
+                'dateCreated' => $this->date(),
+                'dateUpdated' => $this->date(),
+                'uid' => $this->text()
+            ]);
+        }
+
+        if (!$this->tableExists('mailmanager_logs')) {
+            $this->createTable('mailmanager_logs', [
                 'id' => $this->primaryKey(),
                 'pid' => $this->integer(),
                 'culprit' => $this->integer(),
@@ -181,42 +132,26 @@ class Install extends Migration
     private function addForeignKeys()
     {
         $this->addForeignKey(
-            'fk-donations-transaction-card',
-            'donations_transaction',
-            'cardId',
-            'donations_card',
+            'fk-mailmanager-mail-mailType',
+            'mailmanager_mail',
+            'mailTypeId',
+            'mailmanager_mail_type',
             'id'
         );
 
         $this->addForeignKey(
-            'fk-donations-card-customer',
-            'donations_card',
-            'customerId',
-            'donations_customer',
+            'fk-mailmanager-mail-template',
+            'mailmanager_mail',
+            'templateId',
+            'mailmanager_template',
             'id'
         );
 
         $this->addForeignKey(
-            'fk-donations-recurring_payment-card',
-            'donations_recurring_payment',
-            'cardId',
-            'donations_card',
-            'id'
-        );
-
-        $this->addForeignKey(
-            'fk-donations-customer-address',
-            'donations_customer',
-            'addressId',
-            'donations_address',
-            'id'
-        );
-
-        $this->addForeignKey(
-            'fk-donations-address-country',
-            'donations_address',
-            'countryId',
-            'donations_country',
+            'fk-mailmanager-changes-template',
+            'mailmanager_changes',
+            'templateId',
+            'mailmanager_template',
             'id'
         );
     }
@@ -224,69 +159,60 @@ class Install extends Migration
     private function removeForeignKeys()
     {
         $this->dropForeignKey(
-            'fk-donations-transaction-card',
-            'donations_transaction'
+            'fk-mailmanager-mail-mailType',
+            'mailmanager_mail'
         );
 
         $this->dropForeignKey(
-            'fk-donations-card-customer',
-            'donations_card'
+            'fk-mailmanager-mail-template',
+            'mailmanager_mail'
         );
 
         $this->dropForeignKey(
-            'fk-donations-recurring_payment-card',
-            'donations_recurring_payment'
-        );
-
-        $this->dropForeignKey(
-            'fk-donations-customer-address',
-            'donations_customer'
-        );
-
-        $this->dropForeignKey(
-            'fk-donations-address-country',
-            'donations_address'
+            'fk-mailmanager-changes-template',
+            'mailmanager_changes'
         );
     }
 
     private function removeTables()
     {
-        if ($this->tableExists('donations_recurring_payment')) {
-            $this->dropTable('donations_recurring_payment');
+        if ($this->tableExists('mailmanager_mail')) {
+            $this->dropTable('mailmanager_mail');
         }
 
-        if ($this->tableExists('donations_transaction')) {
-            $this->dropTable('donations_transaction');
+        if ($this->tableExists('mailmanager_mail_type')) {
+            $this->dropTable('mailmanager_mail_type');
         }
 
-        if ($this->tableExists('donations_customer')) {
-            $this->dropTable('donations_customer');
+        if ($this->tableExists('mailmanager_changes')) {
+            $this->dropTable('mailmanager_changes');
         }
 
-        if ($this->tableExists('donations_address')) {
-            $this->dropTable('donations_address');
+        if ($this->tableExists('mailmanager_template')) {
+            $this->dropTable('mailmanager_template');
         }
 
-        if ($this->tableExists('donations_card')) {
-            $this->dropTable('donations_card');
-        }
-
-        if ($this->tableExists('donations_country')) {
-            $this->dropTable('donations_country');
-        }
-
-        if ($this->tableExists('donations_state')) {
-            $this->dropTable('donations_state');
-        }
-
-        if ($this->tableExists('donations_logs')) {
-            $this->dropTable('donations_logs');
+        if ($this->tableExists('mailmanager_logs')) {
+            $this->dropTable('mailmanager_logs');
         }
     }
 
     private function tableExists($table)
     {
         return (Yii::$app->db->schema->getTableSchema($table) !== null);
+    }
+
+    private function insertDefaultValues()
+    {
+        $this->$this->insert('mailmanager_mail_type', [
+            'key' => 'mailgun',
+            'name' => 'Mailgun Mailer'
+        ]);
+
+        $this->$this->insert('mailmanager_mail_type', [
+            'key' => 'php-mail',
+            'name' => 'PHP Mail'
+        ]);
     }
 }
 

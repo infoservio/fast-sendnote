@@ -10,26 +10,21 @@
 
 namespace endurant\mailmanager\records;
 
-use endurant\donationsfree\SmptMailer;
-
-use Craft;
 use craft\db\ActiveRecord;
 
 /**
- * Address Record
+ * Mail Type Record
  *
  * @property integer $id
- * @property integer $pid
- * @property integer $culprit
- * @property string $category
- * @property string $method
- * @property string $errors
- * @property string $message
+ * @property integer $templateId
+ * @property integer $userId
+ * @property string $oldVersion
+ * @property string $newVersion
  * @property string $dateCreated
  * @property string $dateUpdated
  * @property string $uid
  */
-class Log extends ActiveRecord
+class Changes extends ActiveRecord
 {
     // Public Static Methods
     // =========================================================================
@@ -48,7 +43,7 @@ class Log extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{donations_logs}}';
+        return '{{mailmanager_changes}}';
     }
 
     /**
@@ -58,9 +53,9 @@ class Log extends ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'pid', 'culprit'], 'integer'],
-            [['method', 'errors', 'message', 'category'], 'string'],
-            [['pid', 'method', 'errors', 'message'], 'required']
+            [['id', 'userId', 'templateId'], 'integer'],
+            [['oldVersion', 'newVersion'], 'string'],
+            [['userId', 'templateId', 'oldVersion', 'newVersion'], 'required']
         ];
     }
 }

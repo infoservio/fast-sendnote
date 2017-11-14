@@ -1,6 +1,6 @@
 {
-    "name": "endurant/smtp-mailer",
-    "description": "Free Smtp Mailer",
+    "name": "endurant/mail-manager",
+    "description": "Mail Manager",
     "type": "craft-plugin",
     "version": "1.0.0",
     "keywords": [
@@ -8,7 +8,7 @@
         "cms",
         "craftcms",
         "craft-plugin",
-        "smtp-mailer"
+        "mail-manager"
     ],
     "support": {
         "docs": "http://test",
@@ -23,7 +23,10 @@
     ],
     "require": {
         "craftcms/cms": "~3.0.0-beta.23",
-        "yiisoft/yii2": "^2.0"
+        "yiisoft/yii2": "^2.0",
+        "mailgun/mailgun-php": "^2.3",
+        "php-http/curl-client": "^1.7",
+        "guzzlehttp/psr7": "^1.4"
     },
     "repositories": [
         {
@@ -37,16 +40,16 @@
         }
     },
     "extra": {
-        "name": "Smtp Mailer",
-        "handle": "smtp-mailer",
+        "name": "Mail Manager",
+        "handle": "mail-manager",
         "schemaVersion": "1.0.0",
         "hasCpSettings": true,
         "hasCpSection": false,
         "changelogUrl": "???",
         "components": {
-            "donationService": "endurant\\donationsfree\\services\\DonationService"
+            "donationService": "endurant\\mailmanager\\services\\DonationService"
         },
-        "class": "endurant\\smtpmailer\\SmtpMailer"
+        "class": "endurant\\mailmanager\\MailManager"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.2"
