@@ -59,6 +59,7 @@ class MailManagerController extends Controller
         // call parent method that will check CSRF if such property is true.
         $this->enableCsrfValidation = false;
         return parent::beforeAction($action);
+
     }
 
     public function actionSend()
