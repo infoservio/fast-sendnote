@@ -1,9 +1,9 @@
 <?php
 
 namespace endurant\smtpmailer\errors;
-use endurant\smtpmailer\SmptMailer;
+use endurant\mailmanager\MailManager;
 
-class SmtpMailerPluginException extends \Exception
+class MailManagerPluginException extends \Exception
 {
     protected $message;
     protected $method;
@@ -19,7 +19,7 @@ class SmtpMailerPluginException extends \Exception
         $this->message = $message;
         $this->method = $method;
 
-        $this->_logService = SmptMailer::$PLUGIN->logService;
+        $this->_logService = MailManager::$PLUGIN->logService;
         $this->log($category);
     }
     

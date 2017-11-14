@@ -21,5 +21,5 @@
  * @since     1.0.0
  */
 return [
-    'donations-free plugin loaded' => 'donations-free plugin loaded',
+    'mail-manager plugin loaded' => 'mail-manager plugin loaded',
 ];

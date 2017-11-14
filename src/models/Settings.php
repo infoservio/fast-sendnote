@@ -10,13 +10,15 @@
 
 namespace endurant\mailmanager\models;
 
-use endurant\donationsfree\SmptMailer;
+use endurant\donationsfree\Donationsfree;
 
 use Craft;
 use craft\base\Model;
 
 /**
- * Card Model
+ * Donationsfree Settings Model
+ *
+ * This is a model used to define the plugin's settings.
  *
  * Models are containers for data. Just about every time information is passed
  * between services, controllers, and templates in Craft, it’s passed via a model.
@@ -27,42 +29,39 @@ use craft\base\Model;
  * @package   Donationsfree
  * @since     1.0.0
  */
-class Log extends Model
+class Settings extends Model
 {
     // Public Properties
     // =========================================================================
-    const MAIL_LOGS = 'mailmanager-mail-logs';
-    const CHANGES_LOGS = 'mailmanager-changes-logs';
-    const TEMPLATE_LOGS = 'mailmanager-template-logs';
 
-    const MAIL_MANAGER_CULPRIT = ['id' => 1, 'name' => 'mail-manager'];
-    const DB_CULPRIT = ['id' => 2, 'name' => 'db'];
     /**
-     * Some model attribute
+     * Some field model attribute
      *
      * @var string
      */
-    public $id;
-    public $pid;
-    public $culprit;
-    public $category;
-    public $method;
-    public $errors;
-    public $message;
+    public $mailer = 1;
+
+    // mailgun
+    public $mailgunKey = '';
 
     // Public Methods
     // =========================================================================
 
     /**
      * Returns the validation rules for attributes.
+     *
+     * Validation rules are used by [[validate()]] to check if attribute values are valid.
+     * Child classes may override this method to declare different validation rules.
+     *
+     * More info: http://www.yiiframework.com/doc-2.0/guide-input-validation.html
+     *
      * @return array
      */
     public function rules()
     {
         return [
-            [['id', 'pid', 'culprit'], 'integer'],
-            [['method', 'errors', 'message', 'category'], 'string'],
-            [['pid', 'method', 'errors', 'message'], 'required']
+            [['btEnvironment', 'btMerchantId', 'btPublicKey', 'btPrivateKey', 'btAuthorization', 'errorText', 'successText', 'color'], 'string'],
+            [['btEnvironment', 'btMerchantId', 'btPublicKey', 'btPrivateKey', 'btAuthorization', 'errorText', 'successText', 'color'], 'required'],
         ];
     }
 }

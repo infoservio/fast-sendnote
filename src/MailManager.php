@@ -8,9 +8,9 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\smtpmailer;
+namespace endurant\mailmanager;
 
-use endurant\donationsfree\models\Settings;
+use endurant\mailmanager\models\Settings;
 
 use Craft;
 use craft\base\Plugin;
@@ -37,16 +37,16 @@ use yii\base\Event;
  * @property  Settings $settings
  * @method    Settings getSettings()
  */
-class SmtpMailer extends Plugin
+class MailManager extends Plugin
 {
     // Static Properties
     // =========================================================================
-
+    public $hasCpSection = true;
     /**
      * Static property that is an instance of this plugin class so that it can be accessed via
      * DonationsFree::$plugin
      *
-     * @var SmtpMailer
+     * @var MailManager
      */
     public static $PLUGIN;
 
@@ -100,7 +100,7 @@ class SmtpMailer extends Plugin
  */
         Craft::info(
             Craft::t(
-                'smtp-mailer',
+                'mail-manager',
                 '{name} plugin loaded',
                 ['name' => $this->name]
             ),
@@ -130,7 +130,7 @@ class SmtpMailer extends Plugin
     protected function settingsHtml(): string
     {
         return Craft::$app->view->renderTemplate(
-            'smtp-mailer/settings',
+            'mail-manager/settings',
             [
                 'settings' => $this->getSettings()
             ]

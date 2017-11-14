@@ -1,6 +1,6 @@
 <?php
 
-namespace endurant\smtpmailer\models\forms;
+namespace endurant\mailmanager\models\forms;
 
 use craft\base\Model;
 
