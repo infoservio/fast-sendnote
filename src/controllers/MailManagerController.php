@@ -63,6 +63,7 @@ class MailManagerController extends Controller
 
     public function actionSend()
     {
+
         $this->requirePostRequest();
     }
 }
