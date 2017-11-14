@@ -7,7 +7,6 @@ use endurant\mailmanager\components\mailmanager\mailer\PhpMailer;
 
 abstract class MailerFactoryAbstract
 {
-
     public function create($id)
     {
         switch ($id) {
