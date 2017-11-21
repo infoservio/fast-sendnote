@@ -44,6 +44,16 @@ class MailType extends ActiveRecord
         return '{{mailmanager_mail_type}}';
     }
 
+    public static function getNames()
+    {
+        $data = self::find()->all();
+        $mailers = [];
+        foreach ($data as $key => $value) {
+            $mailers[$value->id] = $value->name;
+        }
+        return $mailers;
+    }
+
     /**
      * Returns the validation rules for attributes.
      * @return array

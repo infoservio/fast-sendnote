@@ -48,13 +48,17 @@ class MailManagerAssetBundle extends AssetBundle
         // define the relative path to CSS/JS files that should be registered with the page
         // when this asset bundle is registered
         $this->js = [
-            'js/index.js',
-            'js/jscolor.js',
-            'https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.3.2/spin.min.js',
+            'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js',
+            'https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.js',
+            'js/template/index.js',
+            'js/template/view.js'
         ];
 
         $this->css = [
-            'css/style.css',
+            'css/glyphicon.css',
+            'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css',
+            'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
+            'css/template.css'
         ];
 
         $this->depends = [

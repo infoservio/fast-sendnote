@@ -1,0 +1,54 @@
+{% extends "_layouts/cp" %}
+{% do view.registerAssetBundle("endurant\\mailmanager\\MailManagerFormAssetBundle") %}
+{% do view.registerAssetBundle("endurant\\mailmanager\\RedactorAssetBundle") %}
+
+{% set title = (isUpdated ? "Edit Template" : "Create Template")|t('app') %}
+
+{% block content %}
+    {% if errors %}
+        <div class="alert alert-danger" role="alert">
+            <strong>Oh snap!</strong> Change a few things up and try submitting again.
+            <ul>
+                {% for key, error in errors %}
+                    <li>{{ key }}: {{ error[0] }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    <form method="post" action="{{ isUpdated ? 'edit' : 'create' }}" id="template-form">
+        <input hidden name="id" value="{{ isUpdated ? template.id : '' }}" />
+        <div class="form-group">
+            <label for="inputTemplateName">Template Name</label>
+            <small id="nameHelp" class="form-text text-muted">Template name is using as a header for email.</small>
+            <input name="name" type="text" class="form-control" id="inputTemplateName" aria-describedby="nameHelp"
+                   placeholder="Enter Template Name"
+                   value="{{ template ? template.name : '' }}"
+                   data-parsley-required
+                   data-parsley-maxlength="255"
+            />
+        </div>
+        <div class="form-group">
+            <label for="inputTemplateSlug">Slug</label>
+            <small id="keyHelp" class="form-text text-muted">Slug is using for sending the right template.</small>
+            <input name="slug" type="text" class="form-control" id="inputTemplateSlug" aria-describedby="keyHelp"
+                   placeholder="Enter Template Slug"
+                   value="{{ template ? template.slug : '' }}"
+                   data-parsley-required
+                   data-parsley-maxlength="20"
+            />
+        </div>
+        <div class="form-group">
+            <label for="inputTemplate">Template</label>
+            <small id="templateHelp" class="form-text text-muted">Template is using as a template for email. You can put special params using brackets. Example: 'Dear {firstname}'</small>
+            <textarea id="template" name="template"class="form-control" id="inputTemplate" aria-describedby="templateHelp"
+                      placeholder="Enter template"
+                      data-parsley-required>
+            </textarea>
+        </div>
+        <button type="submit" class="btn btn-primary form-btn" id="submit-btn">{{ isUpdated ? 'Update' : 'Create' }}</button>
+    </form>
+    <script>
+        var template = `{{ template ? template.template| raw : '' }}`;
+        var errors = {{ errors ? errors|json_encode|raw : 'null' }};
+    </script>
+{% endblock %}

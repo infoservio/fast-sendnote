@@ -14,6 +14,8 @@ use endurant\donationsfree\Donationsfree;
 
 use Craft;
 use craft\base\Model;
+use endurant\mailmanager\components\mailmanager\transportadapters\MailgunMailer;
+use endurant\mailmanager\components\mailmanager\transportadapters\PhpMailer;
 
 /**
  * Donationsfree Settings Model
@@ -39,7 +41,7 @@ class Settings extends Model
      *
      * @var string
      */
-    public $mailer = 1;
+    public $mailer = PhpMailer::class;
 
     // mailgun
     public $mailgunKey = '';
@@ -60,8 +62,11 @@ class Settings extends Model
     public function rules()
     {
         return [
-            [['btEnvironment', 'btMerchantId', 'btPublicKey', 'btPrivateKey', 'btAuthorization', 'errorText', 'successText', 'color'], 'string'],
-            [['btEnvironment', 'btMerchantId', 'btPublicKey', 'btPrivateKey', 'btAuthorization', 'errorText', 'successText', 'color'], 'required'],
+            [['mailgunKey', 'mailer'], 'string'],
+            [['mailer'], 'required'],
+            ['mailgunKey', 'required', 'when' => function($model) {
+                return $model->mailer === MailgunMailer::class;
+            }]
         ];
     }
 }

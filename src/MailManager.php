@@ -10,13 +10,22 @@
 
 namespace endurant\mailmanager;
 
+use endurant\mailmanager\components\mailmanager\MailerFactory;
+use endurant\mailmanager\components\mailmanager\MailerFactoryAbstract;
+use endurant\mailmanager\components\mailmanager\MailerHelper;
+use endurant\mailmanager\components\mailmanager\transportadapters\PhpMailer;
+use endurant\mailmanager\components\mailmanager\transportadapters\TransportAdapterInterface;
 use endurant\mailmanager\models\Settings;
 
 use Craft;
 use craft\base\Plugin;
 use craft\services\Plugins;
+use craft\web\UrlManager;
 use craft\events\PluginEvent;
+use craft\events\RegisterUrlRulesEvent;
 
+use endurant\mailmanager\records\MailType as MailTypeRecord;
+use ReflectionClass;
 use yii\base\Event;
 
 /**
@@ -39,9 +48,9 @@ use yii\base\Event;
  */
 class MailManager extends Plugin
 {
+    public $hasCpSection = true;
     // Static Properties
     // =========================================================================
-    public $hasCpSection = true;
     /**
      * Static property that is an instance of this plugin class so that it can be accessed via
      * DonationsFree::$plugin
@@ -80,24 +89,30 @@ class MailManager extends Plugin
             }
         );
 
-/**
- * Logging in Craft involves using one of the following methods:
- *
- * Craft::trace(): record a message to trace how a piece of code runs. This is mainly for development use.
- * Craft::info(): record a message that conveys some useful information.
- * Craft::warning(): record a warning message that indicates something unexpected has happened.
- * Craft::error(): record a fatal error that should be investigated as soon as possible.
- *
- * Unless `devMode` is on, only Craft::warning() & Craft::error() will log to `craft/storage/logs/web.log`
- *
- * It's recommended that you pass in the magic constant `__METHOD__` as the second parameter, which sets
- * the category to the method (prefixed with the fully qualified class name) where the constant appears.
- *
- * To enable the Yii debug toolbar, go to your user account in the AdminCP and check the
- * [] Show the debug toolbar on the front end & [] Show the debug toolbar on the Control Panel
- *
- * http://www.yiiframework.com/doc-2.0/guide-runtime-logging.html
- */
+        // Register our site routes
+        Event::on(
+            UrlManager::class,
+            UrlManager::EVENT_REGISTER_SITE_URL_RULES,
+            function (RegisterUrlRulesEvent $event) {
+                $event->rules['mail-manager'] = 'mail-manager/mail-manager/index';
+            }
+        );
+
+        // Register our CP routes
+        Event::on(
+            UrlManager::class,
+            UrlManager::EVENT_REGISTER_CP_URL_RULES,
+            function (RegisterUrlRulesEvent $event) {
+                $event->rules['mail-manager'] = 'mail-manager/template/index';
+                $event->rules['mail-manager/create'] = 'mail-manager/template/create';
+                $event->rules['mail-manager/edit'] = 'mail-manager/template/update';
+                $event->rules['mail-manager/view'] = 'mail-manager/template/view';
+                $event->rules['mail-manager/delete'] = 'mail-manager/template/delete';
+                $event->rules['mail-manager/not-found'] = 'mail-manager/site/not-found';
+            }
+        );
+
+
         Craft::info(
             Craft::t(
                 'mail-manager',
@@ -106,6 +121,17 @@ class MailManager extends Plugin
             ),
             __METHOD__
         );
+    }
+
+    public function getCpNavItem()
+    {
+        $item = parent::getCpNavItem();
+        $item['subnav'] = [
+            'foo' => ['label' => 'Foo', 'url' => 'mail-manager/foo'],
+            'bar' => ['label' => 'Bar', 'url' => 'mail-manager/bar'],
+            'baz' => ['label' => 'Baz', 'url' => 'mail-manager/baz'],
+        ];
+        return $item;
     }
 
     // Protected Methods
@@ -129,10 +155,30 @@ class MailManager extends Plugin
      */
     protected function settingsHtml(): string
     {
+        $allTransportAdapterTypes = MailerFactory::allMailerTransportTypes();
+        $transportTypeOptions = [];
+        $allTransportAdapters = [];
+
+        foreach ($allTransportAdapterTypes as  $transportAdapterType) {
+            /** @var string|TransportAdapterInterface $transportAdapterType */
+            $allTransportAdapters[] = MailerFactory::createTransportAdapter($transportAdapterType);
+            $transportTypeOptions[] = [
+                'value' => $transportAdapterType,
+                'label' => $transportAdapterType::displayName()
+            ];
+
+        }
+        $settings = $this->getSettings();
+
+        $adapter = MailerFactory::createTransportAdapter($settings->mailer);
+
         return Craft::$app->view->renderTemplate(
             'mail-manager/settings',
             [
-                'settings' => $this->getSettings()
+                'settings' => $settings,
+                'adapter' => $adapter,
+                'transportTypeOptions' => $transportTypeOptions,
+                'allTransportAdapters' => $allTransportAdapters
             ]
         );
     }

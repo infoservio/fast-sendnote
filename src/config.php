@@ -23,8 +23,6 @@
  */
 
 return [
-    "btEnvironment" => true,
-    "btMerchantId" => true,
-    "btPublicKey" => true,
-    "btPrivateKey" => true,
+    "mailer" => true,
+    "mailgunKey" => true
 ];

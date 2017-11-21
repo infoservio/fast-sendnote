@@ -44,7 +44,7 @@
         "handle": "mail-manager",
         "schemaVersion": "1.0.0",
         "hasCpSettings": true,
-        "hasCpSection": false,
+        "hasCpSection": true,
         "changelogUrl": "???",
         "components": {
             "donationService": "endurant\\mailmanager\\services\\DonationService"
