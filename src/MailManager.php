@@ -23,6 +23,8 @@ use craft\services\Plugins;
 use craft\web\UrlManager;
 use craft\events\PluginEvent;
 use craft\events\RegisterUrlRulesEvent;
+use craft\events\RegisterCpNavItemsEvent;
+use craft\web\twig\variables\Cp;
 
 use endurant\mailmanager\records\MailType as MailTypeRecord;
 use ReflectionClass;
@@ -48,7 +50,6 @@ use yii\base\Event;
  */
 class MailManager extends Plugin
 {
-    public $hasCpSection = true;
     // Static Properties
     // =========================================================================
     /**
@@ -85,9 +86,20 @@ class MailManager extends Plugin
             function (PluginEvent $event) {
                 if ($event->plugin === $this) {
                     // We were just installed
+                    $this->hasCpSection = true;
+                    $this->hasCpSettings = true;
                 }
             }
         );
+
+        Event::on(Cp::class, Cp::EVENT_REGISTER_CP_NAV_ITEMS, function(RegisterCpNavItemsEvent $event) {
+            if (\Craft::$app->user->identity->admin) {
+                $event->navItems['mail-manager'] = [
+                    'label' => \Craft::t('mail-manager', 'Mail Manager'),
+                    'url' => 'mail-manager'
+                ];
+            }
+        });
 
         // Register our site routes
         Event::on(
