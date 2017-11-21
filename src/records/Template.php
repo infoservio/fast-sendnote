@@ -27,9 +27,9 @@ use craft\db\ActiveRecord;
  */
 class Template extends ActiveRecord
 {
+    public $oldVersion;
     // Public Static Methods
     // =========================================================================
-
     /**
      * Declares the name of the database table associated with this AR class.
      * By default this method returns the class name as the table name by calling [[Inflector::camel2id()]]
@@ -64,5 +64,14 @@ class Template extends ActiveRecord
             [['slug', 'name', 'template'], 'string'],
             [['userId', 'slug', 'name', 'template'], 'required']
         ];
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        if (!$insert && !empty($changedAttributes)) {
+            Changes::log($changedAttributes, $this);
+        }
     }
 }
