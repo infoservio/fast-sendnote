@@ -94,10 +94,7 @@ class MailManager extends Plugin
 
         Event::on(Cp::class, Cp::EVENT_REGISTER_CP_NAV_ITEMS, function(RegisterCpNavItemsEvent $event) {
             if (\Craft::$app->user->identity->admin) {
-                $event->navItems['mail-manager'] = [
-                    'label' => \Craft::t('mail-manager', 'Mail Manager'),
-                    'url' => 'mail-manager'
-                ];
+
             }
         });
 
@@ -121,6 +118,7 @@ class MailManager extends Plugin
                 $event->rules['mail-manager/view'] = 'mail-manager/template/view';
                 $event->rules['mail-manager/delete'] = 'mail-manager/template/delete';
                 $event->rules['mail-manager/not-found'] = 'mail-manager/site/not-found';
+                $event->rules['mail-manager/changes'] = 'mail-manager/changes/index';
             }
         );
 
@@ -139,9 +137,8 @@ class MailManager extends Plugin
     {
         $item = parent::getCpNavItem();
         $item['subnav'] = [
-            'foo' => ['label' => 'Foo', 'url' => 'mail-manager/foo'],
-            'bar' => ['label' => 'Bar', 'url' => 'mail-manager/bar'],
-            'baz' => ['label' => 'Baz', 'url' => 'mail-manager/baz'],
+            'template-manager' => ['label' => 'Template Manager', 'url' => 'mail-manager'],
+            'changes-manager' => ['label' => 'Template Changes Manager', 'url' => 'mail-manager/changes'],
         ];
         return $item;
     }
