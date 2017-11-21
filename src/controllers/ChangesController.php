@@ -64,10 +64,7 @@ class ChangesController extends Controller
 
     public function actionIndex()
     {
-        $columns = Template::getColumns();
-        return $this->renderTemplate('mail-manager/index', [
-            'columns' => $columns
-        ]);
+        return $this->renderTemplate('mail-manager/changes/index');
     }
 
     public function actionSend()
