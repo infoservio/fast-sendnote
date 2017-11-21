@@ -46,6 +46,21 @@ class Changes extends ActiveRecord
         return '{{mailmanager_changes}}';
     }
 
+    public static function log(array $oldVersion, Template $newVersion)
+    {
+        $attributes = [];
+        foreach ($oldVersion as $key => $value) {
+            $attributes[] = $key;
+        }
+
+        $changes = new Changes();
+        $changes->templateId = $newVersion->id;
+        $changes->userId = \Craft::$app->user->id;
+        $changes->oldVersion = json_encode($oldVersion);
+        $changes->newVersion = json_encode($newVersion->getAttributes($attributes));
+        $changes->save();
+    }
+
     /**
      * Returns the validation rules for attributes.
      * @return array
