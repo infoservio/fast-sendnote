@@ -1,0 +1,14 @@
+{% extends "_layouts/cp" %}
+{% do view.registerAssetBundle("endurant\\mailmanager\\MailManagerAssetBundle") %}
+{% set title = "View Template"|t('app') %}
+
+{% block content %}
+    <h1>{{ template.name }}</h1>
+    <h3>{{ template.slug }}</h3>
+    <div style="max-width: 1000px;">
+        <iframe id="template-iframe" align="middle"></iframe>
+    </div>
+    <script>
+        var content = `{{ template.template | raw }}`;
+    </script>
+{% endblock %}

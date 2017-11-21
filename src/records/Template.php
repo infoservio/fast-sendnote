@@ -17,9 +17,10 @@ use craft\db\ActiveRecord;
  *
  * @property integer $id
  * @property integer $userId
- * @property integer $key
+ * @property integer $slug
  * @property integer $name
  * @property string $template
+ * @property integer $isRemoved
  * @property string $dateCreated
  * @property string $dateUpdated
  * @property string $uid
@@ -46,6 +47,11 @@ class Template extends ActiveRecord
         return '{{mailmanager_template}}';
     }
 
+    public static function getColumns()
+    {
+        return ['ID', 'Name', 'Slug', 'User ID', 'Date Created', 'Date Updated'];
+    }
+
     /**
      * Returns the validation rules for attributes.
      * @return array
@@ -54,8 +60,9 @@ class Template extends ActiveRecord
     {
         return [
             [['id', 'userId'], 'integer'],
-            [['key', 'name', 'template'], 'string'],
-            [['userId', 'key', 'name', 'template'], 'required']
+            ['slug', 'unique'],
+            [['slug', 'name', 'template'], 'string'],
+            [['userId', 'slug', 'name', 'template'], 'required']
         ];
     }
 }

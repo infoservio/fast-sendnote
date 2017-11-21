@@ -1,0 +1,36 @@
+{% extends "_layouts/cp" %}
+{% do view.registerAssetBundle("endurant\\mailmanager\\MailManagerAssetBundle") %}
+{% set title = "Mail Manager Templates"|t('app') %}
+
+{% block content %}
+    <a href="mail-manager/create" class="create-template-link">Create Template</a>
+    <table id="template-table" class="table table-hover">
+        <thead>
+        <tr>
+            {% for col in columns %}
+                <th>{{ col }}</th>
+            {% endfor %}
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for template in templates %}
+            <tr>
+                <th scope="row">{{ template.id }}</th>
+                <td>{{ template.name }}</td>
+                <td>{{ template.slug }}</td>
+                <td>{{ template.userId }}</td>
+                <td>{{ template.dateCreated }}</td>
+                <td>{{ template.dateUpdated }}</td>
+                <td class="icons">
+                    <a href="mail-manager/view?id={{ template.id }}" class="glyphicon glyphicon-eye-open" title="View"></a>
+                    <a href="mail-manager/edit?id={{ template.id }}" class="glyphicon glyphicon-pencil space" title="Edit"></a>
+                    <form action="mail-manager/delete" method="post">
+                        <button type="submit" name="id" value="{{ template.id }}" class="btn-link"><span class="glyphicon glyphicon-trash"></span></button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

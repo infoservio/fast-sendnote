@@ -26,6 +26,8 @@ use craft\base\Model;
  */
 class Template extends Model
 {
+    const NOT_REMOVED = 0;
+    const REMOVED = 1;
     /**
      * Some model attribute
      *
@@ -33,9 +35,10 @@ class Template extends Model
      */
     public $id;
     public $userId;
-    public $key;
+    public $slug;
     public $name;
     public $template;
+    public $isRemoved;
 
     // Public Methods
     // =========================================================================
@@ -48,8 +51,9 @@ class Template extends Model
     {
         return [
             [['id', 'userId'], 'integer'],
-            [['key', 'name', 'template'], 'string'],
-            [['userId', 'key', 'name', 'template'], 'required']
+            ['slug', 'unique'],
+            [['slug', 'name', 'template'], 'string'],
+            [['userId', 'slug', 'name', 'template'], 'required']
         ];
     }
 }

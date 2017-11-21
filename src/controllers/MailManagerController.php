@@ -17,6 +17,7 @@ use craft\web\Controller;
 use craft\helpers\ArrayHelper;
 use endurant\mailmanager\MailManagerAssetBundle;
 use endurant\mailmanager\models\forms\ContactForm;
+use endurant\mailmanager\models\Template;
 
 /**
  * Donate Controller
@@ -48,7 +49,7 @@ class MailManagerController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['index', 'send'];
+    protected $allowAnonymous = [];
 
     // Public Methods
     // =========================================================================
@@ -61,9 +62,16 @@ class MailManagerController extends Controller
         return parent::beforeAction($action);
     }
 
+    public function actionIndex()
+    {
+        $columns = Template::getColumns();
+        return $this->renderTemplate('mail-manager/index', [
+            'columns' => $columns
+        ]);
+    }
+
     public function actionSend()
     {
-
         $this->requirePostRequest();
     }
 }

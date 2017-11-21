@@ -1,6 +1,38 @@
 {% extends "_layouts/cp" %}
-{% set title = "Page Title"|t('app') %}
+{% do view.registerAssetBundle("endurant\\mailmanager\\MailManagerAssetBundle") %}
+{% set title = "Mail Manager Templates"|t('app') %}
 
 {% block content %}
-    <p>Page content goes here</p>
+    <table id="example" class="table table-hover">
+        <thead>
+        <tr>
+            {% for col in columns %}
+                <th>{{ col }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+            <td>@mdo</td>
+        </tr>
+        </tbody>
+    </table>
 {% endblock %}

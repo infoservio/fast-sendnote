@@ -32,8 +32,6 @@ class Install extends Migration
         // Refresh the db schema caches
         Craft::$app->db->schema->refresh();
 
-        $this->insertDefaultValues();
-
         return true;
     }
 
@@ -60,17 +58,6 @@ class Install extends Migration
 
     private function createTables()
     {
-        if (!$this->tableExists('mailmanager_mail_type')) {
-            $this->createTable('mailmanager_mail_type', [
-                'id' => $this->primaryKey(),
-                'key' => $this->string(10),
-                'name' => $this->string(50),
-                'dateCreated' => $this->date(),
-                'dateUpdated' => $this->date(),
-                'uid' => $this->text()
-            ]);
-        }
-
         if (!$this->tableExists('mailmanager_mail')) {
             $this->createTable('mailmanager_mail', [
                 'id' => $this->primaryKey(),
@@ -91,9 +78,10 @@ class Install extends Migration
             $this->createTable('mailmanager_template', [
                 'id' => $this->primaryKey(),
                 'userId' => $this->integer(),
-                'key' => $this->string(20),
+                'slug' => $this->string(20)->unique(),
                 'name' => $this->string(255),
                 'template' => $this->text(),
+                'isRemoved' => $this->smallInteger()->defaultValue(0),
                 'dateCreated' => $this->date(),
                 'dateUpdated' => $this->date(),
                 'uid' => $this->text()
@@ -132,10 +120,10 @@ class Install extends Migration
     private function addForeignKeys()
     {
         $this->addForeignKey(
-            'fk-mailmanager-mail-mailType',
-            'mailmanager_mail',
-            'mailTypeId',
-            'mailmanager_mail_type',
+            'fk-template-users',
+            'mailmanager_template',
+            'userId',
+            'users',
             'id'
         );
 
@@ -159,8 +147,8 @@ class Install extends Migration
     private function removeForeignKeys()
     {
         $this->dropForeignKey(
-            'fk-mailmanager-mail-mailType',
-            'mailmanager_mail'
+            'fk-template-users',
+            'mailmanager_template'
         );
 
         $this->dropForeignKey(
@@ -180,10 +168,6 @@ class Install extends Migration
             $this->dropTable('mailmanager_mail');
         }
 
-        if ($this->tableExists('mailmanager_mail_type')) {
-            $this->dropTable('mailmanager_mail_type');
-        }
-
         if ($this->tableExists('mailmanager_changes')) {
             $this->dropTable('mailmanager_changes');
         }
@@ -200,19 +184,6 @@ class Install extends Migration
     private function tableExists($table)
     {
         return (Yii::$app->db->schema->getTableSchema($table) !== null);
-    }
-
-    private function insertDefaultValues()
-    {
-        $this->$this->insert('mailmanager_mail_type', [
-            'key' => 'mailgun',
-            'name' => 'Mailgun Mailer'
-        ]);
-
-        $this->$this->insert('mailmanager_mail_type', [
-            'key' => 'php-mail',
-            'name' => 'PHP Mail'
-        ]);
     }
 }
 
