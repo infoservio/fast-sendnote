@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\mailmanager;
+namespace endurant\mailmanager\assetbundles\parsley;
 
 use Craft;
 use craft\web\AssetBundle;
@@ -32,7 +32,7 @@ use craft\web\assets\cp\CpAsset;
  * @package   Donationsfree
  * @since     1.0.0
  */
-class MailManagerAssetBundle extends AssetBundle
+class ParsleyAssetBundle extends AssetBundle
 {
     // Public Methods
     // =========================================================================
@@ -43,27 +43,16 @@ class MailManagerAssetBundle extends AssetBundle
     public function init()
     {
         // define the path that your publishable resources live
-        $this->sourcePath = '@endurant/mailmanager/resources/';
+        $this->sourcePath = '@endurant/mailmanager/assetbundles/parsley/dist/';
 
         // define the relative path to CSS/JS files that should be registered with the page
         // when this asset bundle is registered
         $this->js = [
-            'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js',
-            'https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.js',
-            'js/template/index.js',
-            'js/template/view.js'
+            'js/parsley.js',
         ];
 
         $this->css = [
-            'css/glyphicon.css',
-            'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css',
-            'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
-            'css/template.css'
-        ];
-
-        $this->depends = [
-            'yii\web\YiiAsset',
-            'yii\web\JqueryAsset',
+            'css/parsley.css'
         ];
 
         $this->publishOptions = ['forceCopy' => true];

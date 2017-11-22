@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\mailmanager;
+namespace endurant\mailmanager\assetbundles\settings;
 
 use Craft;
 use craft\web\AssetBundle;
@@ -32,7 +32,7 @@ use craft\web\assets\cp\CpAsset;
  * @package   Donationsfree
  * @since     1.0.0
  */
-class RedactorAssetBundle extends AssetBundle
+class MailManagerSettingsAssetBundle extends AssetBundle
 {
     // Public Methods
     // =========================================================================
@@ -43,27 +43,22 @@ class RedactorAssetBundle extends AssetBundle
     public function init()
     {
         // define the path that your publishable resources live
-        $this->sourcePath = '@endurant/mailmanager/resources';
+        $this->sourcePath = '@endurant/mailmanager/assetbundles/settings/dist';
 
         // define the relative path to CSS/JS files that should be registered with the page
         // when this asset bundle is registered
         $this->js = [
-            'redactor/redactor.js',
-            'redactor/plugins/filemanager.js',
-            'redactor/plugins/fontcolor.js',
-            'redactor/plugins/fontfamily.js',
-            'redactor/plugins/fontsize.js',
-            'redactor/plugins/fullscreen.js',
-            'redactor/plugins/imagemanager.js',
-            'redactor/plugins/pagebreak.js',
-            'redactor/plugins/source.js',
-            'redactor/plugins/table.js',
-            'redactor/plugins/video.js',
-            'js/redactor.js'
+            'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js',
+            'js/settings.js'
         ];
 
         $this->css = [
-            'redactor/redactor.css'
+            'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'
+        ];
+
+        $this->depends = [
+            'yii\web\YiiAsset',
+            'yii\web\JqueryAsset',
         ];
 
         $this->publishOptions = ['forceCopy' => true];
