@@ -47,7 +47,11 @@
         "hasCpSection": true,
         "changelogUrl": "???",
         "components": {
-            "donationService": "endurant\\mailmanager\\services\\DonationService"
+            "mailManagerService": "endurant\\mailmanager\\services\\MailManagerService",
+            "templateService": "endurant\\mailmanager\\services\\TemplateService",
+            "changesService": "endurant\\mailmanager\\services\\ChangesService",
+            "logService": "endurant\\mailmanager\\services\\LogService",
+            "templateParser": "endurant\\mailmanager\\components\\parser\\TemplateParser"
         },
         "class": "endurant\\mailmanager\\MailManager"
     },

@@ -1,11 +1,12 @@
 {% extends "_layouts/cp" %}
 {% do view.registerAssetBundle("endurant\\mailmanager\\assetbundles\\template\\main\\TemplateAssetBundle") %}
+{% do view.registerAssetBundle("endurant\\mailmanager\\assetbundles\\changes\\ChangesAssetBundle") %}
 {% set title = "View Template Changes"|t('app') %}
 {% set template = templateChange.getTemplate() %}
 {% block content %}
-    <h1>{{ template.name }}</h1>
-    <h3>{{ template.slug }}</h3>
     <div class="container">
+        <h1>{{ template.name }}</h1>
+        <h3>{{ template.slug }}</h3>
         {% for key, item in templateChange.oldVersionArr if key != 'template' %}
             <div class="row" style="margin-bottom: 10px">
                 <div class="col-md-12 col-sm-12">

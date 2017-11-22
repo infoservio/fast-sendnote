@@ -62,14 +62,6 @@ class MailManagerController extends Controller
         return parent::beforeAction($action);
     }
 
-    public function actionIndex()
-    {
-        $columns = Template::getColumns();
-        return $this->renderTemplate('mail-manager/index', [
-            'columns' => $columns
-        ]);
-    }
-
     public function actionSend()
     {
         $this->requirePostRequest();

@@ -12,6 +12,7 @@ namespace endurant\mailmanager\records;
 
 use craft\db\ActiveRecord;
 use craft\records\User;
+use endurant\mailmanager\MailManager;
 
 /**
  * Mail Type Record
@@ -74,7 +75,7 @@ class Template extends ActiveRecord
         if (!$insert && !empty($changedAttributes)) {
             unset($changedAttributes['dateCreated']);
             unset($changedAttributes['dateUpdated']);
-            Changes::log($changedAttributes, $this);
+            MailManager::$PLUGIN->changesService->create($changedAttributes, $this);
         }
     }
 

@@ -92,14 +92,13 @@ class TemplateController extends Controller
     {
         if ($post = Craft::$app->request->post())
         {
-            $templateRecord = new TemplateRecord();
-            $templateRecord->userId = Craft::$app->user->id;
-            $templateRecord->setAttributes($post);
-            if ($templateRecord->validate() && $templateRecord->save()) {
-                return $this->redirect('mail-manager/view?id=' . $templateRecord->id);
+            $res = MailManager::$PLUGIN->templateService->create($post);
+
+            if ($res['success']) {
+                return $this->redirect('mail-manager/view?id=' . $res['template']->id);
             } else {
                 return $this->renderTemplate('mail-manager/templates/create', [
-                    'errors' => $templateRecord->errors,
+                    'errors' => $res['errors'],
                     'template' => $post
                 ]);
             }
@@ -118,13 +117,13 @@ class TemplateController extends Controller
 
         if ($post = Craft::$app->request->post())
         {
-            $templateRecord->userId = Craft::$app->user->id;
-            $templateRecord->setAttributes($post);
-            if ($templateRecord->validate() && $templateRecord->save()) {
-                return $this->redirect('mail-manager/view?id=' . $templateRecord->id);
+            $res = MailManager::$PLUGIN->templateService->update($templateRecord, $post);
+
+            if ($res['success']) {
+                return $this->redirect('mail-manager/view?id=' . $res['template']->id);
             } else {
                 return $this->renderTemplate('mail-manager/templates/update', [
-                    'errors' => $templateRecord->errors,
+                    'errors' => $res['errors'],
                     'template' => $post
                 ]);
             }
@@ -139,9 +138,7 @@ class TemplateController extends Controller
     {
         $this->requirePostRequest();
         $post = Craft::$app->request->post();
-        $templateRecord = TemplateRecord::find()->where(['id' => $post['id']])->one();
-        $templateRecord->isRemoved = Template::REMOVED;
-        $templateRecord->update();
+        $res = MailManager::$PLUGIN->templateService->remove($post['id']);
         return $this->redirect('mail-manager');
     }
 
