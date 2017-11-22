@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\mailmanager;
+namespace endurant\mailmanager\assetbundles\template\main;
 
 use Craft;
 use craft\web\AssetBundle;
@@ -32,7 +32,7 @@ use craft\web\assets\cp\CpAsset;
  * @package   Donationsfree
  * @since     1.0.0
  */
-class MailManagerSettingsAssetBundle extends AssetBundle
+class TemplateAssetBundle extends AssetBundle
 {
     // Public Methods
     // =========================================================================
@@ -43,17 +43,22 @@ class MailManagerSettingsAssetBundle extends AssetBundle
     public function init()
     {
         // define the path that your publishable resources live
-        $this->sourcePath = '@endurant/mailmanager/resources/';
+        $this->sourcePath = '@endurant/mailmanager/assetbundles/template/main/dist';
 
         // define the relative path to CSS/JS files that should be registered with the page
         // when this asset bundle is registered
         $this->js = [
-            'js/settings.js',
-            'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js'
+            'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js',
+            'https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.js',
+            'js/index.js',
+            'js/view.js'
         ];
 
         $this->css = [
-            'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'
+            'css/glyphicon.css',
+            'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css',
+            'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css',
+            'css/template.css'
         ];
 
         $this->depends = [
