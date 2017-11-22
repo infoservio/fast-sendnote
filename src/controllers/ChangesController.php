@@ -17,7 +17,8 @@ use craft\web\Controller;
 use craft\helpers\ArrayHelper;
 use endurant\mailmanager\MailManagerAssetBundle;
 use endurant\mailmanager\models\forms\ContactForm;
-use endurant\mailmanager\models\Template;
+use endurant\mailmanager\records\Changes;
+use endurant\mailmanager\records\Template;
 
 /**
  * Donate Controller
@@ -64,7 +65,27 @@ class ChangesController extends Controller
 
     public function actionIndex()
     {
-        return $this->renderTemplate('mail-manager/changes/index');
+        $changes = Changes::find()->orderBy('id DESC')->all();
+        return $this->renderTemplate('mail-manager/changes/index', [
+            'changes' => $changes,
+            'columns' => Changes::getColumns()
+        ]);
+    }
+
+    public function actionView()
+    {
+        $templateChange = Changes::find()->where(['id' => Craft::$app->request->getParam('id')])->one();
+
+        if (!$templateChange) {
+            return $this->redirect('mail-manager/not-found');
+        }
+
+        $templateChange->oldVersionArr = json_decode($templateChange->oldVersion, true);
+        $templateChange->newVersionArr = json_decode($templateChange->newVersion, true);
+
+        return $this->renderTemplate('mail-manager/changes/view', [
+            'templateChange' => $templateChange
+        ]);
     }
 
     public function actionSend()

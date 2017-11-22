@@ -11,6 +11,7 @@
 namespace endurant\mailmanager\records;
 
 use craft\db\ActiveRecord;
+use craft\records\User;
 
 /**
  * Mail Type Record
@@ -71,7 +72,20 @@ class Template extends ActiveRecord
         parent::afterSave($insert, $changedAttributes);
 
         if (!$insert && !empty($changedAttributes)) {
+            unset($changedAttributes['dateCreated']);
+            unset($changedAttributes['dateUpdated']);
             Changes::log($changedAttributes, $this);
         }
+    }
+
+    public function getChanges()
+    {
+        // a customer has many comments
+        return Changes::find()->where(['templateId' => $this->id])->all();
+    }
+
+    public function getUser()
+    {
+        return User::find()->where(['id' => $this->userId])->one();
     }
 }

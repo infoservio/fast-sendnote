@@ -1,0 +1,58 @@
+{% extends "_layouts/cp" %}
+{% do view.registerAssetBundle("endurant\\mailmanager\\assetbundles\\template\\main\\TemplateAssetBundle") %}
+{% set title = "View Template Changes"|t('app') %}
+{% set template = templateChange.getTemplate() %}
+{% block content %}
+    <h1>{{ template.name }}</h1>
+    <h3>{{ template.slug }}</h3>
+    <div class="container">
+        {% for key, item in templateChange.oldVersionArr if key != 'template' %}
+            <div class="row" style="margin-bottom: 10px">
+                <div class="col-md-12 col-sm-12">
+                    <div class="change-item">
+                        <div class="change-header">
+                            <span class="d2h-icon-wrapper"><svg aria-hidden="true" class="d2h-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12">
+    <path d="M6 5H2v-1h4v1zM2 8h7v-1H2v1z m0 2h7v-1H2v1z m0 2h7v-1H2v1z m10-7.5v9.5c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V2c0-0.55 0.45-1 1-1h7.5l3.5 3.5z m-1 0.5L8 2H1v12h10V5z"></path>
+</svg></span>
+                            {{ key }}
+                        </div>
+                        <div>
+                            <p class="change-description old-change"> - {{ item }}</p>
+                            <p class="change-description new-change"> + {{ templateChange.newVersionArr[key] }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% if templateChange.oldVersionArr['template'] %}
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="change-header">
+                                <span class="d2h-icon-wrapper"><svg aria-hidden="true" class="d2h-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12">
+        <path d="M6 5H2v-1h4v1zM2 8h7v-1H2v1z m0 2h7v-1H2v1z m0 2h7v-1H2v1z m10-7.5v9.5c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V2c0-0.55 0.45-1 1-1h7.5l3.5 3.5z m-1 0.5L8 2H1v12h10V5z"></path>
+    </svg></span>
+                        template
+                    </div>
+                    <div class="old-change">
+                        <iframe id="template-old-iframe"></iframe>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="change-header">
+                        <span class="d2h-icon-wrapper"><svg aria-hidden="true" class="d2h-icon" height="16" version="1.1" viewBox="0 0 12 16" width="12">
+        <path d="M6 5H2v-1h4v1zM2 8h7v-1H2v1z m0 2h7v-1H2v1z m0 2h7v-1H2v1z m10-7.5v9.5c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V2c0-0.55 0.45-1 1-1h7.5l3.5 3.5z m-1 0.5L8 2H1v12h10V5z"></path>
+    </svg></span>
+                        template
+                    </div>
+                    <div class="new-change">
+                        <iframe id="template-new-iframe"></iframe>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    <script>
+        var newContent = `{{ templateChange.newVersionArr['template'] | raw }}`;
+        var oldContent = `{{ templateChange.oldVersionArr['template'] | raw }}`;
+    </script>
+{% endblock %}
