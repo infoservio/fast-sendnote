@@ -65,9 +65,4 @@ class SiteController extends Controller
     {
         return $this->renderTemplate('mail-manager/layouts/not-found');
     }
-
-    public function actionSend()
-    {
-        $this->requirePostRequest();
-    }
 }

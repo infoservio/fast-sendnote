@@ -31,7 +31,7 @@ class Log extends Model
 {
     // Public Properties
     // =========================================================================
-    const MAIL_LOGS = 'mailmanager-mail-logs';
+    const SEND_EMAIL = 'send-email';
     const CHANGES_LOGS = 'mailmanager-changes-logs';
     const TEMPLATE_LOGS = 'mailmanager-template-logs';
 
