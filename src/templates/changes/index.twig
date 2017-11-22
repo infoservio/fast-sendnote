@@ -1,7 +1,29 @@
 {% extends "_layouts/cp" %}
 {% do view.registerAssetBundle("endurant\\mailmanager\\assetbundles\\template\\main\\TemplateAssetBundle") %}
 {% set title = "Changes Manager Templates"|t('app') %}
-
 {% block content %}
-    <h1>Just a test page now</h1>
+    <table id="template-table" class="table table-hover">
+        <thead>
+        <tr>
+            {% for col in columns %}
+                <th>{{ col }}</th>
+            {% endfor %}
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for change in changes %}
+            <tr>
+                <th scope="row">{{ change.id }}</th>
+                <td>{{ (change.getTemplate()).slug }}</td>
+                <td>{{ change.getUser().username }}</td>
+                <td>{{ change.dateCreated }}</td>
+                <td>{{ change.dateUpdated }}</td>
+                <td class="icons">
+                    <a href="changes/view?id={{ change.id }}" class="glyphicon glyphicon-eye-open view-icon" title="View"></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

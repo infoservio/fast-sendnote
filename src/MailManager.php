@@ -119,6 +119,7 @@ class MailManager extends Plugin
                 $event->rules['mail-manager/delete'] = 'mail-manager/template/delete';
                 $event->rules['mail-manager/not-found'] = 'mail-manager/site/not-found';
                 $event->rules['mail-manager/changes'] = 'mail-manager/changes/index';
+                $event->rules['mail-manager/changes/view'] = 'mail-manager/changes/view';
             }
         );
 

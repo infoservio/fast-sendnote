@@ -11,6 +11,7 @@
 namespace endurant\mailmanager\records;
 
 use craft\db\ActiveRecord;
+use craft\records\User;
 
 /**
  * Mail Type Record
@@ -26,6 +27,8 @@ use craft\db\ActiveRecord;
  */
 class Changes extends ActiveRecord
 {
+    public $oldVersionArr;
+    public $newVersionArr;
     // Public Static Methods
     // =========================================================================
 
@@ -46,11 +49,20 @@ class Changes extends ActiveRecord
         return '{{mailmanager_changes}}';
     }
 
+    public static function getColumns()
+    {
+        return ['ID', 'Template Slug', 'User', 'Date Created', 'Date Updated'];
+    }
+
     public static function log(array $oldVersion, Template $newVersion)
     {
         $attributes = [];
         foreach ($oldVersion as $key => $value) {
-            $attributes[] = $key;
+            if ($value != $newVersion->$key) {
+                $attributes[] = $key;
+            } else {
+                unset($oldVersion[$key]);
+            }
         }
 
         $changes = new Changes();
@@ -72,5 +84,15 @@ class Changes extends ActiveRecord
             [['oldVersion', 'newVersion'], 'string'],
             [['userId', 'templateId', 'oldVersion', 'newVersion'], 'required']
         ];
+    }
+
+    public function getTemplate()
+    {
+        return Template::find()->where(['id' => $this->templateId])->one();
+    }
+
+    public function getUser()
+    {
+        return User::find()->where(['id' => $this->userId])->one();
     }
 }
