@@ -34,7 +34,7 @@ class Postal extends BaseTransport
      */
     public function getSettingsHtml()
     {
-        return Craft::$app->getView()->renderTemplate('mail-manager/_components/mailertransports/mailgun/settings', [
+        return Craft::$app->getView()->renderTemplate('mail-manager/_components/mailertransports/postal/settings', [
             'settings' => $this->getParams()
         ]);
     }

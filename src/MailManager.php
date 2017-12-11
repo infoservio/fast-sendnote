@@ -27,6 +27,7 @@ use craft\web\twig\variables\Cp;
 
 use endurant\mailmanager\records\MailType as MailTypeRecord;
 use endurant\mailmanager\services\ChangesService;
+use endurant\mailmanager\services\LogService;
 use endurant\mailmanager\services\MailService;
 use endurant\mailmanager\services\TemplateService;
 use ReflectionClass;
@@ -50,6 +51,7 @@ use yii\base\Event;
  * @property  ChangesService $changes
  * @property  TemplateService $template
  * @property  MailService $mail
+ * @property  LogService $log
  * @property  Logger $logger
  * @property  Settings $settings
  * @method    Settings getSettings()
@@ -176,7 +178,7 @@ class MailManager extends Plugin
 
         foreach ($allTransportAdapterTypes as  $transportAdapterType) {
             /** @var string|BaseTransport $transportAdapterType */
-            $allTransportAdapters[] = MailerFactory::createTransportAdapter($transportAdapterType);
+            $allTransportAdapters[] = MailerFactory::createTransport($transportAdapterType);
             $transportTypeOptions[] = [
                 'value' => $transportAdapterType,
                 'label' => $transportAdapterType::displayName()
@@ -185,7 +187,7 @@ class MailManager extends Plugin
         }
         $settings = $this->getSettings();
 
-        $adapter = MailerFactory::createTransportAdapter($settings->mailer);
+        $adapter = MailerFactory::createTransport($settings->mailer);
 
         return Craft::$app->view->renderTemplate(
             'mail-manager/settings',

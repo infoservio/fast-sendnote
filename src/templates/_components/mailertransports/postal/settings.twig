@@ -1,0 +1,25 @@
+{% import "_includes/forms" as forms %}
+
+{{
+forms.textField({
+    label: "Postal Host"|t('app'),
+    instructions: 'You should get this host from your Postal instance.',
+    id: 'postalHost',
+    name: 'postalHost',
+    value: settings.postalHost,
+    errors: settings.getErrors('postalHost'),
+    required: true,
+})
+}}
+
+{{
+forms.textField({
+    label: "Postal Server Key"|t('app'),
+    instructions: 'You should get this key from your domain in the Postal instance.',
+    id: 'postalServerKey',
+    name: 'postalServerKey',
+    value: settings.postalServerKey,
+    errors: settings.getErrors('postalServerKey'),
+    required: true,
+})
+}}

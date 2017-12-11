@@ -69,6 +69,20 @@ class Template extends ActiveRecord
         return new self($obj);
     }
 
+    public static function getById(int $id, bool $returnActiveRecordObj = false)
+    {
+        $obj = self::find()->where(['id' => $id])->one();
+        if (!$obj) {
+            return false;
+        }
+
+        if ($returnActiveRecordObj) {
+            return $obj;
+        }
+
+        return new self($obj);
+    }
+
     public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
@@ -76,7 +90,11 @@ class Template extends ActiveRecord
         if (!$insert && !empty($changedAttributes)) {
             unset($changedAttributes['dateCreated']);
             unset($changedAttributes['dateUpdated']);
-            MailManager::$PLUGIN->changesService->create($changedAttributes, $this);
+            try {
+                MailManager::$PLUGIN->changes->create($changedAttributes, $this);
+            } catch (\Exception $e) {
+                // TODO handle exception
+            }
         }
     }
 
