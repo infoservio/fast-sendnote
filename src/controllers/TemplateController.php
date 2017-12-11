@@ -16,25 +16,12 @@ use Craft;
 use craft\web\Controller;
 use endurant\mailmanager\models\Template;
 use endurant\mailmanager\records\Template as TemplateRecord;
+use yii\web\BadRequestHttpException;
 
 /**
- * Donate Controller
- *
- * Generally speaking, controllers are the middlemen between the front end of
- * the CP/website and your plugin’s services. They contain action methods which
- * handle individual tasks.
- *
- * A common pattern used throughout Craft involves a controller action gathering
- * post data, saving it on a model, passing the model off to a service, and then
- * responding to the request appropriately depending on the service method’s response.
- *
- * Action methods begin with the prefix “action”, followed by a description of what
- * the method does (for example, actionSaveIngredient()).
- *
- * https://craftcms.com/docs/plugins/controllers
- *
+ * Template Controller
  * @author    endurant
- * @package   Donationsfree
+ * @package   Mailmanager
  * @since     1.0.0
  */
 class TemplateController extends Controller
@@ -60,6 +47,9 @@ class TemplateController extends Controller
         return parent::beforeAction($action);
     }
 
+    /**
+     * @return \yii\web\Response
+     */
     public function actionIndex()
     {
         $columns = TemplateRecord::getColumns();
@@ -71,6 +61,9 @@ class TemplateController extends Controller
         ]);
     }
 
+    /**
+     * @return \yii\web\Response
+     */
     public function actionView()
     {
         $template = TemplateRecord::find()->where(['id' => Craft::$app->request->getParam('id')])->one();
@@ -84,52 +77,77 @@ class TemplateController extends Controller
         ]);
     }
 
+    /**
+     * @return \yii\web\Response
+     */
     public function actionCreate()
     {
         if ($post = Craft::$app->request->post())
         {
-            $template = MailManager::$PLUGIN->template->create($post);
+            try {
+                $template = MailManager::$PLUGIN->template->create($post);
+            } catch (\Exception $e) {
+                return $this->renderTemplate('mail-manager/templates/create', [
+                    'errors' => json_decode($e->getMessage()),
+                    'template' => $post
+                ]);
+            }
             return $this->redirect('mail-manager/view?id=' . $template->id);
         }
 
         return $this->renderTemplate('mail-manager/templates/create');
     }
 
+    /**
+     * @return \yii\web\Response
+     */
     public function actionUpdate()
     {
-        $templateRecord = TemplateRecord::find()->where(['id' => Craft::$app->request->getParam('id')])->one();
+        $record = TemplateRecord::getById(Craft::$app->request->getParam('id'), true);
 
-        if (!$templateRecord) {
+        if (!$record) {
             return $this->redirect('mail-manager/not-found');
         }
 
         if ($post = Craft::$app->request->post())
         {
-            $res = MailManager::$PLUGIN->templateService->update($templateRecord, $post);
-
-            if ($res['success']) {
-                return $this->redirect('mail-manager/view?id=' . $res['template']->id);
-            } else {
+            try {
+                $template = MailManager::$PLUGIN->template->update($record, $post);
+            } catch (\Exception $e) {
                 return $this->renderTemplate('mail-manager/templates/update', [
-                    'errors' => $res['errors'],
+                    'errors' => json_decode($e->getMessage()),
                     'template' => $post
                 ]);
             }
+            return $this->redirect('mail-manager/view?id=' . $template->id);
         }
 
         return $this->renderTemplate('mail-manager/templates/update', [
-            'template' => $templateRecord
+            'template' => $record
         ]);
     }
 
+    /**
+     * @return \yii\web\Response
+     * @throws BadRequestHttpException
+     */
     public function actionDelete()
     {
         $this->requirePostRequest();
         $post = Craft::$app->request->post();
-        $res = MailManager::$PLUGIN->templateService->remove($post['id']);
+
+        try {
+            $template = MailManager::$PLUGIN->template->remove($post['id']);
+        } catch (\Exception $e) {
+            // TODO make up something
+        }
+
         return $this->redirect('mail-manager');
     }
 
+    /**
+     * @throws BadRequestHttpException
+     */
     public function actionSend()
     {
         $this->requirePostRequest();

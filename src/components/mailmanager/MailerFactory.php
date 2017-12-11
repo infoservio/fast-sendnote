@@ -11,7 +11,7 @@ use endurant\mailmanager\components\mailmanager\transports\Php;
 use endurant\mailmanager\components\mailmanager\transports\Postal;
 use yii\base\Event;
 
-class MailerFactory extends MailerFactoryAbstract
+class MailerFactory
 {
     // Constants
     // =========================================================================

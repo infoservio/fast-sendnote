@@ -11,6 +11,8 @@
 namespace endurant\mailmanager\models;
 
 use craft\base\Model;
+use endurant\mailmanager\records\Template as TemplateRecord;
+use yii\validators\UniqueValidator;
 
 /**
  * Card Model
@@ -39,7 +41,7 @@ class Template extends Model
     public $name;
     public $subject;
     public $template;
-    public $isRemoved;
+    public $isRemoved = self::NOT_REMOVED;
 
     // Public Methods
     // =========================================================================
@@ -52,9 +54,21 @@ class Template extends Model
     {
         return [
             [['id', 'userId'], 'integer'],
-            ['slug', 'unique'],
-            [['slug', 'name', 'template', 'subject'], 'string'],
+            ['slug', 'uniqueSlug'],
+            ['slug', 'string', 'max' => 20],
+            [['name', 'subject'], 'string', 'max' => 255],
             [['userId', 'slug', 'name', 'template', 'subject'], 'required']
         ];
+    }
+
+    public function uniqueSlug($attribute)
+    {
+        if ($record = TemplateRecord::getBySlug($this->slug)) {
+            if ($record->id != $this->id) {
+                $this->addError($attribute, 'The slug has already been taken.');
+            }
+        }
+
+        return true;
     }
 }

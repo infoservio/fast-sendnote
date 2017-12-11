@@ -19,7 +19,7 @@ class MailManagerPluginException extends \Exception
         $this->message = $message;
         $this->method = $method;
 
-        $this->_logService = MailManager::$PLUGIN->logService;
+        $this->_logService = MailManager::$PLUGIN->log;
         $this->log($category);
     }
     

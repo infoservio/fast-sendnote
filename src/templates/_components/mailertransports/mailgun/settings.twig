@@ -1,8 +1,21 @@
 {% import "_includes/forms" as forms %}
 
 {{
+forms.textField({
+    label: "Mailgun Domain"|t('app'),
+    instructions: 'You should get this key from your Mailgun account.',
+    id: 'mailgunDomain',
+    name: 'mailgunDomain',
+    value: settings.mailgunDomain,
+    errors: settings.getErrors('mailgunDomain'),
+    required: true,
+})
+}}
+
+{{
     forms.textField({
         label: "Mailgun Key"|t('app'),
+        instructions: 'You should get this key from your domain in the Mailgun account.',
         id: 'mailgunKey',
         name: 'mailgunKey',
         value: settings.mailgunKey,
@@ -10,16 +23,3 @@
         required: true,
     })
 }}
-
-{{
-    forms.textField({
-        label: "Mailgun Domain"|t('app'),
-        id: 'mailgunDomain',
-        name: 'mailgunDomain',
-        value: settings.mailgunDomain,
-        errors: settings.getErrors('mailgunDomain'),
-        required: true,
-    })
-}}
-
-mailgunDomain

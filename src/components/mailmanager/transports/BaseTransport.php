@@ -7,6 +7,7 @@
 
 namespace endurant\mailmanager\components\mailmanager\transports;
 
+use craft\base\ComponentInterface;
 use craft\base\SavableComponent;
 use endurant\mailmanager\MailManager;
 use endurant\mailmanager\models\Settings;
@@ -18,7 +19,7 @@ use endurant\mailmanager\records\Template;
  * @author Pixel & Tonic, Inc. <support@pixelandtonic.com>
  * @since  3.0
  */
-abstract class BaseTransport
+abstract class BaseTransport implements ComponentInterface
 {
     protected $mailer;
     private $_settings;
