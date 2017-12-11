@@ -37,6 +37,7 @@ class Template extends Model
     public $userId;
     public $slug;
     public $name;
+    public $subject;
     public $template;
     public $isRemoved;
 
@@ -52,8 +53,8 @@ class Template extends Model
         return [
             [['id', 'userId'], 'integer'],
             ['slug', 'unique'],
-            [['slug', 'name', 'template'], 'string'],
-            [['userId', 'slug', 'name', 'template'], 'required']
+            [['slug', 'name', 'template', 'subject'], 'string'],
+            [['userId', 'slug', 'name', 'template', 'subject'], 'required']
         ];
     }
 }

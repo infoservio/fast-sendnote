@@ -10,11 +10,10 @@
 
 namespace endurant\mailmanager;
 
+use endurant\mailmanager\components\logger\Logger;
 use endurant\mailmanager\components\mailmanager\MailerFactory;
-use endurant\mailmanager\components\mailmanager\MailerFactoryAbstract;
-use endurant\mailmanager\components\mailmanager\MailerHelper;
-use endurant\mailmanager\components\mailmanager\transportadapters\PhpMailer;
-use endurant\mailmanager\components\mailmanager\transportadapters\TransportAdapterInterface;
+use endurant\mailmanager\components\mailmanager\transports\BaseTransport;
+use endurant\mailmanager\components\parser\TemplateParser;
 use endurant\mailmanager\models\Settings;
 
 use Craft;
@@ -27,6 +26,9 @@ use craft\events\RegisterCpNavItemsEvent;
 use craft\web\twig\variables\Cp;
 
 use endurant\mailmanager\records\MailType as MailTypeRecord;
+use endurant\mailmanager\services\ChangesService;
+use endurant\mailmanager\services\MailService;
+use endurant\mailmanager\services\TemplateService;
 use ReflectionClass;
 use yii\base\Event;
 
@@ -40,11 +42,15 @@ use yii\base\Event;
  *
  * https://craftcms.com/docs/plugins/introduction
  *
- * @author    endurant
- * @package   Donationsfree
+ * @author    Vlad Hontar
+ * @package   Billionglobalserver
  * @since     1.0.0
  *
- * @property Plugin $plugin
+ * @property  TemplateParser $templateParser
+ * @property  ChangesService $changes
+ * @property  TemplateService $template
+ * @property  MailService $mail
+ * @property  Logger $logger
  * @property  Settings $settings
  * @method    Settings getSettings()
  */
@@ -157,11 +163,10 @@ class MailManager extends Plugin
         return new Settings();
     }
 
+
     /**
-     * Returns the rendered settings HTML, which will be inserted into the content
-     * block on the settings page.
-     *
-     * @return string The rendered settings HTML
+     * @return string
+     * @throws \craft\errors\MissingComponentException
      */
     protected function settingsHtml(): string
     {
@@ -170,7 +175,7 @@ class MailManager extends Plugin
         $allTransportAdapters = [];
 
         foreach ($allTransportAdapterTypes as  $transportAdapterType) {
-            /** @var string|TransportAdapterInterface $transportAdapterType */
+            /** @var string|BaseTransport $transportAdapterType */
             $allTransportAdapters[] = MailerFactory::createTransportAdapter($transportAdapterType);
             $transportTypeOptions[] = [
                 'value' => $transportAdapterType,

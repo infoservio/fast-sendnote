@@ -21,7 +21,7 @@
         <input hidden name="id" value="{{ isUpdated ? template.id : '' }}" />
         <div class="form-group">
             <label for="inputTemplateName">Template Name</label>
-            <small id="nameHelp" class="form-text text-muted">Template name is using as a header for email.</small>
+            <small id="nameHelp" class="form-text text-muted">Template name for your understanding.</small>
             <input name="name" type="text" class="form-control" id="inputTemplateName" aria-describedby="nameHelp"
                    placeholder="Enter Template Name"
                    value="{{ template ? template.name : '' }}"
@@ -37,6 +37,16 @@
                    value="{{ template ? template.slug : '' }}"
                    data-parsley-required
                    data-parsley-maxlength="20"
+            />
+        </div>
+        <div class="form-group">
+            <label for="inputSubject">Subject</label>
+            <small id="subjectHelp" class="form-text text-muted">Subject is using as a header for email.</small>
+            <input name="subject" type="text" class="form-control" id="inputSubject" aria-describedby="subjectHelp"
+                   placeholder="Enter Subject"
+                   value="{{ template ? template.subject : '' }}"
+                   data-parsley-required
+                   data-parsley-maxlength="255"
             />
         </div>
         <div class="form-group">

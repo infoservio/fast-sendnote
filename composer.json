@@ -24,9 +24,11 @@
     "require": {
         "craftcms/cms": "~3.0.0-beta.23",
         "yiisoft/yii2": "^2.0",
-        "mailgun/mailgun-php": "^2.3",
         "php-http/curl-client": "^1.7",
-        "guzzlehttp/psr7": "^1.4"
+        "guzzlehttp/psr7": "^1.4",
+        "php-http/guzzle6-adapter": "^1.1.1",
+        "mailgun/mailgun-php": "^2.4",
+        "postal/postal": "^1.0"
     },
     "repositories": [
         {
@@ -47,11 +49,12 @@
         "hasCpSection": true,
         "changelogUrl": "???",
         "components": {
-            "mailManagerService": "endurant\\mailmanager\\services\\MailManagerService",
-            "templateService": "endurant\\mailmanager\\services\\TemplateService",
-            "changesService": "endurant\\mailmanager\\services\\ChangesService",
-            "logService": "endurant\\mailmanager\\services\\LogService",
-            "templateParser": "endurant\\mailmanager\\components\\parser\\TemplateParser"
+            "mail": "endurant\\mailmanager\\services\\MailService",
+            "template": "endurant\\mailmanager\\services\\TemplateService",
+            "changes": "endurant\\mailmanager\\services\\ChangesService",
+            "log": "endurant\\mailmanager\\services\\LogService",
+            "templateParser": "endurant\\mailmanager\\components\\parser\\TemplateParser",
+            "logger": "endurant\\mailmanager\\components\\logger\\Logger"
         },
         "class": "endurant\\mailmanager\\MailManager"
     },

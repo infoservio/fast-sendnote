@@ -80,6 +80,7 @@ class Install extends Migration
                 'userId' => $this->integer(),
                 'slug' => $this->string(20)->unique(),
                 'name' => $this->string(255),
+                'subject' => $this->string(255),
                 'template' => $this->text(),
                 'isRemoved' => $this->smallInteger()->defaultValue(0),
                 'dateCreated' => $this->date(),

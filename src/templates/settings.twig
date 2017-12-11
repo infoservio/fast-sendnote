@@ -13,6 +13,43 @@
 #}
 {% do view.registerAssetBundle("endurant\\mailmanager\\assetbundles\\settings\\MailManagerSettingsAssetBundle") %}
 {% import "_includes/forms" as forms %}
+mailgunDomain
+{{
+    forms.textField({
+        label: 'From',
+        instructions: 'This email is using as your support email.',
+        id: 'from',
+        name: 'from',
+        value: settings['from'],
+        required: true,
+        element: true
+    })
+}}
+
+{{
+    forms.textField({
+        label: 'First Name',
+        instructions: 'First Name using for identify you.',
+        id: 'firstName',
+        name: 'firstName',
+        value: settings['firstName'],
+        required: true,
+        element: true
+    })
+}}
+
+{{
+    forms.textField({
+        label: 'Last Name',
+        instructions: 'Last Name using for identify you.',
+        id: 'lastName',
+        name: 'lastName',
+        value: settings['lastName'],
+        required: true,
+        element: true
+    })
+}}
+
 {{
     forms.selectField({
         label: 'Transport Type',

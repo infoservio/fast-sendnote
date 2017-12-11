@@ -1,0 +1,25 @@
+{% import "_includes/forms" as forms %}
+
+{{
+    forms.textField({
+        label: "Mailgun Key"|t('app'),
+        id: 'mailgunKey',
+        name: 'mailgunKey',
+        value: settings.mailgunKey,
+        errors: settings.getErrors('mailgunKey'),
+        required: true,
+    })
+}}
+
+{{
+    forms.textField({
+        label: "Mailgun Domain"|t('app'),
+        id: 'mailgunDomain',
+        name: 'mailgunDomain',
+        value: settings.mailgunDomain,
+        errors: settings.getErrors('mailgunDomain'),
+        required: true,
+    })
+}}
+
+mailgunDomain

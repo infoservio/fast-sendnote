@@ -54,19 +54,6 @@ class Changes extends ActiveRecord
         return ['ID', 'Template Slug', 'User', 'Date Created', 'Date Updated'];
     }
 
-    /**
-     * Returns the validation rules for attributes.
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-            [['id', 'userId', 'templateId'], 'integer'],
-            [['oldVersion', 'newVersion'], 'string'],
-            [['userId', 'templateId', 'oldVersion', 'newVersion'], 'required']
-        ];
-    }
-
     public function getTemplate()
     {
         return Template::find()->where(['id' => $this->templateId])->one();

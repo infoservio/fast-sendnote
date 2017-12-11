@@ -1,6 +1,6 @@
 <?php
 
-namespace endurant\smtpmailer\errors;
+namespace endurant\mailmanager\errors;
 use endurant\mailmanager\MailManager;
 
 class MailManagerPluginException extends \Exception

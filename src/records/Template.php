@@ -21,6 +21,7 @@ use endurant\mailmanager\MailManager;
  * @property integer $userId
  * @property integer $slug
  * @property integer $name
+ * @property string $subject
  * @property string $template
  * @property integer $isRemoved
  * @property string $dateCreated
@@ -54,18 +55,18 @@ class Template extends ActiveRecord
         return ['ID', 'Name', 'Slug', 'User ID', 'Date Created', 'Date Updated'];
     }
 
-    /**
-     * Returns the validation rules for attributes.
-     * @return array
-     */
-    public function rules()
+    public static function getBySlug(string $slug, bool $returnActiveRecordObj = false)
     {
-        return [
-            [['id', 'userId'], 'integer'],
-            ['slug', 'unique'],
-            [['slug', 'name', 'template'], 'string'],
-            [['userId', 'slug', 'name', 'template'], 'required']
-        ];
+        $obj = self::find()->where(['slug' => $slug])->one();
+        if (!$obj) {
+            return false;
+        }
+
+        if ($returnActiveRecordObj) {
+            return $obj;
+        }
+
+        return new self($obj);
     }
 
     public function afterSave($insert, $changedAttributes)

@@ -5,7 +5,7 @@ namespace endurant\mailmanager\components\parser;
 use Craft;
 use craft\base\Component;
 
-class TemplateParser extends Component implements Parser
+class TemplateParser extends Component
 {
     const TEMPLATE_PARAM_START = '{{';
     const TEMPLATE_PARAM_END = '}}';
