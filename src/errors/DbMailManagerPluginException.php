@@ -1,8 +1,8 @@
 <?php
 
-namespace endurant\smtpmailer\errors;
+namespace endurant\mailmanager\errors;
 
-use endurant\smtpmailer\models\Log;
+use endurant\mailmanager\models\Log;
 
 
 class DbMailManagerPluginException extends MailManagerPluginException

@@ -10,16 +10,14 @@
 
 namespace endurant\mailmanager\services;
 
-use endurant\mailmanager\components\mailmanager\MailerFactory;
-use endurant\mailmanager\MailManager;
-
-use Craft;
 use craft\base\Component;
 
-use endurant\donationsfree\models\Customer;
-use endurant\donationsfree\models\Address;
-use endurant\donationsfree\models\Card;
-use endurant\donationsfree\models\Transaction;
+use endurant\mailmanager\components\mailmanager\MailerFactory;
+use endurant\mailmanager\components\mailmanager\transports\BaseTransport;
+use endurant\mailmanager\MailManager;
+
+use endurant\mailmanager\models\Template;
+use endurant\mailmanager\records\Template as TemplateRecord;
 
 /**
  * MailService Service
@@ -36,18 +34,20 @@ use endurant\donationsfree\models\Transaction;
  */
 class MailService extends Component
 {
-    public $mailer;
+    /** @var BaseTransport */
+    private $_mailer;
+
     // Public Methods
     // =========================================================================
     public function init()
     {
         parent::init();
-        $mailerFactory = new MailerFactory();
-        $this->mailer = $mailerFactory->create(MailManager::$PLUGIN->getSettings()->mailer);
+        $this->_mailer = MailerFactory::createTransport(MailManager::$PLUGIN->getSettings()->mailer);
     }
 
-    public function send(array $params)
+    public function send(string $to, string $slug, array $params = [])
     {
-
+        $template = TemplateRecord::getBySlug($slug);
+        $this->_mailer->send($to, $template, $params);
     }
 }

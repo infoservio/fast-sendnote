@@ -1,8 +1,10 @@
 <?php
 
-namespace endurant\mailmanager\components\mailmanager\transportadapters;
+namespace endurant\mailmanager\components\mailmanager\transports;
 
-class PhpMailer extends Mailer
+use endurant\mailmanager\records\Template;
+
+class Php extends BaseTransport
 {
     // Static
     // =========================================================================
@@ -18,13 +20,8 @@ class PhpMailer extends Mailer
     // Public Methods
     // =========================================================================
 
-    /**
-     * @inheritdoc
-     */
-    public function defineTransport()
+    public function send(string $to, Template $template, array $params = [], array $attachments = [])
     {
-        return [
-            'class' => \Swift_MailTransport::class,
-        ];
+        // TODO: Implement send() method.
     }
 }

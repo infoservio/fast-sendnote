@@ -14,12 +14,8 @@ use endurant\mailmanager\MailManager;
 
 use Craft;
 use craft\web\Controller;
-use craft\helpers\ArrayHelper;
-use endurant\mailmanager\MailManagerAssetBundle;
-use endurant\mailmanager\models\forms\ContactForm;
 use endurant\mailmanager\models\Template;
 use endurant\mailmanager\records\Template as TemplateRecord;
-use yii\helpers\Url;
 
 /**
  * Donate Controller
@@ -92,16 +88,8 @@ class TemplateController extends Controller
     {
         if ($post = Craft::$app->request->post())
         {
-            $res = MailManager::$PLUGIN->templateService->create($post);
-
-            if ($res['success']) {
-                return $this->redirect('mail-manager/view?id=' . $res['template']->id);
-            } else {
-                return $this->renderTemplate('mail-manager/templates/create', [
-                    'errors' => $res['errors'],
-                    'template' => $post
-                ]);
-            }
+            $template = MailManager::$PLUGIN->template->create($post);
+            return $this->redirect('mail-manager/view?id=' . $template->id);
         }
 
         return $this->renderTemplate('mail-manager/templates/create');

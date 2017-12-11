@@ -3,14 +3,12 @@
 
 namespace endurant\mailmanager\components\mailmanager;
 
-use craft\errors\MissingComponentException;
 use craft\events\RegisterComponentTypesEvent;
 use craft\helpers\Component;
-use endurant\mailmanager\components\mailmanager\transportadapters\BaseTransportAdapter;
-use endurant\mailmanager\components\mailmanager\transportadapters\MailgunMailer;
-use endurant\mailmanager\components\mailmanager\transportadapters\PhpMailer;
-use endurant\mailmanager\components\mailmanager\transportadapters\TransportAdapterInterface;
-use Mailgun\Tests\Mock\Mailgun;
+use endurant\mailmanager\components\mailmanager\transports\BaseTransport;
+use endurant\mailmanager\components\mailmanager\transports\Mailgun;
+use endurant\mailmanager\components\mailmanager\transports\Php;
+use endurant\mailmanager\components\mailmanager\transports\Postal;
 use yii\base\Event;
 
 class MailerFactory extends MailerFactoryAbstract
@@ -34,8 +32,9 @@ class MailerFactory extends MailerFactoryAbstract
     public static function allMailerTransportTypes(): array
     {
         $transportTypes = [
-            PhpMailer::class,
-            MailgunMailer::class
+            Php::class,
+            Mailgun::class,
+            Postal::class
         ];
 
         $event = new RegisterComponentTypesEvent([
@@ -46,22 +45,19 @@ class MailerFactory extends MailerFactoryAbstract
         return $event->types;
     }
 
+
     /**
-     * Creates a transport adapter based on the given mail settings.
-     *
-     * @param string     $type
+     * @param string $type
      * @param array|null $settings
-     *
-     * @return TransportAdapterInterface
-     * @throws MissingComponentException if $type is missing
+     * @return BaseTransport
      */
-    public static function createTransportAdapter(string $type, array $settings = null): TransportAdapterInterface
+    public static function createTransport(string $type, array $settings = null): BaseTransport
     {
-        /** @var BaseTransportAdapter $adapter */
+        /** @var BaseTransport $adapter */
         $adapter = Component::createComponent([
             'type' => $type,
             'settings' => $settings,
-        ], TransportAdapterInterface::class);
+        ], BaseTransport::class);
 
         return $adapter;
     }

@@ -1,11 +1,11 @@
 <?php
-namespace endurant\donationsfree\components\logger;
+namespace endurant\mailmanager\components\logger;
 
 use Craft;
 use PHPUnit\Framework\Error\Error;
 use Psr\Log\LogLevel;
-use endurant\smtpmailer\records\Log as LogRecord;
-use endurant\smtpmailer\models\Log;
+use endurant\mailmanager\records\Log as LogRecord;
+use endurant\mailmanager\models\Log;
 
 /**
  * General Logger
@@ -17,8 +17,8 @@ class Logger implements ILogger
 
     public function __construct()
     {
-        $this->category = 'donations-free-logs';
-        $this->processId = Settings::createProcessID();
+        $this->category = 'mail-manager-logs';
+        $this->processId = time();
     }
 
     public function setCategory(string $category)

@@ -48,17 +48,4 @@ class Mail extends ActiveRecord
     {
         return '{{mailmanager_mail}}';
     }
-
-    /**
-     * Returns the validation rules for attributes.
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-            [['id', 'userId', 'templateId', 'mailTypeId', 'isDelivered', 'isOpened', 'isDropped'], 'integer'],
-            ['email', 'string'],
-            [['templateId', 'mailTypeId'], 'required']
-        ];
-    }
 }

@@ -10,12 +10,10 @@
 
 namespace endurant\mailmanager\models;
 
-use endurant\donationsfree\Donationsfree;
-
-use Craft;
 use craft\base\Model;
-use endurant\mailmanager\components\mailmanager\transportadapters\MailgunMailer;
-use endurant\mailmanager\components\mailmanager\transportadapters\PhpMailer;
+use endurant\mailmanager\components\mailmanager\transports\Mailgun;
+use endurant\mailmanager\components\mailmanager\transports\Php;
+use endurant\mailmanager\components\mailmanager\transports\Postal;
 
 /**
  * Donationsfree Settings Model
@@ -41,10 +39,18 @@ class Settings extends Model
      *
      * @var string
      */
-    public $mailer = PhpMailer::class;
+    public $mailer = Php::class;
+    public $from = 'support@gmail.com';
+    public $firstName = 'Support';
+    public $lastName = 'Support';
 
     // mailgun
-    public $mailgunKey = '';
+    public $mailgunDomain;
+    public $mailgunKey;
+
+    // postal
+    public $postalHost;
+    public $postalServerKey;
 
     // Public Methods
     // =========================================================================
@@ -62,10 +68,13 @@ class Settings extends Model
     public function rules()
     {
         return [
-            [['mailgunKey', 'mailer'], 'string'],
-            [['mailer'], 'required'],
-            ['mailgunKey', 'required', 'when' => function($model) {
-                return $model->mailer === MailgunMailer::class;
+            [['mailgunKey', 'mailer', 'from', 'mailgunDomain', 'firstName', 'lastName', 'postalHost', 'postalServerKey'], 'string'],
+            [['mailer', 'from', 'firstName', 'lastName'], 'required'],
+            [['mailgunKey', 'mailgunDomain'], 'required', 'when' => function($model) {
+                return $model->mailer === Mailgun::class;
+            }],
+            [['postalHost', 'postalServerKey'], 'required', 'when' => function($model) {
+                return $model->mailer === Postal::class;
             }]
         ];
     }

@@ -50,17 +50,4 @@ class Log extends ActiveRecord
     {
         return '{{donations_logs}}';
     }
-
-    /**
-     * Returns the validation rules for attributes.
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-            [['id', 'pid', 'culprit'], 'integer'],
-            [['method', 'errors', 'message', 'category'], 'string'],
-            [['pid', 'method', 'errors', 'message'], 'required']
-        ];
-    }
 }
