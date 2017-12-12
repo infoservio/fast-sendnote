@@ -78,15 +78,5 @@ class Postal extends BaseTransport
 
         // Send the message and get the result
         return $message->send();
-
-        // Send the message and get the result
-//        $result = $message->send();
-
-        // Loop through each of the recipients to get the message ID
-//        foreach ($result->recipients() as $email => $message) {
-//            $email;            // The e-mail address of the recipient
-//            $message->id();    // Returns the message ID
-//            $message->token(); // Returns the message's token
-//        }
     }
 }
