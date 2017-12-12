@@ -28,7 +28,7 @@ class Install extends Migration
     {
         $this->createTables();
         // $this->createIndexes();
-        $this->addForeignKeys();
+//        $this->addForeignKeys();
         // Refresh the db schema caches
         Craft::$app->db->schema->refresh();
 
@@ -47,8 +47,8 @@ class Install extends Migration
      */
     public function safeDown()
     {
-        $this->removeForeignKeys();
-        $this->removeTables();
+//        $this->removeForeignKeys();
+//        $this->removeTables();
 
         return true;
     }
