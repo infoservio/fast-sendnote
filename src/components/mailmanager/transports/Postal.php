@@ -39,12 +39,13 @@ class Postal extends BaseTransport
         ]);
     }
 
+
     /**
      * @param string $to
      * @param Template $template
      * @param array $params
      * @param array $attachments
-     * @return mixed|void
+     * @return mixed|\Postal\SendResult
      */
     public function send(string $to, Template $template, array $params = [], array $attachments = [])
     {
@@ -76,7 +77,7 @@ class Postal extends BaseTransport
         }
 
         // Send the message and get the result
-        $message->send();
+        return $message->send();
 
         // Send the message and get the result
 //        $result = $message->send();
