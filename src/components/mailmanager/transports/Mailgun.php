@@ -39,12 +39,13 @@ class Mailgun extends BaseTransport
         ]);
     }
 
+
     /**
      * @param string $to
      * @param Template $template
      * @param array $params
      * @param array $attachments
-     * @return mixed|void
+     * @return mixed|\stdClass
      */
     public function send(string $to, Template $template, array $params = [], array $attachments = [])
     {
@@ -61,7 +62,7 @@ class Mailgun extends BaseTransport
         # Define the subject.
         $messageBldr->setSubject($template->subject);
         # Define the body of the message.
-        $messageBldr->setTextBody($parsedTemplate);
+        $messageBldr->setHtmlBody($parsedTemplate);
 
         # Other Optional Parameters.
         foreach ($attachments as $attachment) {
@@ -72,6 +73,6 @@ class Mailgun extends BaseTransport
         $messageBldr->setClickTracking(true);
 
         // Finally, send the message.
-        $this->mailer->post("{$this->_domain}/messages", $messageBldr->getMessage(), $messageBldr->getFiles());
+        return $this->mailer->post("{$this->_domain}/messages", $messageBldr->getMessage(), $messageBldr->getFiles());
     }
 }
