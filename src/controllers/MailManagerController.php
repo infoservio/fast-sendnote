@@ -18,6 +18,7 @@ use craft\helpers\ArrayHelper;
 use endurant\mailmanager\MailManagerAssetBundle;
 use endurant\mailmanager\models\forms\ContactForm;
 use endurant\mailmanager\models\Template;
+use yii\web\BadRequestHttpException;
 
 /**
  * MailManager Controller
@@ -36,7 +37,7 @@ class MailManagerController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = [];
+    protected $allowAnonymous = ['send'];
 
     // Public Methods
     // =========================================================================
@@ -46,6 +47,7 @@ class MailManagerController extends Controller
         // ...set `$this->enableCsrfValidation` here based on some conditions...
         // call parent method that will check CSRF if such property is true.
         $this->enableCsrfValidation = false;
+        Craft::$app->response->format = \yii\web\Response::FORMAT_JSON;
         return parent::beforeAction($action);
     }
 
@@ -57,8 +59,10 @@ class MailManagerController extends Controller
         $this->requirePostRequest();
         $post = Craft::$app->request->post();
 
-        if (isset($post['to']) && isset($post['slug']) && isset($post['params'])) {
-            MailManager::$PLUGIN->mail->send($post['to'], $post['slug'], $post['params']);
+        if (isset($post['to']) && isset($post['slug'])) {
+            return MailManager::$PLUGIN->mail->send($post['to'], $post['slug']);
         }
+
+        throw new BadRequestHttpException('Params not found.');
     }
 }

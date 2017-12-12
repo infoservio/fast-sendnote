@@ -39,9 +39,15 @@ class MailService extends Component
         $this->_mailer = MailerFactory::createTransport(MailManager::$PLUGIN->getSettings()->mailer);
     }
 
+    /**
+     * @param string $to
+     * @param string $slug
+     * @param array $params
+     * @return mixed
+     */
     public function send(string $to, string $slug, array $params = [])
     {
         $template = TemplateRecord::getBySlug($slug);
-        $this->_mailer->send($to, $template, $params);
+        return $this->_mailer->send($to, $template, $params);
     }
 }
