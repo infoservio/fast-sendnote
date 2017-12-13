@@ -60,7 +60,7 @@ class Postal extends BaseTransport
 
         // Specify who the message should be from. This must be from a verified domain
         // on your mail server.
-        $message->from($settings->from);
+        $message->from($settings->postalFrom);
 
         // Set the subject
         $message->subject($template->subject);
