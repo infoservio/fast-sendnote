@@ -60,7 +60,11 @@ class MailManagerController extends Controller
         $post = Craft::$app->request->post();
 
         if (isset($post['to']) && isset($post['slug'])) {
-            return MailManager::$PLUGIN->mail->send($post['to'], $post['slug']);
+            try {
+                return MailManager::$PLUGIN->mail->send($post['to'], $post['slug']);
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            }
         }
 
         throw new BadRequestHttpException('Params not found.');

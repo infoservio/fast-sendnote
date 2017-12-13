@@ -51,6 +51,7 @@ class Settings extends Model
     // postal
     public $postalHost;
     public $postalServerKey;
+    public $postalFrom;
 
     // Public Methods
     // =========================================================================
@@ -68,12 +69,13 @@ class Settings extends Model
     public function rules()
     {
         return [
-            [['mailgunKey', 'mailer', 'from', 'mailgunDomain', 'firstName', 'lastName', 'postalHost', 'postalServerKey'], 'string'],
+            [['mailgunKey', 'mailer', 'from', 'mailgunDomain', 'firstName', 'lastName', 'postalHost', 'postalServerKey', 'postalFrom'], 'string'],
+            [['postalFrom', 'from'], 'email'],
             [['mailer', 'from', 'firstName', 'lastName'], 'required'],
             [['mailgunKey', 'mailgunDomain'], 'required', 'when' => function($model) {
                 return $model->mailer === Mailgun::class;
             }],
-            [['postalHost', 'postalServerKey'], 'required', 'when' => function($model) {
+            [['postalHost', 'postalServerKey', 'postalFrom'], 'required', 'when' => function($model) {
                 return $model->mailer === Postal::class;
             }]
         ];

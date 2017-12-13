@@ -2,6 +2,18 @@
 
 {{
 forms.textField({
+    label: "Postal Registered Email"|t('app'),
+    instructions: 'You should get this email from your Postal instance.',
+    id: 'postalFrom',
+    name: 'postalFrom',
+    value: settings.postalFrom,
+    errors: settings.getErrors('postalFrom'),
+    required: true,
+})
+}}
+
+{{
+forms.textField({
     label: "Postal Host"|t('app'),
     instructions: 'You should get this host from your Postal instance.',
     id: 'postalHost',
