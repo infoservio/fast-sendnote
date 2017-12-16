@@ -78,7 +78,7 @@ class Install extends Migration
             $this->createTable('mailmanager_template', [
                 'id' => $this->primaryKey(),
                 'userId' => $this->integer(),
-                'slug' => $this->string(20)->unique(),
+                'slug' => $this->string(100)->unique(),
                 'name' => $this->string(255),
                 'subject' => $this->string(255),
                 'template' => $this->text(),
