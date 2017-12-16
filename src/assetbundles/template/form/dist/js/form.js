@@ -6,8 +6,8 @@ $(document).ready(function() {
             slug = slug.substring(0, slug.length - 1);
         }
 
-        if (slug.length > 20) {
-            slug = slug.substring(0, 20);
+        if (slug.length > 100) {
+            slug = slug.substring(0, 100);
         }
 
         $('#inputTemplateSlug').val(slug);

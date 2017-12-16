@@ -55,7 +55,7 @@ class Template extends Model
         return [
             [['id', 'userId'], 'integer'],
             ['slug', 'uniqueSlug'],
-            ['slug', 'string', 'max' => 20],
+            ['slug', 'string', 'max' => 100],
             [['name', 'subject'], 'string', 'max' => 255],
             [['userId', 'slug', 'name', 'template', 'subject'], 'required']
         ];
