@@ -1,8 +1,8 @@
 <?php
 
-namespace endurant\mailmanager\controllers;
+namespace infoservio\mailmanager\controllers;
 
-use endurant\mailmanager\MailManager;
+use infoservio\mailmanager\MailManager;
 
 use Craft;
 use craft\web\Controller;

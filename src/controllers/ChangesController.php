@@ -2,8 +2,6 @@
 
 namespace infoservio\mailmanager\controllers;
 
-use endurant\mailmanager\MailManager;
-
 use Craft;
 use craft\web\Controller;
 
