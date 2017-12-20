@@ -28,6 +28,7 @@ class Mail extends Model
     public $templateId;
     public $mailTypeId;
     public $email;
+    public $method;
     public $isDelivered;
     public $isOpened;
     public $isDropped;
@@ -42,9 +43,9 @@ class Mail extends Model
     public function rules()
     {
         return [
-            [['id', 'userId', 'templateId', 'mailTypeId', 'isDelivered', 'isOpened', 'isDropped'], 'integer'],
-            ['email', 'string'],
-            [['templateId', 'mailTypeId'], 'required']
+            [['id', 'userId', 'templateId', 'isDelivered', 'isOpened', 'isDropped'], 'integer'],
+            ['email', 'email'],
+            [['templateId', 'mailTypeId', 'email'], 'required']
         ];
     }
 }
