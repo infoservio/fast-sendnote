@@ -109,7 +109,7 @@ class MailManager extends Plugin
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
-                $event->rules['mail-manager'] = 'mail-manager/mail-manager/index';
+                $event->rules['mail-manager/send'] = 'mail-manager/mail-manager/send';
             }
         );
 

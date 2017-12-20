@@ -23,6 +23,7 @@ class Log extends Model
     const SEND_EMAIL = 'send-email';
     const CHANGES_LOGS = 'mailmanager-changes-logs';
     const TEMPLATE_LOGS = 'mailmanager-template-logs';
+    const MAIL_LOGS = 'mailmanager-mail-logs';
 
     const MAIL_MANAGER_CULPRIT = ['id' => 1, 'name' => 'mail-manager'];
     const DB_CULPRIT = ['id' => 2, 'name' => 'db'];

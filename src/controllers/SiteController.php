@@ -3,7 +3,6 @@
 namespace infoservio\mailmanager\controllers;
 
 use craft\web\Controller;
-use infoservio\mailmanager\MailManagerAssetBundle;
 
 /**
  * Site Controller

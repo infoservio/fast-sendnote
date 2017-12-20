@@ -14,7 +14,17 @@ class MailerFactory
 {
     // Constants
     // =========================================================================
+    const TRANSPORT_TYPES_CODES = [
+        Php::class => ['id' => 1, 'name' => 'Php Mailer'],
+        Mailgun::class => ['id' => 2, 'name' => 'Mailgun Mailer'],
+        Postal::class => ['id' => 3, 'name' => 'Postal Mailer']
+    ];
 
+    const TRANSPORT_TYPES = [
+        Php::class,
+        Mailgun::class,
+        Postal::class
+    ];
     /**
      * @event RegisterComponentTypesEvent The event that is triggered when registering mailer transport adapter types.
      */
@@ -30,14 +40,8 @@ class MailerFactory
      */
     public static function allMailerTransportTypes(): array
     {
-        $transportTypes = [
-            Php::class,
-            Mailgun::class,
-            Postal::class
-        ];
-
         $event = new RegisterComponentTypesEvent([
-            'types' => $transportTypes
+            'types' => self::TRANSPORT_TYPES
         ]);
         Event::trigger(static::class, self::EVENT_REGISTER_MAILER_TRANSPORT_TYPES, $event);
 

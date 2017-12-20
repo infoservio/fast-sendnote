@@ -10,8 +10,9 @@ use craft\db\ActiveRecord;
  * @property integer $id
  * @property integer $userId
  * @property integer $templateId
- * @property integer $mailTypeId
+ * @property string $mailTypeId
  * @property string $email
+ * @property string $method
  * @property integer $isDelivered
  * @property integer $isOpened
  * @property integer $isDropped
@@ -41,7 +42,7 @@ class Mail extends ActiveRecord
         return '{{mailmanager_mail}}';
     }
 
-    public static function getLatestByEmail(string $email, string $slug)
+    public static function getLatestByEmail(string $email, string $slug, bool $returnActiveRecordObj = false)
     {
         $record = Template::getBySlug($slug);
 
@@ -52,6 +53,10 @@ class Mail extends ActiveRecord
         $obj = self::find()->where(['email' => $email, 'templateId' => $record->id])->orderBy(['dateCreated' => SORT_DESC, 'isDelivered' => 1])->one();
         if (!$obj) {
             return false;
+        }
+
+        if ($returnActiveRecordObj) {
+            return $obj;
         }
 
         return new self($obj);
