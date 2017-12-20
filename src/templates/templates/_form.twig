@@ -1,8 +1,8 @@
 {% extends "_layouts/cp" %}
-{% do view.registerAssetBundle("endurant\\mailmanager\\assetbundles\\template\\main\\TemplateAssetBundle") %}
-{% do view.registerAssetBundle("endurant\\mailmanager\\assetbundles\\template\\form\\TemplateFormAssetBundle") %}
-{% do view.registerAssetBundle("endurant\\mailmanager\\assetbundles\\parsley\\ParsleyAssetBundle") %}
-{% do view.registerAssetBundle("endurant\\mailmanager\\assetbundles\\redactor\\RedactorAssetBundle") %}
+{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\template\\main\\TemplateAssetBundle") %}
+{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\template\\form\\TemplateFormAssetBundle") %}
+{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\parsley\\ParsleyAssetBundle") %}
+{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\redactor\\RedactorAssetBundle") %}
 
 {% set title = (isUpdated ? "Edit Template" : "Create Template")|t('app') %}
 

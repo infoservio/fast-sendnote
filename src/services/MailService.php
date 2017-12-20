@@ -8,16 +8,14 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\mailmanager\services;
+namespace infoservio\mailmanager\services;
 
 use craft\base\Component;
 
-use endurant\mailmanager\components\mailmanager\MailerFactory;
-use endurant\mailmanager\components\mailmanager\transports\BaseTransport;
-use endurant\mailmanager\MailManager;
-
-use endurant\mailmanager\models\Template;
-use endurant\mailmanager\records\Template as TemplateRecord;
+use infoservio\mailmanager\components\mailmanager\MailerFactory;
+use infoservio\mailmanager\components\mailmanager\transports\BaseTransport;
+use infoservio\mailmanager\MailManager;
+use infoservio\mailmanager\records\Template as TemplateRecord;
 
 /**
  * MailService Service

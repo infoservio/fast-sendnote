@@ -8,11 +8,9 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\mailmanager\assetbundles\template\form;
+namespace infoservio\mailmanager\assetbundles\template\form;
 
-use Craft;
 use craft\web\AssetBundle;
-use craft\web\assets\cp\CpAsset;
 
 /**
  * DonationsfreeAsset AssetBundle
@@ -28,7 +26,7 @@ use craft\web\assets\cp\CpAsset;
  *
  * http://www.yiiframework.com/doc-2.0/guide-structure-assets.html
  *
- * @author    endurant
+ * @author    infoservio
  * @package   Donationsfree
  * @since     1.0.0
  */
@@ -43,7 +41,7 @@ class TemplateFormAssetBundle extends AssetBundle
     public function init()
     {
         // define the path that your publishable resources live
-        $this->sourcePath = '@endurant/mailmanager/assetbundles/template/form/dist';
+        $this->sourcePath = '@infoservio/mailmanager/assetbundles/template/form/dist';
 
         // define the relative path to CSS/JS files that should be registered with the page
         // when this asset bundle is registered

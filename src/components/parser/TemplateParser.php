@@ -1,8 +1,7 @@
 <?php
 
-namespace endurant\mailmanager\components\parser;
+namespace infoservio\mailmanager\components\parser;
 
-use Craft;
 use craft\base\Component;
 
 class TemplateParser extends Component

@@ -1,11 +1,11 @@
 <?php
-namespace endurant\mailmanager\components\logger;
+namespace infoservio\mailmanager\components\logger;
 
 use Craft;
 use PHPUnit\Framework\Error\Error;
 use Psr\Log\LogLevel;
-use endurant\mailmanager\records\Log as LogRecord;
-use endurant\mailmanager\models\Log;
+use infoservio\mailmanager\records\Log as LogRecord;
+use infoservio\mailmanager\models\Log;
 
 /**
  * General Logger

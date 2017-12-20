@@ -1,19 +1,11 @@
 <?php
-/**
- * donations-free plugin for Craft CMS 3.x
- *
- * Free Braintree Donation System
- *
- * @link      https://endurant.org
- * @copyright Copyright (c) 2017 endurant
- */
 
-namespace endurant\mailmanager\models;
+namespace infoservio\mailmanager\models;
 
 use craft\base\Model;
-use endurant\mailmanager\components\mailmanager\transports\Mailgun;
-use endurant\mailmanager\components\mailmanager\transports\Php;
-use endurant\mailmanager\components\mailmanager\transports\Postal;
+use infoservio\mailmanager\components\mailmanager\transports\Mailgun;
+use infoservio\mailmanager\components\mailmanager\transports\Php;
+use infoservio\mailmanager\components\mailmanager\transports\Postal;
 
 /**
  * Donationsfree Settings Model

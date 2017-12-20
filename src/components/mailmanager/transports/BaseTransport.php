@@ -1,17 +1,12 @@
 <?php
-/**
- * @link      https://craftcms.com/
- * @copyright Copyright (c) Pixel & Tonic, Inc.
- * @license   https://craftcms.com/license
- */
 
-namespace endurant\mailmanager\components\mailmanager\transports;
+namespace infoservio\mailmanager\components\mailmanager\transports;
 
 use craft\base\ComponentInterface;
-use craft\base\SavableComponent;
-use endurant\mailmanager\MailManager;
-use endurant\mailmanager\models\Settings;
-use endurant\mailmanager\records\Template;
+
+use infoservio\mailmanager\MailManager;
+use infoservio\mailmanager\models\Settings;
+use infoservio\mailmanager\records\Template;
 
 /**
  * Php implements a PHP Mail transport adapter into Craft’s mailer.

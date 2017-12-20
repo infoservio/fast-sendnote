@@ -1,11 +1,9 @@
 <?php
-namespace endurant\mailmanager\migrations;
+namespace infoservio\mailmanager\migrations;
 
 use Yii;
 use Craft;
 use craft\db\Migration;
-
-use endurant\donationsfree\SmptMailer;
 
 class Install extends Migration
 {

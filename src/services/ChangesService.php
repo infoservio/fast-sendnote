@@ -1,16 +1,15 @@
 <?php
 
-namespace endurant\mailmanager\services;
+namespace infoservio\mailmanager\services;
 
 use Craft;
 use craft\base\Component;
 
-use endurant\mailmanager\errors\DbMailManagerPluginException;
-use endurant\mailmanager\models\Changes;
-use endurant\mailmanager\models\Log;
-use endurant\mailmanager\records\Changes as ChangesRecord;
-use endurant\mailmanager\records\Template;
-use yii\web\BadRequestHttpException;
+use infoservio\mailmanager\errors\DbMailManagerPluginException;
+use infoservio\mailmanager\models\Changes;
+use infoservio\mailmanager\models\Log;
+use infoservio\mailmanager\records\Changes as ChangesRecord;
+use infoservio\mailmanager\records\Template;
 
 /**
  * Changes Service

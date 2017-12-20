@@ -1,10 +1,10 @@
 <?php
 
-namespace endurant\mailmanager\components\mailmanager\transports;
+namespace infoservio\mailmanager\components\mailmanager\transports;
 
 use Craft;
-use endurant\mailmanager\MailManager;
-use endurant\mailmanager\records\Template;
+use infoservio\mailmanager\MailManager;
+use infoservio\mailmanager\records\Template;
 use Postal as PostalLibrary;
 
 class Postal extends BaseTransport

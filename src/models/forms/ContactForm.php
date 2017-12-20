@@ -1,6 +1,6 @@
 <?php
 
-namespace endurant\mailmanager\models\forms;
+namespace infoservio\mailmanager\models\forms;
 
 use craft\base\Model;
 

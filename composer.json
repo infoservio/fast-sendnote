@@ -1,8 +1,8 @@
 {
-    "name": "endurant/mail-manager",
+    "name": "infoservio/mail-manager",
     "description": "Mail Manager",
     "type": "craft-plugin",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "keywords": [
         "craft",
         "cms",
@@ -17,8 +17,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "endurant",
-            "homepage": "https://endurant.org"
+            "name": "infoservio",
+            "homepage": "https://infoserv.io"
         }
     ],
     "require": {
@@ -38,25 +38,25 @@
     ],
     "autoload": {
         "psr-4": {
-          "endurant\\mailmanager\\": "src/"
+          "infoservio\\mailmanager\\": "src/"
         }
     },
     "extra": {
         "name": "Mail Manager",
         "handle": "mail-manager",
-        "schemaVersion": "1.0.0",
+        "schemaVersion": "0.0.1",
         "hasCpSettings": true,
         "hasCpSection": true,
         "changelogUrl": "???",
         "components": {
-            "mail": "endurant\\mailmanager\\services\\MailService",
-            "template": "endurant\\mailmanager\\services\\TemplateService",
-            "changes": "endurant\\mailmanager\\services\\ChangesService",
-            "log": "endurant\\mailmanager\\services\\LogService",
-            "templateParser": "endurant\\mailmanager\\components\\parser\\TemplateParser",
-            "logger": "endurant\\mailmanager\\components\\logger\\Logger"
+            "mail": "infoservio\\mailmanager\\services\\MailService",
+            "template": "infoservio\\mailmanager\\services\\TemplateService",
+            "changes": "infoservio\\mailmanager\\services\\ChangesService",
+            "log": "infoservio\\mailmanager\\services\\LogService",
+            "templateParser": "infoservio\\mailmanager\\components\\parser\\TemplateParser",
+            "logger": "infoservio\\mailmanager\\components\\logger\\Logger"
         },
-        "class": "endurant\\mailmanager\\MailManager"
+        "class": "infoservio\\mailmanager\\MailManager"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.2"

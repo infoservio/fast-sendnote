@@ -1,8 +1,8 @@
 <?php
 
-namespace endurant\mailmanager\errors;
+namespace infoservio\mailmanager\errors;
 
-use endurant\mailmanager\models\Log;
+use infoservio\mailmanager\models\Log;
 
 
 class DbMailManagerPluginException extends MailManagerPluginException
