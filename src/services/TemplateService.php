@@ -1,13 +1,13 @@
 <?php
 
-namespace endurant\mailmanager\services;
+namespace infoservio\mailmanager\services;
 
 use Craft;
 use craft\base\Component;
-use endurant\mailmanager\errors\DbMailManagerPluginException;
-use endurant\mailmanager\models\Template;
-use endurant\mailmanager\models\Log;
-use endurant\mailmanager\records\Template as TemplateRecord;
+use infoservio\mailmanager\errors\DbMailManagerPluginException;
+use infoservio\mailmanager\models\Template;
+use infoservio\mailmanager\models\Log;
+use infoservio\mailmanager\records\Template as TemplateRecord;
 use yii\web\BadRequestHttpException;
 
 /**

@@ -1,14 +1,13 @@
 <?php
 
-
-namespace endurant\mailmanager\components\mailmanager;
+namespace infoservio\mailmanager\components\mailmanager;
 
 use craft\events\RegisterComponentTypesEvent;
 use craft\helpers\Component;
-use endurant\mailmanager\components\mailmanager\transports\BaseTransport;
-use endurant\mailmanager\components\mailmanager\transports\Mailgun;
-use endurant\mailmanager\components\mailmanager\transports\Php;
-use endurant\mailmanager\components\mailmanager\transports\Postal;
+use infoservio\mailmanager\components\mailmanager\transports\BaseTransport;
+use infoservio\mailmanager\components\mailmanager\transports\Mailgun;
+use infoservio\mailmanager\components\mailmanager\transports\Php;
+use infoservio\mailmanager\components\mailmanager\transports\Postal;
 use yii\base\Event;
 
 class MailerFactory

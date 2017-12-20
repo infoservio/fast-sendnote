@@ -8,11 +8,9 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\mailmanager\assetbundles\parsley;
+namespace infoservio\mailmanager\assetbundles\parsley;
 
-use Craft;
 use craft\web\AssetBundle;
-use craft\web\assets\cp\CpAsset;
 
 /**
  * DonationsfreeAsset AssetBundle
@@ -28,7 +26,7 @@ use craft\web\assets\cp\CpAsset;
  *
  * http://www.yiiframework.com/doc-2.0/guide-structure-assets.html
  *
- * @author    endurant
+ * @author    infoservio
  * @package   Donationsfree
  * @since     1.0.0
  */
@@ -43,7 +41,7 @@ class ParsleyAssetBundle extends AssetBundle
     public function init()
     {
         // define the path that your publishable resources live
-        $this->sourcePath = '@endurant/mailmanager/assetbundles/parsley/dist/';
+        $this->sourcePath = '@infoservio/mailmanager/assetbundles/parsley/dist/';
 
         // define the relative path to CSS/JS files that should be registered with the page
         // when this asset bundle is registered

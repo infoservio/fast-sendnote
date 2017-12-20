@@ -1,12 +1,4 @@
 <?php
-/**
- * donations-free plugin for Craft CMS 3.x
- *
- * Free Braintree Donation System
- *
- * @link      https://endurant.org
- * @copyright Copyright (c) 2017 endurant
- */
 
 namespace endurant\mailmanager\controllers;
 
@@ -14,8 +6,8 @@ use endurant\mailmanager\MailManager;
 
 use Craft;
 use craft\web\Controller;
-use endurant\mailmanager\models\Template;
-use endurant\mailmanager\records\Template as TemplateRecord;
+use infoservio\mailmanager\models\Template;
+use infoservio\mailmanager\records\Template as TemplateRecord;
 use yii\web\BadRequestHttpException;
 
 /**

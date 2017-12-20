@@ -8,13 +8,13 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\mailmanager;
+namespace infoservio\mailmanager;
 
-use endurant\mailmanager\components\logger\Logger;
-use endurant\mailmanager\components\mailmanager\MailerFactory;
-use endurant\mailmanager\components\mailmanager\transports\BaseTransport;
-use endurant\mailmanager\components\parser\TemplateParser;
-use endurant\mailmanager\models\Settings;
+use infoservio\mailmanager\components\logger\Logger;
+use infoservio\mailmanager\components\mailmanager\MailerFactory;
+use infoservio\mailmanager\components\mailmanager\transports\BaseTransport;
+use infoservio\mailmanager\components\parser\TemplateParser;
+use infoservio\mailmanager\models\Settings;
 
 use Craft;
 use craft\base\Plugin;
@@ -25,12 +25,10 @@ use craft\events\RegisterUrlRulesEvent;
 use craft\events\RegisterCpNavItemsEvent;
 use craft\web\twig\variables\Cp;
 
-use endurant\mailmanager\records\MailType as MailTypeRecord;
-use endurant\mailmanager\services\ChangesService;
-use endurant\mailmanager\services\LogService;
-use endurant\mailmanager\services\MailService;
-use endurant\mailmanager\services\TemplateService;
-use ReflectionClass;
+use infoservio\mailmanager\services\ChangesService;
+use infoservio\mailmanager\services\LogService;
+use infoservio\mailmanager\services\MailService;
+use infoservio\mailmanager\services\TemplateService;
 use yii\base\Event;
 
 /**

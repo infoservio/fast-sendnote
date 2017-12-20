@@ -1,18 +1,9 @@
 <?php
-/**
- * donations-free plugin for Craft CMS 3.x
- *
- * Free Braintree Donation System
- *
- * @link      https://endurant.org
- * @copyright Copyright (c) 2017 endurant
- */
 
-namespace endurant\mailmanager\models;
+namespace infoservio\mailmanager\models;
 
 use craft\base\Model;
-use endurant\mailmanager\records\Template as TemplateRecord;
-use yii\validators\UniqueValidator;
+use infoservio\mailmanager\records\Template as TemplateRecord;
 
 /**
  * Card Model

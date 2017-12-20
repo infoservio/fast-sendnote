@@ -1,7 +1,7 @@
 <?php
 
-namespace endurant\mailmanager\errors;
-use endurant\mailmanager\MailManager;
+namespace infoservio\mailmanager\errors;
+use infoservio\mailmanager\MailManager;
 
 class MailManagerPluginException extends \Exception
 {

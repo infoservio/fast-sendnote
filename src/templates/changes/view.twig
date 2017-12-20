@@ -1,6 +1,6 @@
 {% extends "_layouts/cp" %}
-{% do view.registerAssetBundle("endurant\\mailmanager\\assetbundles\\template\\main\\TemplateAssetBundle") %}
-{% do view.registerAssetBundle("endurant\\mailmanager\\assetbundles\\changes\\ChangesAssetBundle") %}
+{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\template\\main\\TemplateAssetBundle") %}
+{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\changes\\ChangesAssetBundle") %}
 {% set title = "View Template Changes"|t('app') %}
 {% set template = templateChange.getTemplate() %}
 {% block content %}

@@ -1,5 +1,5 @@
 {% extends "_layouts/cp" %}
-{% do view.registerAssetBundle("endurant\\mailmanager\\assetbundles\\template\\main\\TemplateAssetBundle") %}
+{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\template\\main\\TemplateAssetBundle") %}
 {% set title = "Changes Manager Templates"|t('app') %}
 {% block content %}
     <table id="template-table" class="table table-hover">
@@ -20,7 +20,7 @@
                 <td>{{ change.dateCreated }}</td>
                 <td>{{ change.dateUpdated }}</td>
                 <td class="icons">
-                    <a href="changes/view?id={{ change.id }}" class="glyphicon glyphicon-eye-open view-icon" title="View"></a>
+                    <a href="/admin/mail-manager/changes/view?id={{ change.id }}" class="glyphicon glyphicon-eye-open view-icon" title="View"></a>
                 </td>
             </tr>
         {% endfor %}

@@ -8,10 +8,9 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace endurant\mailmanager\services;
+namespace infoservio\mailmanager\services;
 
-use endurant\mailmanager\MailManager;
-use endurant\stripedonation\StripeDonation;
+use infoservio\mailmanager\MailManager;
 use craft\base\Component;
 
 /**

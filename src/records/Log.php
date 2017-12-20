@@ -1,18 +1,7 @@
 <?php
-/**
- * donations-free plugin for Craft CMS 3.x
- *
- * Free Braintree Donation System
- *
- * @link      https://endurant.org
- * @copyright Copyright (c) 2017 endurant
- */
 
-namespace endurant\mailmanager\records;
+namespace infoservio\mailmanager\records;
 
-use endurant\donationsfree\SmptMailer;
-
-use Craft;
 use craft\db\ActiveRecord;
 
 /**

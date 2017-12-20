@@ -1,8 +1,8 @@
 <?php
 
-namespace endurant\mailmanager\components\mailmanager\transports;
+namespace infoservio\mailmanager\components\mailmanager\transports;
 
-use endurant\mailmanager\records\Template;
+use infoservio\mailmanager\records\Template;
 
 class Php extends BaseTransport
 {

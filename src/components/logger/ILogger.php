@@ -1,5 +1,5 @@
 <?php
-namespace endurant\mailmanager\components\logger;
+namespace infoservio\mailmanager\components\logger;
 
 interface ILogger
 {
