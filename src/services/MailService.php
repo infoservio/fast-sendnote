@@ -98,7 +98,7 @@ class MailService extends Component
                 );
             }
         } else {
-            return $model->getErrors();
+            return false;
         }
 
         return true;
