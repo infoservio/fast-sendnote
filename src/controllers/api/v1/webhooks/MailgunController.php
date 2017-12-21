@@ -104,9 +104,7 @@ class MailgunController extends Controller
      */
     private function findEmail()
     {
-        $body = Craft::$app->request->getRawBody();
-
-        $post = json_decode($body, true);
+        $post = Craft::$app->request->post();
         die(json_encode($post));
         $mailgunId = $post['message']['message-id'];
 
