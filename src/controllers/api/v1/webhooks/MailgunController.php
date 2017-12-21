@@ -41,6 +41,7 @@ class MailgunController extends Controller
      */
     public function beforeAction($action)
     {
+        $this->enableCsrfValidation = false;
         $request = Craft::$app->request;
         $expectedSignature = hash_hmac('sha256', $request->post('timestamp') . $request->post('token'), MailManager::$PLUGIN->getSettings()->mailgunKey);
         if ($request->post('signature') !== $expectedSignature) {
@@ -103,7 +104,10 @@ class MailgunController extends Controller
      */
     private function findEmail()
     {
-        $mailgunId = Craft::$app->request->post('Message-Id');
+        $body = Craft::$app->request->getRawBody();
+
+        $post = json_decode($body, true);
+        $mailgunId = $post('Message-Id');
 
         $email = MailRecord::getByEmailIdAndMethod($mailgunId, MailerFactory::MAILGUN, true);
         if (!$email) {
