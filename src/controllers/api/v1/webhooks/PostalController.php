@@ -9,6 +9,7 @@ use infoservio\mailmanager\components\mailmanager\MailerFactory;
 use infoservio\mailmanager\MailManager;
 use infoservio\mailmanager\records\Mail as MailRecord;
 use infoservio\mailmanager\models\Mail;
+use yii\web\BadRequestHttpException;
 use yii\web\NotAcceptableHttpException;
 
 
@@ -57,6 +58,11 @@ class PostalController extends Controller
     {
         $this->requirePostRequest();
         $post = Craft::$app->request->post();
+
+        if (!isset($post['message']) || !isset($post['message']['message_id']) || !isset($post['status'])) {
+            throw new BadRequestHttpException('Missed data.');
+        }
+
         $email = $this->findEmail($post);
         if ($post['status'] == self::MESSAGE_SENT) {
             $email->isDelivered = 1;
