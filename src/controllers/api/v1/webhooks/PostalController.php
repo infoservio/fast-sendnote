@@ -84,7 +84,7 @@ class PostalController extends Controller
 
         $email->save();
 
-        return ['message' => 'Email dropped. Thanks!'];
+        return ['message' => 'Thanks!'];
     }
 
     /**
