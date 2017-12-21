@@ -1,0 +1,29 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.textField({
+    label: "Email"|t('app'),
+    id: 'email',
+    name: 'gmailEmail',
+    value: settings.gmailEmail,
+    errors: settings.getErrors('gmailEmail'),
+    required: true
+}) }}
+
+{{ forms.passwordField({
+    label: "Password"|t('app'),
+    id: 'password',
+    name: 'gmailPassword',
+    value: settings.gmailPassword,
+    errors: settings.getErrors('gmailPassword'),
+    required: true,
+}) }}
+
+{{ forms.textField({
+    label: "Timeout"|t('app'),
+    id: 'timeout',
+    name: 'gmailTimeout',
+    value: settings.gmailTimeout,
+    size: 2,
+    errors: settings.getErrors('gmailTimeout'),
+    required: true
+}) }}

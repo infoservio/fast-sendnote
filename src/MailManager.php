@@ -110,6 +110,8 @@ class MailManager extends Plugin
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
                 $event->rules['mail-manager/send'] = 'mail-manager/mail-manager/send';
+                $event->rules['mail-manager/mailgun/status'] = 'mail-manager/api/v1/webhooks/mailgun/status';
+                $event->rules['mail-manager/postal/status'] = 'mail-manager/api/v1/webhooks/postal/status';
             }
         );
 

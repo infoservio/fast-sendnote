@@ -4,7 +4,7 @@ namespace infoservio\mailmanager\models;
 
 use craft\base\Model;
 use infoservio\mailmanager\components\mailmanager\transports\Mailgun;
-use infoservio\mailmanager\components\mailmanager\transports\Php;
+use infoservio\mailmanager\components\mailmanager\transports\Gmail;
 use infoservio\mailmanager\components\mailmanager\transports\Postal;
 
 /**
@@ -31,7 +31,7 @@ class Settings extends Model
      *
      * @var string
      */
-    public $mailer = Php::class;
+    public $mailer = Gmail::class;
     public $from = 'support@gmail.com';
     public $firstName = 'Support';
     public $lastName = 'Support';
@@ -44,6 +44,11 @@ class Settings extends Model
     public $postalHost;
     public $postalServerKey;
     public $postalFrom;
+
+    // gmail
+    public $gmailEmail;
+    public $gmailPassword;
+    public $gmailTimeout = 10;
 
     // Public Methods
     // =========================================================================
@@ -65,11 +70,14 @@ class Settings extends Model
             [['postalFrom', 'from'], 'email'],
             [['mailer', 'from', 'firstName', 'lastName'], 'required'],
             [['mailgunKey', 'mailgunDomain'], 'required', 'when' => function($model) {
-                return $model->mailer === Mailgun::class;
+                return $model->mailer == Mailgun::class;
             }],
             [['postalHost', 'postalServerKey', 'postalFrom'], 'required', 'when' => function($model) {
-                return $model->mailer === Postal::class;
-            }]
+                return $model->mailer == Postal::class;
+            }],
+            [['gmailEmail', 'gmailPassword', 'gmailTimeout'], 'required', 'when' => function($model) {
+                return $model->mailer == Gmail::class;
+            }],
         ];
     }
 }
