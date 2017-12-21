@@ -66,7 +66,7 @@ class PostalController extends Controller
         $body = Craft::$app->getRequest()->getRawBody();
 
         $post = json_decode($body, true);
-
+die(json_encode($post));
         if (!isset($post['message']) || !isset($post['status'])) {
             throw new BadRequestHttpException('Missed data.');
         }
