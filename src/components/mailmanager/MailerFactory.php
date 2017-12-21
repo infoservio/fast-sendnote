@@ -6,7 +6,7 @@ use craft\events\RegisterComponentTypesEvent;
 use craft\helpers\Component;
 use infoservio\mailmanager\components\mailmanager\transports\BaseTransport;
 use infoservio\mailmanager\components\mailmanager\transports\Mailgun;
-use infoservio\mailmanager\components\mailmanager\transports\Php;
+use infoservio\mailmanager\components\mailmanager\transports\Gmail;
 use infoservio\mailmanager\components\mailmanager\transports\Postal;
 use yii\base\Event;
 
@@ -14,14 +14,19 @@ class MailerFactory
 {
     // Constants
     // =========================================================================
+    const GMAIL = 1;
+    const MAILGUN = 2;
+    const POSTAL = 3;
+
+
     const TRANSPORT_TYPES_CODES = [
-        Php::class => ['id' => 1, 'name' => 'Php Mailer'],
+        Gmail::class => ['id' => 1, 'name' => 'Gmail Mailer'],
         Mailgun::class => ['id' => 2, 'name' => 'Mailgun Mailer'],
         Postal::class => ['id' => 3, 'name' => 'Postal Mailer']
     ];
 
     const TRANSPORT_TYPES = [
-        Php::class,
+        Gmail::class,
         Mailgun::class,
         Postal::class
     ];

@@ -42,6 +42,21 @@ class Mail extends ActiveRecord
         return '{{mailmanager_mail}}';
     }
 
+    public static function getByEmailIdAndMethod(string $emailId, int $method, bool $returnActiveRecordObj = false)
+    {
+
+        $obj = self::find()->where(['emailTypeId' => $emailId, 'method' => $method])->one();
+        if (!$obj) {
+            return false;
+        }
+
+        if ($returnActiveRecordObj) {
+            return $obj;
+        }
+
+        return new self($obj);
+    }
+
     public static function getLatestByEmail(string $email, string $slug, bool $returnActiveRecordObj = false)
     {
         $record = Template::getBySlug($slug);

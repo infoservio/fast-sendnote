@@ -3,11 +3,10 @@
 namespace infoservio\mailmanager\components\mailmanager\transports;
 
 use Craft;
-use craft\mail\transportadapters\Sendmail;
 use infoservio\mailmanager\MailManager;
 use infoservio\mailmanager\records\Template;
 
-class Php extends BaseTransport
+class Gmail extends BaseTransport
 {
     // Static
     // =========================================================================
@@ -17,7 +16,17 @@ class Php extends BaseTransport
      */
     public static function displayName(): string
     {
-        return 'PHP Mail';
+        return 'Gmail Mail';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSettingsHtml()
+    {
+        return Craft::$app->getView()->renderTemplate('mail-manager/_components/mailertransports/gmail/settings', [
+            'settings' => $this->getParams()
+        ]);
     }
 
     // Public Methods
@@ -28,7 +37,20 @@ class Php extends BaseTransport
         $settings = $this->getParams();
         $parsedTemplate = MailManager::$PLUGIN->templateParser->parse($template->template, $params);
 
-        $mail = Craft::$app->mailer->compose()
+        $mailer = Craft::$app->getMailer();
+
+        $mailer->setTransport([
+            'class' => \Swift_SmtpTransport::class,
+            'host' => 'smtp.gmail.com',
+            'port' => 465,
+            'encryption' => 'ssl',
+            'username' => $settings->gmailEmail,
+            'password' => $settings->gmailPassword,
+            'timeout' => $settings->gmailTimeout
+
+        ]);
+
+        $mail = $mailer->compose()
             ->setFrom($settings->from)
             ->setTo($to)
             ->setSubject($template->subject)
@@ -38,13 +60,7 @@ class Php extends BaseTransport
             $mail->attach($attachment['path']);
         }
 
-        try {
-            $mail->send();
-        } catch (\Exception $e) {
-            die($e->getMessage());
-        }
-
-        return true;
+        return $mail->send();
 
     }
 }
