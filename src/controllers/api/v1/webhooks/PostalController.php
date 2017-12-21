@@ -25,9 +25,9 @@ class PostalController extends Controller
 {
     // Protected Properties
     // =========================================================================
-    const MESSAGE_SENT = 'Sent';
-    const MESSAGE_DROPPED = 'DeliveryFailed';
-    const MESSAGE_OPENED = 'LinkClicked';
+    const MESSAGE_SENT = 'MessageSent';
+    const MESSAGE_DROPPED = 'MessageDeliveryFailed';
+    const MESSAGE_OPENED = 'MessageLinkClicked';
     /**
      * @var    bool|array Allows anonymous access to this controller's actions.
      *         The actions must be in 'kebab-case'
@@ -66,17 +66,17 @@ class PostalController extends Controller
         $body = Craft::$app->getRequest()->getRawBody();
 
         $post = json_decode($body, true);
-die(json_encode($post));
-        if (!isset($post['message']) || !isset($post['status'])) {
+
+        if (!isset($post['payload']['message']) || !isset($post['payload']['status'])) {
             throw new BadRequestHttpException('Missed data.');
         }
 
         $email = $this->findEmail($post);
-        if ($post['status'] == self::MESSAGE_SENT) {
+        if ($post['event'] == self::MESSAGE_SENT) {
             $email->isDelivered = 1;
-        } else if ($post['status'] == self::MESSAGE_OPENED) {
+        } else if ($post['event'] == self::MESSAGE_OPENED) {
             $email->isOpened = 1;
-        } else if ($post['status'] == self::MESSAGE_DROPPED) {
+        } else if ($post['event'] == self::MESSAGE_DROPPED) {
             $email->isDropped = 1;
         } else {
             throw new BadRequestHttpException('Event does not exist.');
@@ -93,7 +93,7 @@ die(json_encode($post));
      */
     private function findEmail($post)
     {
-        $email = MailRecord::getByEmailIdAndMethod($post['message']['message_id'], MailerFactory::POSTAL, true);
+        $email = MailRecord::getByEmailIdAndMethod($post['payload']['message']['message_id'], MailerFactory::POSTAL, true);
         if (!$email) {
             throw new NotAcceptableHttpException('Email not found');
         }
