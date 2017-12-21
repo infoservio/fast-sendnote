@@ -1,5 +1,6 @@
 {% extends "_layouts/cp" %}
 {% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\template\\main\\TemplateAssetBundle") %}
+{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\sidebar\\SidebarAssetBundle") %}
 {% set title = "Changes Manager Templates"|t('app') %}
 {% block sidebar %}
     <div class="sidebar-header">
