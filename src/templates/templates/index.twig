@@ -2,6 +2,17 @@
 {% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\template\\main\\TemplateAssetBundle") %}
 {% set title = "Mail Manager Templates"|t('app') %}
 {#{% set iconUrl = view.getAssetManager().getPublishedUrl('@test/test/assetbundles/testcpsection/dist', true) ~ '/img/Test-icon.svg' %}#}
+{% block sidebar %}
+    <div class="sidebar-header">
+        <h3>Sidebar Menu</h3>
+    </div>
+
+    <!-- Sidebar Links -->
+    <ul class="list-unstyled components">
+        <li class="active sidebar-item"><a href="/admin/mail-manager">Template Manager <i class="sidebar-icon material-icons">keyboard_arrow_right</i></a></li>
+        <li class="sidebar-item"><a href="/admin/mail-manager/changes">Template Changes Manager</a></li>
+    </ul>
+{% endblock %}
 {% block content %}
     <a href="/admin/mail-manager/create" class="create-template-link">Create Template</a>
     <table id="template-table" class="table table-hover">
