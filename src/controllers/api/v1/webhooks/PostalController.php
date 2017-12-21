@@ -24,9 +24,9 @@ class PostalController extends Controller
 {
     // Protected Properties
     // =========================================================================
-    const MESSAGE_SENT = 'MessageSent';
-    const MESSAGE_DROPPED = 'MessageDeliveryFailed';
-    const MESSAGE_OPENED = 'MessageLinkClicked';
+    const MESSAGE_SENT = 'Sent';
+    const MESSAGE_DROPPED = 'DeliveryFailed';
+    const MESSAGE_OPENED = 'LinkClicked';
     /**
      * @var    bool|array Allows anonymous access to this controller's actions.
      *         The actions must be in 'kebab-case'
@@ -59,16 +59,16 @@ class PostalController extends Controller
         $this->requirePostRequest();
         $post = Craft::$app->request->post();
 
-        if (!isset($post['message']) || !isset($post['message']['message_id']) || !isset($post['status'])) {
+        if (!isset($post->message) || !isset($post->status)) {
             throw new BadRequestHttpException('Missed data.');
         }
 
         $email = $this->findEmail($post);
-        if ($post['status'] == self::MESSAGE_SENT) {
+        if ($post->status == self::MESSAGE_SENT) {
             $email->isDelivered = 1;
-        } else if ($post['status'] == self::MESSAGE_OPENED) {
+        } else if ($post->status == self::MESSAGE_OPENED) {
             $email->isOpened = 1;
-        } else if ($post['status'] == self::MESSAGE_DROPPED) {
+        } else if ($post->status == self::MESSAGE_DROPPED) {
             $email->isDropped = 1;
         } else {
             die(json_encode($post));
@@ -82,9 +82,9 @@ class PostalController extends Controller
      * @return array|bool|Mail|null|\yii\db\ActiveRecord
      * @throws NotAcceptableHttpException
      */
-    private function findEmail(array $post)
+    private function findEmail($post)
     {
-        $email = MailRecord::getByEmailIdAndMethod($post['message']['message_id'], MailerFactory::POSTAL, true);
+        $email = MailRecord::getByEmailIdAndMethod($post->message->message_id, MailerFactory::POSTAL, true);
         if (!$email) {
             throw new NotAcceptableHttpException('Email not found');
         }
