@@ -11,6 +11,7 @@ use infoservio\mailmanager\records\Mail as MailRecord;
 use infoservio\mailmanager\models\Mail;
 use yii\web\BadRequestHttpException;
 use yii\web\NotAcceptableHttpException;
+use yii\web\Response;
 
 
 /**
@@ -46,7 +47,12 @@ class PostalController extends Controller
     {
         $this->enableCsrfValidation = false;
 
-        return parent::beforeAction($action);
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+
+        Craft::$app->response->format = Response::FORMAT_JSON;
+        return true;
     }
 
     /**
@@ -57,22 +63,25 @@ class PostalController extends Controller
     public function actionStatus()
     {
         $this->requirePostRequest();
-        $post = Craft::$app->request->post();
+        $body = Craft::$app->getRequest()->getRawBody();
 
-        if (!isset($post->message) || !isset($post->status)) {
+        $post = json_decode($body, true);
+
+        if (!isset($post['message']) || !isset($post['status'])) {
             throw new BadRequestHttpException('Missed data.');
         }
 
         $email = $this->findEmail($post);
-        if ($post->status == self::MESSAGE_SENT) {
+        if ($post['status'] == self::MESSAGE_SENT) {
             $email->isDelivered = 1;
-        } else if ($post->status == self::MESSAGE_OPENED) {
+        } else if ($post['status'] == self::MESSAGE_OPENED) {
             $email->isOpened = 1;
-        } else if ($post->status == self::MESSAGE_DROPPED) {
+        } else if ($post['status'] == self::MESSAGE_DROPPED) {
             $email->isDropped = 1;
         } else {
-            die(json_encode($post));
+            throw new BadRequestHttpException('Event does not exist.');
         }
+
         $email->save();
 
         return ['message' => 'Email dropped. Thanks!'];
@@ -84,7 +93,7 @@ class PostalController extends Controller
      */
     private function findEmail($post)
     {
-        $email = MailRecord::getByEmailIdAndMethod($post->message->message_id, MailerFactory::POSTAL, true);
+        $email = MailRecord::getByEmailIdAndMethod($post['message']['message_id'], MailerFactory::POSTAL, true);
         if (!$email) {
             throw new NotAcceptableHttpException('Email not found');
         }

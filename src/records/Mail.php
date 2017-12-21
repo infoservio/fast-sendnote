@@ -44,8 +44,7 @@ class Mail extends ActiveRecord
 
     public static function getByEmailIdAndMethod(string $emailId, int $method, bool $returnActiveRecordObj = false)
     {
-
-        $obj = self::find()->where(['emailTypeId' => $emailId, 'method' => $method])->one();
+        $obj = self::find()->where(['mailTypeId' => $emailId, 'method' => $method])->one();
         if (!$obj) {
             return false;
         }
