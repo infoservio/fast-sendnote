@@ -51,12 +51,15 @@ class MailgunController extends Controller
         return parent::beforeAction($action);
     }
 
+
     /**
      * @return array
      * @throws NotAcceptableHttpException
+     * @throws \yii\web\BadRequestHttpException
      */
     public function actionDropped()
     {
+        $this->requirePostRequest();
         $email = $this->findEmail();
         $email->isDropped = 1;
         $email->save();
@@ -67,9 +70,11 @@ class MailgunController extends Controller
     /**
      * @return array
      * @throws NotAcceptableHttpException
+     * @throws \yii\web\BadRequestHttpException
      */
     public function actionDelivered()
     {
+        $this->requirePostRequest();
         $email = $this->findEmail();
         $email->isDelivered = 1;
         $email->save();
@@ -80,9 +85,11 @@ class MailgunController extends Controller
     /**
      * @return array
      * @throws NotAcceptableHttpException
+     * @throws \yii\web\BadRequestHttpException
      */
     public function actionOpened()
     {
+        $this->requirePostRequest();
         $email = $this->findEmail();
         $email->isOpened = 1;
         $email->save();
