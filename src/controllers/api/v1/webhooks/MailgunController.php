@@ -42,11 +42,11 @@ class MailgunController extends Controller
     public function beforeAction($action)
     {
         $this->enableCsrfValidation = false;
-        $request = Craft::$app->request;
-        $expectedSignature = hash_hmac('sha256', $request->post('timestamp') . $request->post('token'), MailManager::$PLUGIN->getSettings()->mailgunKey);
-        if ($request->post('signature') !== $expectedSignature) {
-            throw new NotAcceptableHttpException('Wrong signature');
-        }
+//        $request = Craft::$app->request;
+//        $expectedSignature = hash_hmac('sha256', $request->post('timestamp') . $request->post('token'), MailManager::$PLUGIN->getSettings()->mailgunKey);
+//        if ($request->post('signature') !== $expectedSignature) {
+//            throw new NotAcceptableHttpException('Wrong signature');
+//        }
 
 
         return parent::beforeAction($action);
