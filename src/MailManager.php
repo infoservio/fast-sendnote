@@ -144,16 +144,6 @@ class MailManager extends Plugin
         );
     }
 
-    public function getCpNavItem()
-    {
-        $item = parent::getCpNavItem();
-        $item['subnav'] = [
-            'template-manager' => ['label' => 'Template Manager', 'url' => 'mail-manager'],
-            'changes-manager' => ['label' => 'Template Changes Manager', 'url' => 'mail-manager/changes'],
-        ];
-        return $item;
-    }
-
     // Protected Methods
     // =========================================================================
 
