@@ -107,7 +107,7 @@ class MailgunController extends Controller
         $body = Craft::$app->request->getRawBody();
 
         $post = json_decode($body, true);
-        $mailgunId = $post('Message-Id');
+        $mailgunId = $post['message']['message-id'];
 
         $email = MailRecord::getByEmailIdAndMethod($mailgunId, MailerFactory::MAILGUN, true);
         if (!$email) {
