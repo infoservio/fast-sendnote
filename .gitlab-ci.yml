@@ -4,7 +4,6 @@ stages:
 trigger_build:
   stage: satis-update
   script:
-    - echo $COMPOSER_REPO_TOKEN
     - curl -X POST -F token=$COMPOSER_REPO_TOKEN -F ref=master "https://gitlab.oms.systems/api/v4/projects/60/trigger/pipeline"
   tags:
     - kmtest
