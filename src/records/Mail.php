@@ -13,6 +13,7 @@ use craft\db\ActiveRecord;
  * @property string $mailTypeId
  * @property string $email
  * @property string $method
+ * @property string $customId
  * @property integer $isDelivered
  * @property integer $isOpened
  * @property integer $isDropped

@@ -64,6 +64,7 @@ class Install extends Migration
                 'mailTypeId' => $this->string(),
                 'email' => $this->string(255),
                 'method' => $this->integer(),
+                'customId' => $this->string(255),
                 'isDelivered' => $this->smallInteger()->defaultValue(0),
                 'isOpened' => $this->smallInteger()->defaultValue(0),
                 'isDropped' => $this->smallInteger()->defaultValue(0),

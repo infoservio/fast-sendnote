@@ -47,7 +47,7 @@ class TemplateFormAssetBundle extends AssetBundle
         // when this asset bundle is registered
         $this->js = [
             'js/form.js',
-            'js/redactor.js'
+//            'js/redactor.js'
         ];
 
         $this->css = [

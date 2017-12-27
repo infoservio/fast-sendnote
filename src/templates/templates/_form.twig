@@ -2,7 +2,7 @@
 {% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\template\\main\\TemplateAssetBundle") %}
 {% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\template\\form\\TemplateFormAssetBundle") %}
 {% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\parsley\\ParsleyAssetBundle") %}
-{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\redactor\\RedactorAssetBundle") %}
+{#{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\redactor\\RedactorAssetBundle") %}#}
 
 {% set title = (isUpdated ? "Edit Template" : "Create Template")|t('app') %}
 
@@ -55,12 +55,18 @@
             <textarea id="template" name="template"class="form-control" id="inputTemplate" aria-describedby="templateHelp"
                       placeholder="Enter template"
                       data-parsley-required>
+                {{ (template ? template.template : '') }}
             </textarea>
         </div>
         <button type="submit" class="btn btn-primary form-btn" id="submit-btn">{{ isUpdated ? 'Update' : 'Create' }}</button>
     </form>
+    <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
     <script>
-        var template = `{{ template ? template.template| raw : '' }}`;
         var errors = {{ errors ? errors|json_encode|raw : 'null' }};
+        CKEDITOR.replace('template', {
+            fullPage: true,
+            allowedContent: true,
+            protectedTags: 'html|head|body'
+        });
     </script>
 {% endblock %}

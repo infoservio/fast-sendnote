@@ -29,6 +29,7 @@ class Mail extends Model
     public $mailTypeId;
     public $email;
     public $method;
+    public $customId;
     public $isDelivered = 0;
     public $isOpened = 0;
     public $isDropped = 0;

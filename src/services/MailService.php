@@ -50,11 +50,11 @@ class MailService extends Component
      * @return mixed
      * @throws DbMailManagerPluginException
      */
-    public function send(string $to, string $slug, array $params = [], int $userId = null)
+    public function send(string $to, string $slug, array $params = [], int $userId = null, string $customId = null)
     {
         $template = TemplateRecord::getBySlug($slug);
         $result = $this->_mailer->send($to, $template, $params);
-        $res = $this->createMail($to, $template->id, $result, $userId);
+        $res = $this->createMail($to, $template->id, $result, $userId, $customId);
         return $res;
     }
 
@@ -62,11 +62,12 @@ class MailService extends Component
      * @param string $email
      * @param int $templateId
      * @param Object $result
+     * @param string|null $customId
      * @param int|null $userId
      * @return bool
      * @throws DbMailManagerPluginException
      */
-    private function createMail(string $email, int $templateId, $result, int $userId = null)
+    private function createMail(string $email, int $templateId, $result, string $customId = null, int $userId = null)
     {
         $mailer = MailManager::$PLUGIN->getSettings()->mailer;
         $methodId = MailerFactory::TRANSPORT_TYPES_CODES[$mailer]['id'];
@@ -85,6 +86,7 @@ class MailService extends Component
         $model->mailTypeId = $mailTypeId;
         $model->email = $email;
         $model->method = $methodId;
+        $model->customId = $customId;
 
         if ($model->validate()) {
             $record = new MailRecord();
