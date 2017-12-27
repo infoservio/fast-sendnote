@@ -46,15 +46,16 @@ class MailService extends Component
      * @param string $to
      * @param string $slug
      * @param array $params
+     * @param string|null $customId
      * @param int|null $userId
      * @return mixed
      * @throws DbMailManagerPluginException
      */
-    public function send(string $to, string $slug, array $params = [], int $userId = null, string $customId = null)
+    public function send(string $to, string $slug, array $params = [], string $customId = null, int $userId = null)
     {
         $template = TemplateRecord::getBySlug($slug);
         $result = $this->_mailer->send($to, $template, $params);
-        $res = $this->createMail($to, $template->id, $result, $userId, $customId);
+        $res = $this->createMail($to, $template->id, $result, $customId, $userId);
         return $res;
     }
 
