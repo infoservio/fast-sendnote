@@ -1,4 +1,9 @@
 {% extends "_layouts/cp" %}
+
+{% if isUserHelpUs %}
+    {% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\logrocket\\LogRocketAssetBundle") %}
+{% endif %}
+
 {% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\template\\main\\TemplateAssetBundle") %}
 {% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\template\\form\\TemplateFormAssetBundle") %}
 {% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\parsley\\ParsleyAssetBundle") %}

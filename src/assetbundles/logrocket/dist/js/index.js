@@ -1,0 +1,1 @@
+window.LogRocket && window.LogRocket.init('infoservio/mail-manager-c3-plugin');

@@ -16,7 +16,7 @@ use yii\web\BadRequestHttpException;
  * @package   Mailmanager
  * @since     1.0.0
  */
-class TemplateController extends Controller
+class TemplateController extends BaseController
 {
     // Protected Properties
     // =========================================================================
@@ -31,14 +31,6 @@ class TemplateController extends Controller
     // Public Methods
     // =========================================================================
 
-    public function beforeAction($action)
-    {
-        // ...set `$this->enableCsrfValidation` here based on some conditions...
-        // call parent method that will check CSRF if such property is true.
-        $this->enableCsrfValidation = false;
-        return parent::beforeAction($action);
-    }
-
     /**
      * @return \yii\web\Response
      */
@@ -49,6 +41,7 @@ class TemplateController extends Controller
         return $this->renderTemplate('mail-manager/templates/index', [
             'columns' => $columns,
             'templates' => $templates,
+            'isUserHelpUs' => $this->isUserHelpUs,
             'buttons' => ['edit', 'delete']
         ]);
     }
@@ -65,7 +58,8 @@ class TemplateController extends Controller
         }
 
         return $this->renderTemplate('mail-manager/templates/view', [
-            'template' => $template
+            'template' => $template,
+            'isUserHelpUs' => $this->isUserHelpUs
         ]);
     }
 
@@ -87,7 +81,9 @@ class TemplateController extends Controller
             return $this->redirect('mail-manager/view?id=' . $template->id);
         }
 
-        return $this->renderTemplate('mail-manager/templates/create');
+        return $this->renderTemplate('mail-manager/templates/create', [
+            'isUserHelpUs' => $this->isUserHelpUs
+        ]);
     }
 
     /**
@@ -108,14 +104,16 @@ class TemplateController extends Controller
             } catch (\Exception $e) {
                 return $this->renderTemplate('mail-manager/templates/update', [
                     'errors' => json_decode($e->getMessage()),
-                    'template' => $post
+                    'template' => $post,
+                    'isUserHelpUs' => $this->isUserHelpUs
                 ]);
             }
             return $this->redirect('mail-manager/view?id=' . $template->id);
         }
 
         return $this->renderTemplate('mail-manager/templates/update', [
-            'template' => $record
+            'template' => $record,
+            'isUserHelpUs' => $this->isUserHelpUs
         ]);
     }
 

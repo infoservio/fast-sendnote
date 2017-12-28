@@ -5,7 +5,6 @@ namespace infoservio\mailmanager\controllers;
 use Craft;
 use craft\web\Controller;
 
-use infoservio\mailmanager\MailManagerAssetBundle;
 use infoservio\mailmanager\records\Changes;
 
 
@@ -16,7 +15,7 @@ use infoservio\mailmanager\records\Changes;
  * @package   Mailmanager
  * @since     1.0.0
  */
-class ChangesController extends Controller
+class ChangesController extends BaseController
 {
     // Protected Properties
     // =========================================================================
@@ -28,23 +27,13 @@ class ChangesController extends Controller
      */
     protected $allowAnonymous = [];
 
-    // Public Methods
-    // =========================================================================
-
-    public function beforeAction($action)
-    {
-        // ...set `$this->enableCsrfValidation` here based on some conditions...
-        // call parent method that will check CSRF if such property is true.
-        $this->enableCsrfValidation = false;
-        return parent::beforeAction($action);
-    }
-
     public function actionIndex()
     {
         $changes = Changes::find()->orderBy('id DESC')->all();
         return $this->renderTemplate('mail-manager/changes/index', [
             'changes' => $changes,
-            'columns' => Changes::getColumns()
+            'columns' => Changes::getColumns(),
+            'isUserHelpUs' => $this->isUserHelpUs
         ]);
     }
 
@@ -60,7 +49,8 @@ class ChangesController extends Controller
         $templateChange->newVersionArr = json_decode($templateChange->newVersion, true);
 
         return $this->renderTemplate('mail-manager/changes/view', [
-            'templateChange' => $templateChange
+            'templateChange' => $templateChange,
+            'isUserHelpUs' => $this->isUserHelpUs
         ]);
     }
 }

@@ -32,9 +32,10 @@ class Settings extends Model
      * @var string
      */
     public $mailer = Gmail::class;
-    public $from = 'support@gmail.com';
-    public $firstName = 'Support';
-    public $lastName = 'Support';
+    public $from = 'yoour@company.com';
+    public $firstName = 'Your';
+    public $lastName = 'Company';
+    public $helpUsImproveOurProduct = false;
 
     // mailgun
     public $mailgunDomain;
