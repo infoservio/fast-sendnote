@@ -50,6 +50,14 @@
             />
         </div>
         <div class="form-group">
+            <label for="inputSendEmail">Send Email</label>
+            <small id="sendEmailHelp" class="form-text text-muted">Do you want to send emails for this template?</small>
+            <select name="sendEmail"data-width="100%" class="form-control" id="inputSendEmail" aria-describedby="sendEmailHelp" data-parsley-required>
+                <option value="0" {{ (0 == template.sendEmail) ? 'selected' : '' }}>No</option>
+                <option value="1" {{ (1 == template.sendEmail) ? 'selected' : '' }}>Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label for="inputTemplate">Template</label>
             <small id="templateHelp" class="form-text text-muted">Template is using as a template for email. You can put special params using brackets. Example: 'Dear {firstname}'</small>
             <textarea id="template" name="template"class="form-control" id="inputTemplate" aria-describedby="templateHelp"

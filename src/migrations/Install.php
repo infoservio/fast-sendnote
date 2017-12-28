@@ -83,6 +83,7 @@ class Install extends Migration
                 'subject' => $this->string(255),
                 'template' => $this->text(),
                 'isRemoved' => $this->smallInteger()->defaultValue(0),
+                'sendEmail' => $this->smallInteger()->defaultValue(1),
                 'dateCreated' => $this->date(),
                 'dateUpdated' => $this->date(),
                 'uid' => $this->text()

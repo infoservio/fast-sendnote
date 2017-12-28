@@ -54,6 +54,13 @@ class MailService extends Component
     public function send(string $to, string $slug, array $params = [], string $customId = null, int $userId = null)
     {
         $template = TemplateRecord::getBySlug($slug);
+
+        if (!$template) {
+            return false;
+        } else if(!$template->sendEmail) {
+            return false;
+        }
+
         $result = $this->_mailer->send($to, $template, $params);
         $res = $this->createMail($to, $template->id, $result, $customId, $userId);
         return $res;

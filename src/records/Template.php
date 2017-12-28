@@ -16,6 +16,7 @@ use infoservio\mailmanager\MailManager;
  * @property string $subject
  * @property string $template
  * @property integer $isRemoved
+ * @property integer $sendEmail
  * @property string $dateCreated
  * @property string $dateUpdated
  * @property string $uid
@@ -44,7 +45,7 @@ class Template extends ActiveRecord
 
     public static function getColumns()
     {
-        return ['ID', 'Name', 'Slug', 'User ID', 'Date Created', 'Date Updated'];
+        return ['ID', 'Name', 'Slug', 'User ID', 'Send Email', 'Date Created', 'Date Updated'];
     }
 
     public static function getBySlug(string $slug, bool $returnActiveRecordObj = false)

@@ -21,6 +21,9 @@ class Template extends Model
 {
     const NOT_REMOVED = 0;
     const REMOVED = 1;
+
+    const NOT_SEND_EMAIL = 0;
+    const SEND_EMAIL = 1;
     /**
      * Some model attribute
      *
@@ -33,6 +36,7 @@ class Template extends Model
     public $subject;
     public $template;
     public $isRemoved = self::NOT_REMOVED;
+    public $sendEmail = self::SEND_EMAIL;
 
     // Public Methods
     // =========================================================================

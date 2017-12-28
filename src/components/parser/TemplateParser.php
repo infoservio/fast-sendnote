@@ -6,8 +6,8 @@ use craft\base\Component;
 
 class TemplateParser extends Component
 {
-    const TEMPLATE_PARAM_START = '{{';
-    const TEMPLATE_PARAM_END = '}}';
+    const TEMPLATE_PARAM_START = '{';
+    const TEMPLATE_PARAM_END = '}';
 
     public function parse(string $template, array $params = null)
     {
