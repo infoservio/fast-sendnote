@@ -1,7 +1,7 @@
 <?php
 
-namespace infoservio\mailmanager\errors;
-use infoservio\mailmanager\MailManager;
+namespace infoservio\fastsendnote\errors;
+use infoservio\fastsendnote\FastSendNote;
 
 class MailManagerPluginException extends \Exception
 {
@@ -19,7 +19,7 @@ class MailManagerPluginException extends \Exception
         $this->message = $message;
         $this->method = $method;
 
-        $this->_logService = MailManager::$PLUGIN->log;
+        $this->_logService = FastSendNote::$plugin->log;
         $this->log($category);
     }
     

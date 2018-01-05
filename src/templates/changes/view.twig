@@ -1,11 +1,11 @@
 {% extends "_layouts/cp" %}
 
 {% if isUserHelpUs %}
-    {% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\logrocket\\LogRocketAssetBundle") %}
+    {% do view.registerAssetBundle("infoservio\\fastsendnote\\assetbundles\\logrocket\\LogRocketAssetBundle") %}
 {% endif %}
 
-{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\template\\main\\TemplateAssetBundle") %}
-{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\changes\\ChangesAssetBundle") %}
+{% do view.registerAssetBundle("infoservio\\fastsendnote\\assetbundles\\template\\main\\TemplateAssetBundle") %}
+{% do view.registerAssetBundle("infoservio\\fastsendnote\\assetbundles\\changes\\ChangesAssetBundle") %}
 {% set title = "View Template Changes"|t('app') %}
 {% set template = templateChange.getTemplate() %}
 {% block content %}

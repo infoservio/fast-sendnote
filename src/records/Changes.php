@@ -1,6 +1,6 @@
 <?php
 
-namespace infoservio\mailmanager\records;
+namespace infoservio\fastsendnote\records;
 
 use craft\db\ActiveRecord;
 use craft\records\User;
@@ -38,7 +38,7 @@ class Changes extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{mailmanager_changes}}';
+        return '{{fastsendnote_changes}}';
     }
 
     public static function getColumns()

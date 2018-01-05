@@ -8,13 +8,13 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace infoservio\mailmanager;
+namespace infoservio\fastsendnote;
 
-use infoservio\mailmanager\components\logger\Logger;
-use infoservio\mailmanager\components\mailmanager\MailerFactory;
-use infoservio\mailmanager\components\mailmanager\transports\BaseTransport;
-use infoservio\mailmanager\components\parser\TemplateParser;
-use infoservio\mailmanager\models\Settings;
+use infoservio\fastsendnote\components\logger\Logger;
+use infoservio\fastsendnote\components\fastsendnote\MailerFactory;
+use infoservio\fastsendnote\components\fastsendnote\transports\BaseTransport;
+use infoservio\fastsendnote\components\parser\TemplateParser;
+use infoservio\fastsendnote\models\Settings;
 
 use Craft;
 use craft\base\Plugin;
@@ -25,10 +25,10 @@ use craft\events\RegisterUrlRulesEvent;
 use craft\events\RegisterCpNavItemsEvent;
 use craft\web\twig\variables\Cp;
 
-use infoservio\mailmanager\services\ChangesService;
-use infoservio\mailmanager\services\LogService;
-use infoservio\mailmanager\services\MailService;
-use infoservio\mailmanager\services\TemplateService;
+use infoservio\fastsendnote\services\ChangesService;
+use infoservio\fastsendnote\services\LogService;
+use infoservio\fastsendnote\services\MailService;
+use infoservio\fastsendnote\services\TemplateService;
 use yii\base\Event;
 
 /**
@@ -54,7 +54,7 @@ use yii\base\Event;
  * @property  Settings $settings
  * @method    Settings getSettings()
  */
-class MailManager extends Plugin
+class FastSendNote extends Plugin
 {
     // Static Properties
     // =========================================================================
@@ -62,9 +62,9 @@ class MailManager extends Plugin
      * Static property that is an instance of this plugin class so that it can be accessed via
      * DonationsFree::$plugin
      *
-     * @var MailManager
+     * @var FastSendNote
      */
-    public static $PLUGIN;
+    public static $plugin;
 
     // Public Methods
     // =========================================================================
@@ -83,7 +83,7 @@ class MailManager extends Plugin
     public function init()
     {
         parent::init();
-        self::$PLUGIN = $this;
+        self::$plugin = $this;
 
         // Do something after we're installed
         Event::on(
@@ -109,11 +109,11 @@ class MailManager extends Plugin
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
-                $event->rules['mail-manager/send'] = 'mail-manager/mail-manager/send';
-                $event->rules['mail-manager/mailgun/opened'] = 'mail-manager/api/v1/webhooks/mailgun/opened';
-                $event->rules['mail-manager/mailgun/dropped'] = 'mail-manager/api/v1/webhooks/mailgun/dropped';
-                $event->rules['mail-manager/mailgun/delivered'] = 'mail-manager/api/v1/webhooks/mailgun/delivered';
-                $event->rules['mail-manager/postal/status'] = 'mail-manager/api/v1/webhooks/postal/status';
+                $event->rules['fast-sendnote/send'] = 'fast-sendnote/fast-sendnote/send';
+                $event->rules['fast-sendnote/mailgun/opened'] = 'fast-sendnote/api/v1/webhooks/mailgun/opened';
+                $event->rules['fast-sendnote/mailgun/dropped'] = 'fast-sendnote/api/v1/webhooks/mailgun/dropped';
+                $event->rules['fast-sendnote/mailgun/delivered'] = 'fast-sendnote/api/v1/webhooks/mailgun/delivered';
+                $event->rules['fast-sendnote/postal/status'] = 'fast-sendnote/api/v1/webhooks/postal/status';
             }
         );
 
@@ -122,21 +122,21 @@ class MailManager extends Plugin
             UrlManager::class,
             UrlManager::EVENT_REGISTER_CP_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
-                $event->rules['mail-manager'] = 'mail-manager/template/index';
-                $event->rules['mail-manager/create'] = 'mail-manager/template/create';
-                $event->rules['mail-manager/edit'] = 'mail-manager/template/update';
-                $event->rules['mail-manager/view'] = 'mail-manager/template/view';
-                $event->rules['mail-manager/delete'] = 'mail-manager/template/delete';
-                $event->rules['mail-manager/not-found'] = 'mail-manager/site/not-found';
-                $event->rules['mail-manager/changes'] = 'mail-manager/changes/index';
-                $event->rules['mail-manager/changes/view'] = 'mail-manager/changes/view';
+                $event->rules['fast-sendnote'] = 'fast-sendnote/template/index';
+                $event->rules['fast-sendnote/create'] = 'fast-sendnote/template/create';
+                $event->rules['fast-sendnote/edit'] = 'fast-sendnote/template/update';
+                $event->rules['fast-sendnote/view'] = 'fast-sendnote/template/view';
+                $event->rules['fast-sendnote/delete'] = 'fast-sendnote/template/delete';
+                $event->rules['fast-sendnote/not-found'] = 'fast-sendnote/site/not-found';
+                $event->rules['fast-sendnote/changes'] = 'fast-sendnote/changes/index';
+                $event->rules['fast-sendnote/changes/view'] = 'fast-sendnote/changes/view';
             }
         );
 
 
         Craft::info(
             Craft::t(
-                'mail-manager',
+                'fast-sendnote',
                 '{name} plugin loaded',
                 ['name' => $this->name]
             ),
@@ -182,7 +182,7 @@ class MailManager extends Plugin
         $adapter = MailerFactory::createTransport($settings->mailer);
 
         return Craft::$app->view->renderTemplate(
-            'mail-manager/settings',
+            'fast-sendnote/settings',
             [
                 'settings' => $settings,
                 'adapter' => $adapter,

@@ -1,5 +1,5 @@
 <?php
-namespace infoservio\mailmanager\components\logger;
+namespace infoservio\fastsendnote\components\logger;
 
 interface ILogger
 {

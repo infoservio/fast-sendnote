@@ -8,18 +8,18 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace infoservio\mailmanager\services;
+namespace infoservio\fastsendnote\services;
 
 use craft\base\Component;
 
-use infoservio\mailmanager\components\mailmanager\MailerFactory;
-use infoservio\mailmanager\components\mailmanager\transports\BaseTransport;
-use infoservio\mailmanager\errors\DbMailManagerPluginException;
-use infoservio\mailmanager\MailManager;
-use infoservio\mailmanager\models\Log;
-use infoservio\mailmanager\models\Mail;
-use infoservio\mailmanager\records\Mail as MailRecord;
-use infoservio\mailmanager\records\Template as TemplateRecord;
+use infoservio\fastsendnote\components\fastsendnote\MailerFactory;
+use infoservio\fastsendnote\components\fastsendnote\transports\BaseTransport;
+use infoservio\fastsendnote\errors\DbMailManagerPluginException;
+use infoservio\fastsendnote\FastSendNote;
+use infoservio\fastsendnote\models\Log;
+use infoservio\fastsendnote\models\Mail;
+use infoservio\fastsendnote\records\Mail as MailRecord;
+use infoservio\fastsendnote\records\Template as TemplateRecord;
 use PhpParser\Node\Expr\Cast\Object_;
 
 /**
@@ -39,7 +39,7 @@ class MailService extends Component
     public function init()
     {
         parent::init();
-        $this->_mailer = MailerFactory::createTransport(MailManager::$PLUGIN->getSettings()->mailer);
+        $this->_mailer = MailerFactory::createTransport(FastSendNote::$plugin->getSettings()->mailer);
     }
 
     /**
@@ -77,7 +77,7 @@ class MailService extends Component
      */
     private function createMail(string $email, int $templateId, $result, string $customId = null, int $userId = null)
     {
-        $mailer = MailManager::$PLUGIN->getSettings()->mailer;
+        $mailer = FastSendNote::$plugin->getSettings()->mailer;
         $methodId = MailerFactory::TRANSPORT_TYPES_CODES[$mailer]['id'];
 
         if ($methodId == 1) {

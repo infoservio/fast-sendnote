@@ -7,7 +7,7 @@ $(document).ready(function() {
         if (confirm("Are you sure?")) {
             $.ajax({
                 type: "POST",
-                url: 'mail-manager/delete',
+                url: 'fast-sendnote/delete',
                 data: { id: $(this).attr('value')},
             });
         }

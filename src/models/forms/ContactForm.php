@@ -1,6 +1,6 @@
 <?php
 
-namespace infoservio\mailmanager\models\forms;
+namespace infoservio\fastsendnote\models\forms;
 
 use craft\base\Model;
 

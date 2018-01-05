@@ -1,6 +1,6 @@
 {
-    "name": "infoservio/mail-manager",
-    "description": "Mail Manager",
+    "name": "infoservio/fast-sendnote",
+    "description": "Fast Sendnote",
     "type": "craft-plugin",
     "version": "0.0.1",
     "keywords": [
@@ -8,7 +8,7 @@
         "cms",
         "craftcms",
         "craft-plugin",
-        "mail-manager"
+        "fast-sendnote"
     ],
     "support": {
         "docs": "http://test",
@@ -38,25 +38,25 @@
     ],
     "autoload": {
         "psr-4": {
-          "infoservio\\mailmanager\\": "src/"
+          "infoservio\\fastsendnote\\": "src/"
         }
     },
     "extra": {
-        "name": "Mail Manager",
-        "handle": "mail-manager",
+        "name": "Fast Sendnote",
+        "handle": "fast-sendnote",
         "schemaVersion": "0.0.1",
         "hasCpSettings": true,
         "hasCpSection": true,
         "changelogUrl": "???",
         "components": {
-            "mail": "infoservio\\mailmanager\\services\\MailService",
-            "template": "infoservio\\mailmanager\\services\\TemplateService",
-            "changes": "infoservio\\mailmanager\\services\\ChangesService",
-            "log": "infoservio\\mailmanager\\services\\LogService",
-            "templateParser": "infoservio\\mailmanager\\components\\parser\\TemplateParser",
-            "logger": "infoservio\\mailmanager\\components\\logger\\Logger"
+            "mail": "infoservio\\fastsendnote\\services\\MailService",
+            "template": "infoservio\\fastsendnote\\services\\TemplateService",
+            "changes": "infoservio\\fastsendnote\\services\\ChangesService",
+            "log": "infoservio\\fastsendnote\\services\\LogService",
+            "templateParser": "infoservio\\fastsendnote\\components\\parser\\TemplateParser",
+            "logger": "infoservio\\fastsendnote\\components\\logger\\Logger"
         },
-        "class": "infoservio\\mailmanager\\MailManager"
+        "class": "infoservio\\fastsendnote\\FastSendNote"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.2"

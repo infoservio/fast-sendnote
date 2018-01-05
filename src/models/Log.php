@@ -1,6 +1,6 @@
 <?php
 
-namespace infoservio\mailmanager\models;
+namespace infoservio\fastsendnote\models;
 
 use craft\base\Model;
 
@@ -21,11 +21,11 @@ class Log extends Model
     // Public Properties
     // =========================================================================
     const SEND_EMAIL = 'send-email';
-    const CHANGES_LOGS = 'mailmanager-changes-logs';
-    const TEMPLATE_LOGS = 'mailmanager-template-logs';
-    const MAIL_LOGS = 'mailmanager-mail-logs';
+    const CHANGES_LOGS = 'fastsendnote-changes-logs';
+    const TEMPLATE_LOGS = 'fastsendnote-template-logs';
+    const MAIL_LOGS = 'fastsendnote-mail-logs';
 
-    const MAIL_MANAGER_CULPRIT = ['id' => 1, 'name' => 'mail-manager'];
+    const MAIL_MANAGER_CULPRIT = ['id' => 1, 'name' => 'fast-sendnote'];
     const DB_CULPRIT = ['id' => 2, 'name' => 'db'];
     /**
      * Some model attribute

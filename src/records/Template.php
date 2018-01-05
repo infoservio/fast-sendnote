@@ -1,10 +1,10 @@
 <?php
 
-namespace infoservio\mailmanager\records;
+namespace infoservio\fastsendnote\records;
 
 use craft\db\ActiveRecord;
 use craft\records\User;
-use infoservio\mailmanager\MailManager;
+use infoservio\fastsendnote\FastSendNote;
 
 /**
  * Mail Type Record
@@ -40,7 +40,7 @@ class Template extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{mailmanager_template}}';
+        return '{{fastsendnote_template}}';
     }
 
     public static function getColumns()
@@ -84,7 +84,7 @@ class Template extends ActiveRecord
             unset($changedAttributes['dateCreated']);
             unset($changedAttributes['dateUpdated']);
             try {
-                MailManager::$PLUGIN->changes->create($changedAttributes, $this);
+                FastSendNote::$plugin->changes->create($changedAttributes, $this);
             } catch (\Exception $e) {
                 // TODO handle exception
             }

@@ -1,11 +1,11 @@
 <?php
 
-namespace infoservio\mailmanager\models;
+namespace infoservio\fastsendnote\models;
 
 use craft\base\Model;
-use infoservio\mailmanager\components\mailmanager\transports\Mailgun;
-use infoservio\mailmanager\components\mailmanager\transports\Gmail;
-use infoservio\mailmanager\components\mailmanager\transports\Postal;
+use infoservio\fastsendnote\components\fastsendnote\transports\Mailgun;
+use infoservio\fastsendnote\components\fastsendnote\transports\Gmail;
+use infoservio\fastsendnote\components\fastsendnote\transports\Postal;
 
 /**
  * Donationsfree Settings Model

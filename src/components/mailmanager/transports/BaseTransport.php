@@ -1,12 +1,12 @@
 <?php
 
-namespace infoservio\mailmanager\components\mailmanager\transports;
+namespace infoservio\fastsendnote\components\fastsendnote\transports;
 
 use craft\base\ComponentInterface;
 
-use infoservio\mailmanager\MailManager;
-use infoservio\mailmanager\models\Settings;
-use infoservio\mailmanager\records\Template;
+use infoservio\fastsendnote\FastSendNote;
+use infoservio\fastsendnote\models\Settings;
+use infoservio\fastsendnote\records\Template;
 
 /**
  * Php implements a PHP Mail transport adapter into Craft’s mailer.
@@ -26,7 +26,7 @@ abstract class BaseTransport implements ComponentInterface
      */
     public function __construct()
     {
-        $this->_settings = MailManager::$PLUGIN->getSettings();
+        $this->_settings = FastSendNote::$plugin->getSettings();
     }
 
     /**

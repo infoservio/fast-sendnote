@@ -1,13 +1,13 @@
 <?php
 
-namespace infoservio\mailmanager\components\mailmanager;
+namespace infoservio\fastsendnote\components\fastsendnote;
 
 use craft\events\RegisterComponentTypesEvent;
 use craft\helpers\Component;
-use infoservio\mailmanager\components\mailmanager\transports\BaseTransport;
-use infoservio\mailmanager\components\mailmanager\transports\Mailgun;
-use infoservio\mailmanager\components\mailmanager\transports\Gmail;
-use infoservio\mailmanager\components\mailmanager\transports\Postal;
+use infoservio\fastsendnote\components\fastsendnote\transports\BaseTransport;
+use infoservio\fastsendnote\components\fastsendnote\transports\Mailgun;
+use infoservio\fastsendnote\components\fastsendnote\transports\Gmail;
+use infoservio\fastsendnote\components\fastsendnote\transports\Postal;
 use yii\base\Event;
 
 class MailerFactory

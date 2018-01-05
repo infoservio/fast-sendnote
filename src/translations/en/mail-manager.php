@@ -21,5 +21,5 @@
  * @since     1.0.0
  */
 return [
-    'mail-manager plugin loaded' => 'mail-manager plugin loaded',
+    'fast-sendnote plugin loaded' => 'fast-sendnote plugin loaded',
 ];

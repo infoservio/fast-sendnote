@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace infoservio\mailmanager\assetbundles\changes;
+namespace infoservio\fastsendnote\assetbundles\changes;
 
 use craft\web\AssetBundle;
 
@@ -41,7 +41,7 @@ class ChangesAssetBundle extends AssetBundle
     public function init()
     {
         // define the path that your publishable resources live
-        $this->sourcePath = '@infoservio/mailmanager/assetbundles/changes/dist';
+        $this->sourcePath = '@infoservio/fastsendnote/assetbundles/changes/dist';
 
         // define the relative path to CSS/JS files that should be registered with the page
         // when this asset bundle is registered

@@ -8,9 +8,9 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace infoservio\mailmanager\services;
+namespace infoservio\fastsendnote\services;
 
-use infoservio\mailmanager\MailManager;
+use infoservio\fastsendnote\FastSendNote;
 use craft\base\Component;
 
 /**
@@ -27,7 +27,7 @@ class LogService extends Component
     public function __construct()
     {
         parent::__construct();
-        $this->_logger = MailManager::$PLUGIN->logger;
+        $this->_logger = FastSendNote::$plugin->logger;
     }
 
     // Public Methods

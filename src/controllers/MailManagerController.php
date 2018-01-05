@@ -1,12 +1,12 @@
 <?php
 
-namespace infoservio\mailmanager\controllers;
+namespace infoservio\fastsendnote\controllers;
 
-use infoservio\mailmanager\MailManager;
+use infoservio\fastsendnote\FastSendNote;
 
 use Craft;
 use craft\web\Controller;
-use infoservio\mailmanager\MailManagerAssetBundle;
+use infoservio\fastsendnote\MailManagerAssetBundle;
 use yii\web\BadRequestHttpException;
 
 /**
@@ -50,7 +50,7 @@ class MailManagerController extends Controller
 
         if (isset($post['to']) && isset($post['slug'])) {
             try {
-                return MailManager::$PLUGIN->mail->send($post['to'], $post['slug']);
+                return FastSendNote::$plugin->mail->send($post['to'], $post['slug']);
             } catch (\Exception $e) {
                 return $e->getMessage();
             }

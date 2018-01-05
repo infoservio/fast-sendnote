@@ -1,6 +1,6 @@
 <?php
 
-namespace infoservio\mailmanager\controllers;
+namespace infoservio\fastsendnote\controllers;
 
 use craft\web\Controller;
 
@@ -35,6 +35,6 @@ class SiteController extends Controller
 
     public function actionNotFound()
     {
-        return $this->renderTemplate('mail-manager/layouts/not-found');
+        return $this->renderTemplate('fast-sendnote/layouts/not-found');
     }
 }

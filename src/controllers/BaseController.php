@@ -8,11 +8,11 @@
  * @copyright Copyright (c) 2017 endurant
  */
 
-namespace infoservio\mailmanager\controllers;
+namespace infoservio\fastsendnote\controllers;
 
 use Craft;
 use craft\web\Controller;
-use infoservio\mailmanager\MailManager;
+use infoservio\fastsendnote\FastSendNote;
 
 /**
  * Invoice Controller
@@ -35,7 +35,7 @@ class BaseController extends Controller
         // ...set `$this->enableCsrfValidation` here based on some conditions...
         // call parent method that will check CSRF if such property is true.
         $this->enableCsrfValidation = false;
-        $this->isUserHelpUs = MailManager::$PLUGIN->getSettings()->helpUsImproveOurProduct;
+        $this->isUserHelpUs = FastSendNote::$plugin->getSettings()->helpUsImproveOurProduct;
         return parent::beforeAction($action);
     }
 }

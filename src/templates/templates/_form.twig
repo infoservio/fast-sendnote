@@ -1,13 +1,13 @@
 {% extends "_layouts/cp" %}
 
 {% if isUserHelpUs %}
-    {% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\logrocket\\LogRocketAssetBundle") %}
+    {% do view.registerAssetBundle("infoservio\\fastsendnote\\assetbundles\\logrocket\\LogRocketAssetBundle") %}
 {% endif %}
 
-{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\template\\main\\TemplateAssetBundle") %}
-{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\template\\form\\TemplateFormAssetBundle") %}
-{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\parsley\\ParsleyAssetBundle") %}
-{#{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\redactor\\RedactorAssetBundle") %}#}
+{% do view.registerAssetBundle("infoservio\\fastsendnote\\assetbundles\\template\\main\\TemplateAssetBundle") %}
+{% do view.registerAssetBundle("infoservio\\fastsendnote\\assetbundles\\template\\form\\TemplateFormAssetBundle") %}
+{% do view.registerAssetBundle("infoservio\\fastsendnote\\assetbundles\\parsley\\ParsleyAssetBundle") %}
+{#{% do view.registerAssetBundle("infoservio\\fastsendnote\\assetbundles\\redactor\\RedactorAssetBundle") %}#}
 
 {% set title = (isUpdated ? "Edit Template" : "Create Template")|t('app') %}
 

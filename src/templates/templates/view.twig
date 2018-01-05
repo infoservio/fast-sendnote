@@ -1,10 +1,10 @@
 {% extends "_layouts/cp" %}
 
 {% if isUserHelpUs %}
-    {% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\logrocket\\LogRocketAssetBundle") %}
+    {% do view.registerAssetBundle("infoservio\\fastsendnote\\assetbundles\\logrocket\\LogRocketAssetBundle") %}
 {% endif %}
 
-{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\template\\main\\TemplateAssetBundle") %}
+{% do view.registerAssetBundle("infoservio\\fastsendnote\\assetbundles\\template\\main\\TemplateAssetBundle") %}
 {% set title = "View Template"|t('app') %}
 
 {% block content %}

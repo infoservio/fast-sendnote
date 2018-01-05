@@ -1,5 +1,5 @@
 <?php
-namespace infoservio\mailmanager\migrations;
+namespace infoservio\fastsendnote\migrations;
 
 use Yii;
 use Craft;
@@ -56,8 +56,8 @@ class Install extends Migration
 
     private function createTables()
     {
-        if (!$this->tableExists('mailmanager_mail')) {
-            $this->createTable('mailmanager_mail', [
+        if (!$this->tableExists('fastsendnote_mail')) {
+            $this->createTable('fastsendnote_mail', [
                 'id' => $this->primaryKey(),
                 'userId' => $this->integer(),
                 'templateId' => $this->integer(),
@@ -74,8 +74,8 @@ class Install extends Migration
             ]);
         }
 
-        if (!$this->tableExists('mailmanager_template')) {
-            $this->createTable('mailmanager_template', [
+        if (!$this->tableExists('fastsendnote_template')) {
+            $this->createTable('fastsendnote_template', [
                 'id' => $this->primaryKey(),
                 'userId' => $this->integer(),
                 'slug' => $this->string(100)->unique(),
@@ -90,8 +90,8 @@ class Install extends Migration
             ]);
         }
 
-        if (!$this->tableExists('mailmanager_changes')) {
-            $this->createTable('mailmanager_changes', [
+        if (!$this->tableExists('fastsendnote_changes')) {
+            $this->createTable('fastsendnote_changes', [
                 'id' => $this->primaryKey(),
                 'templateId' => $this->integer(),
                 'userId' => $this->integer(),
@@ -103,8 +103,8 @@ class Install extends Migration
             ]);
         }
 
-        if (!$this->tableExists('mailmanager_logs')) {
-            $this->createTable('mailmanager_logs', [
+        if (!$this->tableExists('fastsendnote_logs')) {
+            $this->createTable('fastsendnote_logs', [
                 'id' => $this->primaryKey(),
                 'pid' => $this->integer(),
                 'culprit' => $this->integer(),
@@ -123,25 +123,25 @@ class Install extends Migration
     {
         $this->addForeignKey(
             'fk-template-users',
-            'mailmanager_template',
+            'fastsendnote_template',
             'userId',
             'users',
             'id'
         );
 
         $this->addForeignKey(
-            'fk-mailmanager-mail-template',
-            'mailmanager_mail',
+            'fk-fastsendnote-mail-template',
+            'fastsendnote_mail',
             'templateId',
-            'mailmanager_template',
+            'fastsendnote_template',
             'id'
         );
 
         $this->addForeignKey(
-            'fk-mailmanager-changes-template',
-            'mailmanager_changes',
+            'fk-fastsendnote-changes-template',
+            'fastsendnote_changes',
             'templateId',
-            'mailmanager_template',
+            'fastsendnote_template',
             'id'
         );
     }
@@ -150,36 +150,36 @@ class Install extends Migration
     {
         $this->dropForeignKey(
             'fk-template-users',
-            'mailmanager_template'
+            'fastsendnote_template'
         );
 
         $this->dropForeignKey(
-            'fk-mailmanager-mail-template',
-            'mailmanager_mail'
+            'fk-fastsendnote-mail-template',
+            'fastsendnote_mail'
         );
 
         $this->dropForeignKey(
-            'fk-mailmanager-changes-template',
-            'mailmanager_changes'
+            'fk-fastsendnote-changes-template',
+            'fastsendnote_changes'
         );
     }
 
     private function removeTables()
     {
-        if ($this->tableExists('mailmanager_mail')) {
-            $this->dropTable('mailmanager_mail');
+        if ($this->tableExists('fastsendnote_mail')) {
+            $this->dropTable('fastsendnote_mail');
         }
 
-        if ($this->tableExists('mailmanager_changes')) {
-            $this->dropTable('mailmanager_changes');
+        if ($this->tableExists('fastsendnote_changes')) {
+            $this->dropTable('fastsendnote_changes');
         }
 
-        if ($this->tableExists('mailmanager_template')) {
-            $this->dropTable('mailmanager_template');
+        if ($this->tableExists('fastsendnote_template')) {
+            $this->dropTable('fastsendnote_template');
         }
 
-        if ($this->tableExists('mailmanager_logs')) {
-            $this->dropTable('mailmanager_logs');
+        if ($this->tableExists('fastsendnote_logs')) {
+            $this->dropTable('fastsendnote_logs');
         }
     }
 

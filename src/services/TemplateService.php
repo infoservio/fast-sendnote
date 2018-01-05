@@ -1,13 +1,13 @@
 <?php
 
-namespace infoservio\mailmanager\services;
+namespace infoservio\fastsendnote\services;
 
 use Craft;
 use craft\base\Component;
-use infoservio\mailmanager\errors\DbMailManagerPluginException;
-use infoservio\mailmanager\models\Template;
-use infoservio\mailmanager\models\Log;
-use infoservio\mailmanager\records\Template as TemplateRecord;
+use infoservio\fastsendnote\errors\DbMailManagerPluginException;
+use infoservio\fastsendnote\models\Template;
+use infoservio\fastsendnote\models\Log;
+use infoservio\fastsendnote\records\Template as TemplateRecord;
 use yii\web\BadRequestHttpException;
 
 /**

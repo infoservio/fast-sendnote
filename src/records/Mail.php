@@ -1,6 +1,6 @@
 <?php
 
-namespace infoservio\mailmanager\records;
+namespace infoservio\fastsendnote\records;
 
 use craft\db\ActiveRecord;
 
@@ -40,7 +40,7 @@ class Mail extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{mailmanager_mail}}';
+        return '{{fastsendnote_mail}}';
     }
 
     public static function getByEmailIdAndMethod(string $emailId, int $method, bool $returnActiveRecordObj = false)

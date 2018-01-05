@@ -1,15 +1,15 @@
 <?php
 
-namespace infoservio\mailmanager\services;
+namespace infoservio\fastsendnote\services;
 
 use Craft;
 use craft\base\Component;
 
-use infoservio\mailmanager\errors\DbMailManagerPluginException;
-use infoservio\mailmanager\models\Changes;
-use infoservio\mailmanager\models\Log;
-use infoservio\mailmanager\records\Changes as ChangesRecord;
-use infoservio\mailmanager\records\Template;
+use infoservio\fastsendnote\errors\DbMailManagerPluginException;
+use infoservio\fastsendnote\models\Changes;
+use infoservio\fastsendnote\models\Log;
+use infoservio\fastsendnote\records\Changes as ChangesRecord;
+use infoservio\fastsendnote\records\Template;
 
 /**
  * Changes Service

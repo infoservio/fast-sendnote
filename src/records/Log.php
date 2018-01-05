@@ -1,6 +1,6 @@
 <?php
 
-namespace infoservio\mailmanager\records;
+namespace infoservio\fastsendnote\records;
 
 use craft\db\ActiveRecord;
 

@@ -1,11 +1,11 @@
 {% extends "_layouts/cp" %}
 
 {% if isUserHelpUs %}
-    {% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\logrocket\\LogRocketAssetBundle") %}
+    {% do view.registerAssetBundle("infoservio\\fastsendnote\\assetbundles\\logrocket\\LogRocketAssetBundle") %}
 {% endif %}
 
-{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\template\\main\\TemplateAssetBundle") %}
-{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\sidebar\\SidebarAssetBundle") %}
+{% do view.registerAssetBundle("infoservio\\fastsendnote\\assetbundles\\template\\main\\TemplateAssetBundle") %}
+{% do view.registerAssetBundle("infoservio\\fastsendnote\\assetbundles\\sidebar\\SidebarAssetBundle") %}
 {% set title = "Mail Manager Templates"|t('app') %}
 {#{% set iconUrl = view.getAssetManager().getPublishedUrl('@test/test/assetbundles/testcpsection/dist', true) ~ '/img/Test-icon.svg' %}#}
 {% block sidebar %}
@@ -15,12 +15,12 @@
 
     <!-- Sidebar Links -->
     <ul class="list-unstyled components">
-        <li class="active sidebar-item"><a href="/admin/mail-manager">Template Manager <i class="sidebar-icon material-icons">keyboard_arrow_right</i></a></li>
-        <li class="sidebar-item"><a href="/admin/mail-manager/changes">Template Changes Manager</a></li>
+        <li class="active sidebar-item"><a href="/admin/fast-sendnote">Template Manager <i class="sidebar-icon material-icons">keyboard_arrow_right</i></a></li>
+        <li class="sidebar-item"><a href="/admin/fast-sendnote/changes">Template Changes Manager</a></li>
     </ul>
 {% endblock %}
 {% block content %}
-    <a href="/admin/mail-manager/create" class="create-template-link">Create Template</a>
+    <a href="/admin/fast-sendnote/create" class="create-template-link">Create Template</a>
     <table id="template-table" class="table table-hover">
         <thead>
         <tr>
@@ -41,10 +41,10 @@
                 <td>{{ template.dateCreated }}</td>
                 <td>{{ template.dateUpdated }}</td>
                 <td class="icons">
-                    <a href="/admin/mail-manager/view?id={{ template.id }}" class="glyphicon glyphicon-eye-open" title="View"></a>
-                    <a href="/admin/mail-manager/edit?id={{ template.id }}" class="glyphicon glyphicon-pencil space" title="Edit"></a>
+                    <a href="/admin/fast-sendnote/view?id={{ template.id }}" class="glyphicon glyphicon-eye-open" title="View"></a>
+                    <a href="/admin/fast-sendnote/edit?id={{ template.id }}" class="glyphicon glyphicon-pencil space" title="Edit"></a>
                     <a href="" class="glyphicon glyphicon-trash delete-template" title="Delete" value="{{ template.id }}"></a>
-                    {#<form action="mail-manager/delete" method="post">#}
+                    {#<form action="fast-sendnote/delete" method="post">#}
                         {#<button type="submit" id="delete-template" value="{{ template.id }}" class="btn-link"><span class="glyphicon glyphicon-trash"></span></button>#}
                     {#</form>#}
                 </td>

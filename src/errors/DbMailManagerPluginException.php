@@ -1,8 +1,8 @@
 <?php
 
-namespace infoservio\mailmanager\errors;
+namespace infoservio\fastsendnote\errors;
 
-use infoservio\mailmanager\models\Log;
+use infoservio\fastsendnote\models\Log;
 
 
 class DbMailManagerPluginException extends MailManagerPluginException

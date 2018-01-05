@@ -1,6 +1,6 @@
 <?php
 
-namespace infoservio\mailmanager\components\parser;
+namespace infoservio\fastsendnote\components\parser;
 
 use craft\base\Component;
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace infoservio\mailmanager\controllers\api\v1\webhooks;
+namespace infoservio\fastsendnote\controllers\api\v1\webhooks;
 
 use Craft;
 use craft\web\Controller;
 
-use infoservio\mailmanager\components\mailmanager\MailerFactory;
-use infoservio\mailmanager\MailManager;
-use infoservio\mailmanager\records\Mail as MailRecord;
-use infoservio\mailmanager\models\Mail;
+use infoservio\fastsendnote\components\fastsendnote\MailerFactory;
+use infoservio\fastsendnote\FastSendNote;
+use infoservio\fastsendnote\records\Mail as MailRecord;
+use infoservio\fastsendnote\models\Mail;
 use yii\web\NotAcceptableHttpException;
 
 
@@ -44,7 +44,7 @@ class MailgunController extends Controller
         $this->enableCsrfValidation = false;
         Craft::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $request = Craft::$app->request;
-        $expectedSignature = hash_hmac('sha256', $request->post('timestamp') . $request->post('token'), MailManager::$PLUGIN->getSettings()->mailgunKey);
+        $expectedSignature = hash_hmac('sha256', $request->post('timestamp') . $request->post('token'), FastSendNote::$plugin->getSettings()->mailgunKey);
 
         if ($request->post('signature') !== $expectedSignature) {
             throw new NotAcceptableHttpException('Wrong signature');

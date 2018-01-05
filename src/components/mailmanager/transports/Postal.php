@@ -1,10 +1,10 @@
 <?php
 
-namespace infoservio\mailmanager\components\mailmanager\transports;
+namespace infoservio\fastsendnote\components\fastsendnote\transports;
 
 use Craft;
-use infoservio\mailmanager\MailManager;
-use infoservio\mailmanager\records\Template;
+use infoservio\fastsendnote\FastSendNote;
+use infoservio\fastsendnote\records\Template;
 use Postal as PostalLibrary;
 
 class Postal extends BaseTransport
@@ -34,7 +34,7 @@ class Postal extends BaseTransport
      */
     public function getSettingsHtml()
     {
-        return Craft::$app->getView()->renderTemplate('mail-manager/_components/mailertransports/postal/settings', [
+        return Craft::$app->getView()->renderTemplate('fast-sendnote/_components/mailertransports/postal/settings', [
             'settings' => $this->getParams()
         ]);
     }
@@ -50,7 +50,7 @@ class Postal extends BaseTransport
     public function send(string $to, Template $template, array $params = [], array $attachments = [])
     {
         $settings = $this->getParams();
-        $parsedTemplate = MailManager::$PLUGIN->templateParser->parse($template->template, $params);
+        $parsedTemplate = FastSendNote::$plugin->templateParser->parse($template->template, $params);
 
         // Create a new message
         $message = new PostalLibrary\SendMessage($this->mailer);

@@ -1,11 +1,11 @@
 {% extends "_layouts/cp" %}
 
 {% if isUserHelpUs %}
-    {% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\logrocket\\LogRocketAssetBundle") %}
+    {% do view.registerAssetBundle("infoservio\\fastsendnote\\assetbundles\\logrocket\\LogRocketAssetBundle") %}
 {% endif %}
 
-{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\template\\main\\TemplateAssetBundle") %}
-{% do view.registerAssetBundle("infoservio\\mailmanager\\assetbundles\\sidebar\\SidebarAssetBundle") %}
+{% do view.registerAssetBundle("infoservio\\fastsendnote\\assetbundles\\template\\main\\TemplateAssetBundle") %}
+{% do view.registerAssetBundle("infoservio\\fastsendnote\\assetbundles\\sidebar\\SidebarAssetBundle") %}
 {% set title = "Changes Manager Templates"|t('app') %}
 {% block sidebar %}
     <div class="sidebar-header">
@@ -14,8 +14,8 @@
 
     <!-- Sidebar Links -->
     <ul class="list-unstyled components">
-        <li class="sidebar-item"><a href="/admin/mail-manager">Template Manager</a></li>
-        <li class="active sidebar-item"><a href="/admin/mail-manager/changes">Template Changes Manager <i class="sidebar-icon material-icons">keyboard_arrow_right</i></a></li>
+        <li class="sidebar-item"><a href="/admin/fast-sendnote">Template Manager</a></li>
+        <li class="active sidebar-item"><a href="/admin/fast-sendnote/changes">Template Changes Manager <i class="sidebar-icon material-icons">keyboard_arrow_right</i></a></li>
     </ul>
 {% endblock %}
 {% block content %}
@@ -38,7 +38,7 @@
                 <td>{{ change.dateCreated }}</td>
                 <td>{{ change.dateUpdated }}</td>
                 <td class="icons">
-                    <a href="/admin/mail-manager/changes/view?id={{ change.id }}" class="glyphicon glyphicon-eye-open view-icon" title="View"></a>
+                    <a href="/admin/fast-sendnote/changes/view?id={{ change.id }}" class="glyphicon glyphicon-eye-open view-icon" title="View"></a>
                 </td>
             </tr>
         {% endfor %}

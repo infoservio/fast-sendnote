@@ -1,14 +1,14 @@
 <?php
 
-namespace infoservio\mailmanager\controllers\api\v1\webhooks;
+namespace infoservio\fastsendnote\controllers\api\v1\webhooks;
 
 use Craft;
 use craft\web\Controller;
 
-use infoservio\mailmanager\components\mailmanager\MailerFactory;
-use infoservio\mailmanager\MailManager;
-use infoservio\mailmanager\records\Mail as MailRecord;
-use infoservio\mailmanager\models\Mail;
+use infoservio\fastsendnote\components\fastsendnote\MailerFactory;
+use infoservio\fastsendnote\FastSendNote;
+use infoservio\fastsendnote\records\Mail as MailRecord;
+use infoservio\fastsendnote\models\Mail;
 use yii\web\BadRequestHttpException;
 use yii\web\NotAcceptableHttpException;
 use yii\web\Response;

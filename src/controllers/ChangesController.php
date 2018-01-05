@@ -1,11 +1,11 @@
 <?php
 
-namespace infoservio\mailmanager\controllers;
+namespace infoservio\fastsendnote\controllers;
 
 use Craft;
 use craft\web\Controller;
 
-use infoservio\mailmanager\records\Changes;
+use infoservio\fastsendnote\records\Changes;
 
 
 /**
@@ -30,7 +30,7 @@ class ChangesController extends BaseController
     public function actionIndex()
     {
         $changes = Changes::find()->orderBy('id DESC')->all();
-        return $this->renderTemplate('mail-manager/changes/index', [
+        return $this->renderTemplate('fast-sendnote/changes/index', [
             'changes' => $changes,
             'columns' => Changes::getColumns(),
             'isUserHelpUs' => $this->isUserHelpUs
@@ -42,13 +42,13 @@ class ChangesController extends BaseController
         $templateChange = Changes::find()->where(['id' => Craft::$app->request->getParam('id')])->one();
 
         if (!$templateChange) {
-            return $this->redirect('mail-manager/not-found');
+            return $this->redirect('fast-sendnote/not-found');
         }
 
         $templateChange->oldVersionArr = json_decode($templateChange->oldVersion, true);
         $templateChange->newVersionArr = json_decode($templateChange->newVersion, true);
 
-        return $this->renderTemplate('mail-manager/changes/view', [
+        return $this->renderTemplate('fast-sendnote/changes/view', [
             'templateChange' => $templateChange,
             'isUserHelpUs' => $this->isUserHelpUs
         ]);

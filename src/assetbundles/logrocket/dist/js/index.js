@@ -1,1 +1,1 @@
-window.LogRocket && window.LogRocket.init('infoservio/mail-manager-c3-plugin');
+window.LogRocket && window.LogRocket.init('infoservio/fast-sendnote-c3-plugin');

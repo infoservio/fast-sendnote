@@ -1,10 +1,10 @@
 <?php
 
-namespace infoservio\mailmanager\components\mailmanager\transports;
+namespace infoservio\fastsendnote\components\fastsendnote\transports;
 
 use Craft;
-use infoservio\mailmanager\MailManager;
-use infoservio\mailmanager\records\Template;
+use infoservio\fastsendnote\FastSendNote;
+use infoservio\fastsendnote\records\Template;
 
 class Gmail extends BaseTransport
 {
@@ -24,7 +24,7 @@ class Gmail extends BaseTransport
      */
     public function getSettingsHtml()
     {
-        return Craft::$app->getView()->renderTemplate('mail-manager/_components/mailertransports/gmail/settings', [
+        return Craft::$app->getView()->renderTemplate('fast-sendnote/_components/mailertransports/gmail/settings', [
             'settings' => $this->getParams()
         ]);
     }
@@ -35,7 +35,7 @@ class Gmail extends BaseTransport
     public function send(string $to, Template $template, array $params = [], array $attachments = [])
     {
         $settings = $this->getParams();
-        $parsedTemplate = MailManager::$PLUGIN->templateParser->parse($template->template, $params);
+        $parsedTemplate = FastSendNote::$plugin->templateParser->parse($template->template, $params);
 
         $mailer = Craft::$app->getMailer();
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace infoservio\mailmanager\models;
+namespace infoservio\fastsendnote\models;
 
 use craft\base\Model;
-use infoservio\mailmanager\records\Template as TemplateRecord;
+use infoservio\fastsendnote\records\Template as TemplateRecord;
 
 /**
  * Card Model

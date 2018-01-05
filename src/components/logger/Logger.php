@@ -1,11 +1,11 @@
 <?php
-namespace infoservio\mailmanager\components\logger;
+namespace infoservio\fastsendnote\components\logger;
 
 use Craft;
 use PHPUnit\Framework\Error\Error;
 use Psr\Log\LogLevel;
-use infoservio\mailmanager\records\Log as LogRecord;
-use infoservio\mailmanager\models\Log;
+use infoservio\fastsendnote\records\Log as LogRecord;
+use infoservio\fastsendnote\models\Log;
 
 /**
  * General Logger
@@ -17,7 +17,7 @@ class Logger implements ILogger
 
     public function __construct()
     {
-        $this->category = 'mail-manager-logs';
+        $this->category = 'fast-sendnote-logs';
         $this->processId = time();
     }
 

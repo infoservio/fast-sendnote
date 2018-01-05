@@ -1,13 +1,13 @@
 <?php
 
-namespace infoservio\mailmanager\controllers;
+namespace infoservio\fastsendnote\controllers;
 
-use infoservio\mailmanager\MailManager;
+use infoservio\fastsendnote\FastSendNote;
 
 use Craft;
 use craft\web\Controller;
-use infoservio\mailmanager\models\Template;
-use infoservio\mailmanager\records\Template as TemplateRecord;
+use infoservio\fastsendnote\models\Template;
+use infoservio\fastsendnote\records\Template as TemplateRecord;
 use yii\web\BadRequestHttpException;
 
 /**
@@ -38,7 +38,7 @@ class TemplateController extends BaseController
     {
         $columns = TemplateRecord::getColumns();
         $templates = TemplateRecord::find()->where(['isRemoved' => Template::NOT_REMOVED])->orderBy('id DESC')->all();
-        return $this->renderTemplate('mail-manager/templates/index', [
+        return $this->renderTemplate('fast-sendnote/templates/index', [
             'columns' => $columns,
             'templates' => $templates,
             'isUserHelpUs' => $this->isUserHelpUs,
@@ -54,10 +54,10 @@ class TemplateController extends BaseController
         $template = TemplateRecord::find()->where(['id' => Craft::$app->request->getParam('id')])->one();
 
         if (!$template) {
-            return $this->redirect('mail-manager/not-found');
+            return $this->redirect('fast-sendnote/not-found');
         }
 
-        return $this->renderTemplate('mail-manager/templates/view', [
+        return $this->renderTemplate('fast-sendnote/templates/view', [
             'template' => $template,
             'isUserHelpUs' => $this->isUserHelpUs
         ]);
@@ -71,17 +71,17 @@ class TemplateController extends BaseController
         if ($post = Craft::$app->request->post())
         {
             try {
-                $template = MailManager::$PLUGIN->template->create($post);
+                $template = FastSendNote::$plugin->template->create($post);
             } catch (\Exception $e) {
-                return $this->renderTemplate('mail-manager/templates/create', [
+                return $this->renderTemplate('fast-sendnote/templates/create', [
                     'errors' => json_decode($e->getMessage()),
                     'template' => $post
                 ]);
             }
-            return $this->redirect('mail-manager/view?id=' . $template->id);
+            return $this->redirect('fast-sendnote/view?id=' . $template->id);
         }
 
-        return $this->renderTemplate('mail-manager/templates/create', [
+        return $this->renderTemplate('fast-sendnote/templates/create', [
             'isUserHelpUs' => $this->isUserHelpUs
         ]);
     }
@@ -94,24 +94,24 @@ class TemplateController extends BaseController
         $record = TemplateRecord::getById(Craft::$app->request->getParam('id'), true);
 
         if (!$record) {
-            return $this->redirect('mail-manager/not-found');
+            return $this->redirect('fast-sendnote/not-found');
         }
 
         if ($post = Craft::$app->request->post())
         {
             try {
-                $template = MailManager::$PLUGIN->template->update($record, $post);
+                $template = FastSendNote::$plugin->template->update($record, $post);
             } catch (\Exception $e) {
-                return $this->renderTemplate('mail-manager/templates/update', [
+                return $this->renderTemplate('fast-sendnote/templates/update', [
                     'errors' => json_decode($e->getMessage()),
                     'template' => $post,
                     'isUserHelpUs' => $this->isUserHelpUs
                 ]);
             }
-            return $this->redirect('mail-manager/view?id=' . $template->id);
+            return $this->redirect('fast-sendnote/view?id=' . $template->id);
         }
 
-        return $this->renderTemplate('mail-manager/templates/update', [
+        return $this->renderTemplate('fast-sendnote/templates/update', [
             'template' => $record,
             'isUserHelpUs' => $this->isUserHelpUs
         ]);
@@ -127,12 +127,12 @@ class TemplateController extends BaseController
         $post = Craft::$app->request->post();
 
         try {
-            $template = MailManager::$PLUGIN->template->remove($post['id']);
+            $template = FastSendNote::$plugin->template->remove($post['id']);
         } catch (\Exception $e) {
             // TODO make up something
         }
 
-        return $this->redirect('mail-manager');
+        return $this->redirect('fast-sendnote');
     }
 
     /**
