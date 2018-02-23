@@ -5,7 +5,9 @@ image: centos
 trigger_build:
   stage: satis-update
   script:
-    - curl -X POST -F token=$COMPOSER_REPO_TOKEN -F ref=master "https://gitlab.oms.systems/api/v4/projects/60/trigger/pipeline"
+    - |
+        set -e
+        curl -X POST -F token=$COMPOSER_REPO_TOKEN -F ref=master "https://gitlab.oms.systems/api/v4/projects/60/trigger/pipeline"
 job_for_github_push:
   stage: push-in-github
   script:
